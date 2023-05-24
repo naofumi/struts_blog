@@ -1,30 +1,33 @@
 package struts_blog.actions.posts;
 
 import com.opensymphony.xwork2.ActionSupport;
-
 import struts_blog.models.Post;
 import struts_blog.daos.PostDao;
 
-import java.util.ArrayList;
-
-public class IndexAction extends ActionSupport {
+public class EditAction extends ActionSupport {
+	private int id;
 
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<Post> posts;
+	private Post post;
 
 	PostDao postDao = new PostDao();
 
-	public IndexAction() {
+	public EditAction() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public String execute() {
-		this.posts = postDao.getPosts();
+		this.post = postDao.getPost(id);
+
 		return SUCCESS;
 	}
 
-	public ArrayList<Post> getPosts() {
-		return posts;
+	public Post getPost() {
+		return post;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

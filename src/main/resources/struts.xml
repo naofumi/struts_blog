@@ -19,7 +19,46 @@
 	</package>
 	<package name="posts" extends="struts-default"
 		namespace="/posts">
-
+		<action name="show"
+			class="struts_blog.actions.posts.ShowAction">
+			<result name="success">/WEB-INF/content/posts/show.jsp</result>
+		</action>
+		<action name="new"
+				class="struts_blog.actions.posts.NewAction">
+			<result name="success">/WEB-INF/content/posts/new.jsp</result>
+		</action>
+		<action name="edit"
+				class="struts_blog.actions.posts.EditAction">
+			<result name="success">/WEB-INF/content/posts/edit.jsp</result>
+		</action>
+		<action name="create"
+				class="struts_blog.actions.posts.CreateAction">
+			<interceptor-ref name="token" />
+			<interceptor-ref name="defaultStack" />
+			<result type="redirectAction" name="success">
+				<param name="namespace">/</param>
+				<param name="actionName">posts</param>
+				<param name="id">${post.id}</param>
+			</result>
+			<result name="input">/WEB-INF/content/posts/new.jsp</result>
+		</action>
+		<action name="update"
+				class="struts_blog.actions.posts.UpdateAction">
+			<interceptor-ref name="token" />
+			<interceptor-ref name="defaultStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">show</param>
+				<param name="id">${post.id}</param>
+			</result>
+		</action>
+		<action name="delete"
+				class="struts_blog.actions.posts.DeleteAction">
+			<interceptor-ref name="token" />
+			<interceptor-ref name="defaultStack" />
+			<result type="redirectAction" name="success">
+				<param name="namespace">/</param>
+				<param name="actionName">posts</param>
+			</result>
+		</action>
 	</package>
-
 </struts>
