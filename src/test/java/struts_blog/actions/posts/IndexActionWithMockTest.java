@@ -49,7 +49,7 @@ public class IndexActionWithMockTest extends TestCase {
                 createPost(2, "Mock Title 2", "Mock Content 2")
         ));
 
-        Mockito.when(postDaoMock.getPosts()).thenReturn(posts);
+        Mockito.when(postDaoMock.getAll()).thenReturn(posts);
         IndexAction action = new IndexAction(postDaoMock);
 
         String result = action.execute();

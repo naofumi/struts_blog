@@ -2,18 +2,16 @@ package struts_blog.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.action.SessionAware;
+import org.apache.struts2.dispatcher.SessionMap;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public abstract class BaseAction extends ActionSupport implements SessionAware {
     public final static String VISITS_COUNT_SESSION_KEY = "vcsk";
-    protected Map<String, Object> sessionMap = new HashMap<>();
+    protected SessionMap<String, Object> sessionMap;
 
-    @Override
     public void withSession(Map<String, Object> session) {
-        this.sessionMap = Objects.requireNonNullElseGet(session, HashMap::new);
+        this.sessionMap = (SessionMap<String, Object>) session;
     }
 
     public int getVisitsCount() {
@@ -22,6 +20,11 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
 
         return visitsCount;
     }
+
+    public String getUser() {
+        return (String) sessionMap.get("user_id");
+    }
+
 
     protected void incrementVisitsCount() {
         int visitsCount = getVisitsCount();

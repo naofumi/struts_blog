@@ -43,7 +43,7 @@ public class CreateActionTest extends TestCase {
     }
 
     private Post lastPostInDB() {
-        ArrayList<Post> posts = postDao.getPosts();
+        ArrayList<Post> posts = postDao.getAll();
         return posts.get(posts.size() - 1);
     }
 }

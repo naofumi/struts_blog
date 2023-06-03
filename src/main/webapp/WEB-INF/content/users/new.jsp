@@ -10,25 +10,25 @@
 <body>
 <%@ include file="/WEB-INF/layouts/topNav.jspf" %>
 <div class="container">
-    <h1 class="mt-5">New Post</h1>
+    <h1 class="mt-5">New User</h1>
     <form action="create" method="post">
         <s:token/>
         <div class="form-group mt-3">
-            <label for="post_title">Title</label>
-            <input id="post_title"
+            <label for="user_email">Email</label>
+            <input id="user_email"
                    type="text"
-                   value="<s:property value="post.title" />"
-                   name="post.title"
+                   value="<s:property value="user.email" />"
+                   name="user.email"
                    class="form-control"
             />
-            <div class="text-danger"><s:fielderror><s:param value="%{'post.title'}"/></s:fielderror></div>
+            <div class="text-danger"><s:fielderror><s:param value="%{'user.email'}"/></s:fielderror></div>
         </div>
         <div class="form-group mt-3">
-            <label for="post_content">Content</label>
-            <textarea id="post_content"
-                      name="post.content"
-                      class="form-control"><s:property value="post.content"/></textarea>
-            <div class="text-danger"><s:fielderror><s:param value="%{'post.content'}"/></s:fielderror></div>
+            <label for="user_email">Password</label>
+            <textarea id="user_password"
+                      name="user.password"
+                      class="form-control"><s:property value="user.password"/></textarea>
+            <div class="text-danger"><s:fielderror><s:param value="%{'user.password'}"/></s:fielderror></div>
         </div>
         <input type="submit" value="Submit" class="btn btn-warning mt-5"/>
     </form>

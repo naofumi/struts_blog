@@ -1,23 +1,21 @@
-package struts_blog.actions.posts;
+package struts_blog.actions.sessions;
 
 import com.opensymphony.xwork2.ActionSupport;
-import struts_blog.models.Post;
+import struts_blog.models.Login;
 
 public class NewAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
-	private Post post;
+	private final Login login = new Login();
 
 	public NewAction() {
 	}
 
 	public String execute() {
-		this.post = new Post();
 
 		return SUCCESS;
 	}
 
-	public Post getPost() {
-		return post;
+	public Login getLogin() {
+		return login;
 	}
 }

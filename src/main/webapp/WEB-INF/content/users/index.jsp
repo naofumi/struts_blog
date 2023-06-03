@@ -5,18 +5,17 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/layouts/head.jspf">
-    <jsp:param name="title" value="List of Posts"/>
+    <jsp:param name="title" value="List of Users"/>
 </jsp:include>
 <body>
 <%@ include file="/WEB-INF/layouts/topNav.jspf" %>
 <div class="container">
-    <h1 class="mt-5">List of posts</h1>
-    <h2 class="mt-3">Visits: <s:property value="visitsCount"/></h2>
+    <h1 class="mt-5">List of Users</h1>
     <div class="container">
         <div class="row">
             <div class="col"></div>
             <div class="col text-end">
-                <a href="posts/new" class="btn btn-primary">New Post</a>
+                <a href="users/new" class="btn btn-primary">New User</a>
             </div>
         </div>
     </div>
@@ -29,12 +28,11 @@
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="posts">
+        <s:iterator value="users">
             <tr>
-                <td><s:property value="title"/></td>
-                <td><s:property value="content"/></td>
+                <td><s:property value="email"/></td>
                 <td>
-                    <s:url action="posts/show" var="showLink">
+                    <s:url action="users/show" var="showLink">
                         <s:param name="id"><s:property value="id"/></s:param>
                     </s:url> <a href="${showLink}" class="btn btn-secondary">Show</a>
                 </td>
@@ -58,6 +56,7 @@
             </s:if>
         </ul>
     </nav>
+
 </div>
 </body>
 </html>

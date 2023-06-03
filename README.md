@@ -1,5 +1,13 @@
 # README
 
+## Running the application 
+
+The application is build using Maven. The IDE should pick this up.
+
+```shell
+mvn jetty:start
+```
+
 ## Things to study about Struts
 
 ### CSRF protection

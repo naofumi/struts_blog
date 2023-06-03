@@ -14,11 +14,14 @@ public class EditAction extends ActionSupport {
 	PostDao postDao = new PostDao();
 
 	public EditAction() {
-		// TODO Auto-generated constructor stub
+	}
+
+	public EditAction(PostDao postDao) {
+		this.postDao = postDao;
 	}
 
 	public String execute() {
-		this.post = postDao.getPost(id);
+		this.post = postDao.find(id);
 
 		return SUCCESS;
 	}

@@ -11,7 +11,7 @@ public class DeleteAction extends ActionSupport {
 	PostDao postDao = new PostDao();
 
 	public String execute() {
-		if (postDao.deletePost(id)) {
+		if (postDao.delete(id)) {
 			return SUCCESS;
 		} else {
 			return ERROR;

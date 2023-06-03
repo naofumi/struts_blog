@@ -4,10 +4,11 @@
 
 <!DOCTYPE html>
 <html>
-<jsp:include page="/WEB-INF/layouts/head.jsp">
+<jsp:include page="/WEB-INF/layouts/head.jspf">
     <jsp:param name="title" value="Edit Post"/>
 </jsp:include>
 <body>
+<%@ include file="/WEB-INF/layouts/topNav.jspf" %>
 <div class="container">
     <h1 class="mt-5"><s:property value="post.title"/>: Edit</h1>
     <form action="update" method="post">
