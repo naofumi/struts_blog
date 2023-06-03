@@ -20,6 +20,7 @@ public class EditAction extends ActionSupport {
 		this.postDao = postDao;
 	}
 
+	@Override
 	public String execute() {
 		this.post = postDao.find(id);
 

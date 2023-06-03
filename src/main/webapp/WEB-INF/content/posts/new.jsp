@@ -12,7 +12,6 @@
 <div class="container">
     <h1 class="mt-5">New Post</h1>
     <form action="create" method="post">
-        <s:token/>
         <div class="form-group mt-3">
             <label for="post_title">Title</label>
             <input id="post_title"

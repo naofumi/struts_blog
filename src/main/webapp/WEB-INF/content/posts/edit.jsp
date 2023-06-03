@@ -10,9 +10,8 @@
 <body>
 <%@ include file="/WEB-INF/layouts/topNav.jspf" %>
 <div class="container">
-    <h1 class="mt-5"><s:property value="post.title"/>: Edit</h1>
+    <h1 class="mt-5"><s:property value="post.title"/>Edit</h1>
     <form action="update" method="post">
-        <s:token/>
         <input type="hidden" name="post.id" value="<s:property value="post.id" />"/>
         <div class="form-group mt-3">
             <label for="post_title">Title</label>
