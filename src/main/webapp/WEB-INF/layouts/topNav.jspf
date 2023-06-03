@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="/struts_blog/index">Struts Blog</a>
         <s:if test="loggedIn">
             <div class="text-end">
-                <span class="me-3"><s:property value="user"/></span>
+                <span class="me-3"><s:property value="currentUser.email"/></span>
                 <a href="/struts_blog/sessions/delete" class="btn btn-danger">Logout</a>
             </div>
         </s:if>

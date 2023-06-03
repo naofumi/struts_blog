@@ -1,13 +1,13 @@
 package struts_blog.actions.admin.posts;
 
-import struts_blog.actions.BaseAction;
+import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Paginatable;
 import struts_blog.models.Post;
 import struts_blog.daos.PostDao;
 
 import java.util.ArrayList;
 
-public class IndexAction extends BaseAction implements Paginatable {
+public class IndexAction extends AdminBaseAction implements Paginatable {
 
     private static final long serialVersionUID = 1L;
 

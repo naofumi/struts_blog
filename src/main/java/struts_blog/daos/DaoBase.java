@@ -86,20 +86,24 @@ abstract class DaoBase<T> {
         }
     }
 
-
+    /* If not found, returns null */
     public T find(int id) {
         try (Connection conn = getConnection()) {
             String sqlString = "SELECT * FROM " + getTable() + " WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sqlString);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            return objectFromResultSet(rs);
+            if (rs.next()) {
+                return objectFromResultSet(rs);
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /* If not found, returns null */
     public T findBy(String columnName, String value) {
         try (Connection conn = getConnection()) {
             String sqlString = "SELECT * FROM " + getTable() + " WHERE " + columnName + " = ?";

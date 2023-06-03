@@ -2,6 +2,7 @@ package struts_blog.actions.sessions;
 
 import struts_blog.actions.BaseAction;
 import struts_blog.models.Login;
+import struts_blog.models.User;
 
 import java.util.Objects;
 
@@ -9,11 +10,11 @@ public class CreateAction extends BaseAction {
     private Login login;
 
     public String execute() {
-        if (login.isValid()) {
+        User user = login.getAuthenticatedUser();
+        if (user != null) {
             // Sessions should be invalidated prior to login
             // to prevent session fixation attacks.
-            sessionMap.invalidate();
-            sessionMap.put("user_id", login.getEmail());
+            sessionMap.put("user_id", user.getId());
             return SUCCESS;
         } else {
             addFieldError("login.email", "Either email or password is invalid.");

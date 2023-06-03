@@ -7,11 +7,14 @@ public class Login {
     private String password;
     private UserDao userDao = new UserDao();
 
-    public boolean isValid() {
+    public User getAuthenticatedUser() {
         User user = userDao.findBy("email", email);
-        if (user == null) { return false; }
 
-        return user.isMatchingPassword(password);
+        if (user != null && user.isMatchingPassword(password)) {
+            return user;
+        } else {
+            return null;
+        }
     }
 
     public String getEmail() {

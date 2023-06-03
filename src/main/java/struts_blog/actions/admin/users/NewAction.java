@@ -12,8 +12,6 @@ public class NewAction extends AdminBaseAction {
 	}
 
 	public String execute() {
-		setUser(new User());
-
 		return SUCCESS;
 	}
 }

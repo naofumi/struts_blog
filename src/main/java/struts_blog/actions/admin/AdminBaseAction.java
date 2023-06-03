@@ -1,25 +1,24 @@
 package struts_blog.actions.admin;
 
-import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.action.SessionAware;
-import org.apache.struts2.dispatcher.SessionMap;
 import struts_blog.actions.BaseAction;
+import struts_blog.daos.UserDao;
+import struts_blog.models.AuthenticationService;
 import struts_blog.models.User;
 
-import java.util.Map;
-
 public abstract class AdminBaseAction extends BaseAction {
-    private User user;
+    User currentUser;
+    AuthenticationService authenticationService = new AuthenticationService();
 
-    public User getUser() {
-        return user;
+    public User getCurrentUser() {
+        // Memoization
+        if (currentUser != null)
+            return currentUser;
+
+        return this.currentUser = authenticationService.userFromSession(sessionMap);
     }
 
-    protected void setUser(User user) {
-        this.user = user;
-    }
     public boolean isLoggedIn() {
-        return getUser() != null;
+        return getCurrentUser() != null;
     }
 
 }
