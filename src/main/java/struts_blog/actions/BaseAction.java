@@ -21,11 +21,6 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
         return visitsCount;
     }
 
-    public String getUser() {
-        return (String) sessionMap.get("user_id");
-    }
-
-
     protected void incrementVisitsCount() {
         int visitsCount = getVisitsCount();
 

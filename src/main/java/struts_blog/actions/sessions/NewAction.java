@@ -7,11 +7,7 @@ public class NewAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private final Login login = new Login();
 
-	public NewAction() {
-	}
-
 	public String execute() {
-
 		return SUCCESS;
 	}
 

@@ -1,6 +1,18 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/struts_blog/index">Struts Blog</a>
+        <s:if test="loggedIn">
+            <div class="text-end">
+                <span class="me-3"><s:property value="user"/></span>
+                <a href="/struts_blog/sessions/delete" class="btn btn-danger">Logout</a>
+            </div>
+        </s:if>
+        <s:else>
+            <div class="text-end">
+                <a href="/struts_blog/sessions/new" class="btn btn-primary">Login</a>
+            </div>
+        </s:else>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,8 +20,10 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/struts_blog/index">Home</a>
-                <a class="nav-link" href="/struts_blog/posts">All Posts</a>
-                <a class="nav-link" href="/struts_blog/users/index">All Users</a>
+                <s:if test="loggedIn">
+                    <a class="nav-link" href="/struts_blog/admin/posts">All Posts</a>
+                    <a class="nav-link" href="/struts_blog/admin/users/index">All Users</a>
+                </s:if>
                 <a class="nav-link" href="/struts_blog/about/index">About</a>
                 <a class="nav-link disabled">Disabled</a>
             </div>

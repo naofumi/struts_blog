@@ -1,24 +1,19 @@
-package struts_blog.actions.users;
+package struts_blog.actions.admin.users;
 
 import com.opensymphony.xwork2.ActionSupport;
+import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Post;
 import struts_blog.models.User;
 
-public class NewAction extends ActionSupport {
+public class NewAction extends AdminBaseAction {
 	private static final long serialVersionUID = 1L;
-
-	private User user;
 
 	public NewAction() {
 	}
 
 	public String execute() {
-		this.user = new User();
+		setUser(new User());
 
 		return SUCCESS;
-	}
-
-	public User getUser() {
-		return user;
 	}
 }

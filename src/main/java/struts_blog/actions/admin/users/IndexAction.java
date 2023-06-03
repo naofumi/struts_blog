@@ -1,6 +1,7 @@
-package struts_blog.actions.users;
+package struts_blog.actions.admin.users;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.PostDao;
 import struts_blog.daos.UserDao;
 import struts_blog.models.PaginationLinks;
@@ -9,7 +10,7 @@ import struts_blog.models.User;
 
 import java.util.ArrayList;
 
-public class IndexAction extends BaseAction {
+public class IndexAction extends AdminBaseAction {
 
     private static final long serialVersionUID = 1L;
     private static final int PER_PAGE = 5;

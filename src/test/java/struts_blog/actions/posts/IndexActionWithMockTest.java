@@ -31,6 +31,7 @@ package struts_blog.actions.posts;
 import com.opensymphony.xwork2.ActionSupport;
 import junit.framework.TestCase;
 import org.mockito.Mockito;
+import struts_blog.actions.admin.posts.IndexAction;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 

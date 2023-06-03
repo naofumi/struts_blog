@@ -1,9 +1,9 @@
-package struts_blog.actions.posts;
+package struts_blog.actions.admin.posts;
 
-import com.opensymphony.xwork2.ActionSupport;
+import struts_blog.actions.BaseAction;
 import struts_blog.daos.PostDao;
 
-public class DeleteAction extends ActionSupport {
+public class DeleteAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
 	private int id;

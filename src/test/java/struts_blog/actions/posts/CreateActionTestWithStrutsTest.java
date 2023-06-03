@@ -10,15 +10,10 @@
 * */
 package struts_blog.actions.posts;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.dispatcher.Parameter;
 import org.apache.struts2.junit.StrutsTestCase;
-import org.apache.struts2.util.TokenHelper;
-import org.mockito.Mockito;
-
-import java.util.Map;
+import struts_blog.actions.admin.posts.CreateAction;
 
 public class CreateActionTestWithStrutsTest extends StrutsTestCase {
     protected ActionProxy actionProxy;

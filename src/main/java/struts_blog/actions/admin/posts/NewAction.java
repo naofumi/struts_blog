@@ -1,9 +1,9 @@
-package struts_blog.actions.posts;
+package struts_blog.actions.admin.posts;
 
-import com.opensymphony.xwork2.ActionSupport;
+import struts_blog.actions.BaseAction;
 import struts_blog.models.Post;
 
-public class NewAction extends ActionSupport {
+public class NewAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
 	private Post post;

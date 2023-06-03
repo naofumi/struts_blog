@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.struts2.junit.StrutsTestCase;
+import struts_blog.actions.admin.posts.IndexAction;
 
 /*
 * Here we are testing the capabilities of the `StrutsTestCase`.

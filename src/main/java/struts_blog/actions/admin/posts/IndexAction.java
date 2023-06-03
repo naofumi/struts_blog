@@ -1,8 +1,7 @@
-package struts_blog.actions.posts;
+package struts_blog.actions.admin.posts;
 
 import struts_blog.actions.BaseAction;
 import struts_blog.models.Paginatable;
-import struts_blog.models.PaginationLinks;
 import struts_blog.models.Post;
 import struts_blog.daos.PostDao;
 

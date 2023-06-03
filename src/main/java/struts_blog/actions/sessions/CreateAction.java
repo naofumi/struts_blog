@@ -8,9 +8,6 @@ import java.util.Objects;
 public class CreateAction extends BaseAction {
     private Login login;
 
-    public CreateAction() {
-    }
-
     public String execute() {
         if (login.isValid()) {
             // Sessions should be invalidated prior to login
