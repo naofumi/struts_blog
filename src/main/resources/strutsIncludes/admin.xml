@@ -22,6 +22,10 @@
         <action name="index"
                 class="struts_blog.actions.admin.posts.IndexAction">
             <result name="success">/WEB-INF/content/posts/index.jsp</result>
+            <result name="unauthenticated" type="redirectAction">
+                <param name="namespace">/sessions</param>
+                <param name="actionName">new</param>
+            </result>
         </action>
         <action name="show"
                 class="struts_blog.actions.admin.posts.ShowAction">

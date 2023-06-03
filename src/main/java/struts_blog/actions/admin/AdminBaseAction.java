@@ -6,6 +6,7 @@ import struts_blog.models.AuthenticationService;
 import struts_blog.models.User;
 
 public abstract class AdminBaseAction extends BaseAction {
+    protected static final String UNAUTHENTICATED = "unauthenticated";
     User currentUser;
     AuthenticationService authenticationService = new AuthenticationService();
 
@@ -20,5 +21,4 @@ public abstract class AdminBaseAction extends BaseAction {
     public boolean isLoggedIn() {
         return getCurrentUser() != null;
     }
-
 }

@@ -1,9 +1,10 @@
 package struts_blog.actions.sessions;
 
 import com.opensymphony.xwork2.ActionSupport;
+import struts_blog.actions.BaseAction;
 import struts_blog.models.Login;
 
-public class NewAction extends ActionSupport {
+public class NewAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private final Login login = new Login();
 

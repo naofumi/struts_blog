@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class IndexAction extends AdminBaseAction implements Paginatable {
 
     private static final long serialVersionUID = 1L;
-
     private ArrayList<Post> posts;
     private int page;
     private static final int PER_PAGE = 5;
@@ -26,6 +25,11 @@ public class IndexAction extends AdminBaseAction implements Paginatable {
     }
 
     public String execute() {
+        if (!isLoggedIn()) {
+            setFlash("You must be logged in!");
+            return UNAUTHENTICATED;
+        };
+
         incrementVisitsCount();
 
         this.posts = postDao.getAllWithPage(page, 5);
