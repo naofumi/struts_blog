@@ -1,6 +1,7 @@
 package struts_blog.actions.admin.users;
 
 import com.opensymphony.xwork2.ActionSupport;
+import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Post;
 import struts_blog.models.User;
@@ -11,7 +12,9 @@ public class NewAction extends AdminBaseAction {
 	public NewAction() {
 	}
 
-	public String execute() {
+	public String execute() throws UnauthenticatedException {
+		authenticate();
+
 		return SUCCESS;
 	}
 }

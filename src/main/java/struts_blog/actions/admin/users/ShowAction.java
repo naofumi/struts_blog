@@ -1,5 +1,6 @@
 package struts_blog.actions.admin.users;
 
+import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.UserDao;
 import struts_blog.models.User;
@@ -18,7 +19,9 @@ public class ShowAction extends AdminBaseAction {
 		this.userDao = userDao;
 	}
 
-	public String execute() {
+	public String execute() throws UnauthenticatedException {
+		authenticate();
+
 		setUser(userDao.find(id));
 
 		return SUCCESS;

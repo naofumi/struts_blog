@@ -1,11 +1,7 @@
 package struts_blog.daos;
 
-import struts_blog.models.Post;
-import struts_blog.models.User;
-
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.function.Function;
 
 abstract class DaoBase<T> {
     abstract protected String getTable();

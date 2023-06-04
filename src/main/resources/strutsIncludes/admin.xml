@@ -4,7 +4,7 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-    <package name="users" extends="struts-default" namespace="/admin/users">
+    <package name="users" extends="struts-default, exception_handling" namespace="/admin/users">
         <action name="index" class="struts_blog.actions.admin.users.IndexAction">
             <result name="success">/WEB-INF/content/users/index.jsp</result>
         </action>
@@ -18,14 +18,10 @@
         </action>
     </package>
 
-    <package name="posts" extends="struts-default" namespace="/admin/posts">
+    <package name="posts" extends="struts-default, exception_handling" namespace="/admin/posts">
         <action name="index"
                 class="struts_blog.actions.admin.posts.IndexAction">
             <result name="success">/WEB-INF/content/posts/index.jsp</result>
-            <result name="unauthenticated" type="redirectAction">
-                <param name="namespace">/sessions</param>
-                <param name="actionName">new</param>
-            </result>
         </action>
         <action name="show"
                 class="struts_blog.actions.admin.posts.ShowAction">

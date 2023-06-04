@@ -1,10 +1,12 @@
 package struts_blog.actions.admin.posts;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.UnauthenticatedException;
+import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Post;
 import struts_blog.daos.PostDao;
 
-public class UpdateAction extends BaseAction {
+public class UpdateAction extends AdminBaseAction {
 	private static final long serialVersionUID = 1L;
 	private Post post;
 
@@ -14,7 +16,9 @@ public class UpdateAction extends BaseAction {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String execute() {
+	public String execute() throws UnauthenticatedException {
+		authenticate();
+
 		if (postDao.updatePost(post)){
 			return SUCCESS;
 		} else {

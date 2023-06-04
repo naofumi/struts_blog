@@ -1,6 +1,7 @@
 package struts_blog.actions.admin.users;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.PostDao;
 import struts_blog.daos.UserDao;
@@ -29,7 +30,9 @@ public class IndexAction extends AdminBaseAction {
         this.userDao = userDao;
     }
 
-    public String execute() {
+    public String execute() throws UnauthenticatedException {
+        authenticate();
+
         this.users = userDao.getAllWithPage(page, 5);
         this.maxPages = (userDao.getCount() / PER_PAGE) + 1;
 

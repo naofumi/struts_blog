@@ -7,6 +7,19 @@
 
 	<constant name="struts.devMode" value="true" />
 
+	<package name="exception_handling" extends="struts-default">
+		<global-results>
+			<result name="unauthenticated" type="redirectAction">
+				<param name="namespace">/sessions</param>
+				<param name="actionName">new</param>
+			</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="struts_blog.actions.UnauthenticatedException" result="unauthenticated" />
+		</global-exception-mappings>
+	</package>
+
 	<include file="strutsIncludes/user.xml" />
 	<include file="strutsIncludes/admin.xml" />
 </struts>

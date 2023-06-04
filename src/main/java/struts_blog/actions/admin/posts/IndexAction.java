@@ -1,5 +1,6 @@
 package struts_blog.actions.admin.posts;
 
+import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Paginatable;
 import struts_blog.models.Post;
@@ -24,11 +25,8 @@ public class IndexAction extends AdminBaseAction implements Paginatable {
         this.postDao = postDao;
     }
 
-    public String execute() {
-        if (!isLoggedIn()) {
-            setFlash("You must be logged in!");
-            return UNAUTHENTICATED;
-        };
+    public String execute() throws UnauthenticatedException {
+        authenticate();
 
         incrementVisitsCount();
 

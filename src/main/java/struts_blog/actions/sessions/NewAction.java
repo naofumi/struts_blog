@@ -1,6 +1,5 @@
 package struts_blog.actions.sessions;
 
-import com.opensymphony.xwork2.ActionSupport;
 import struts_blog.actions.BaseAction;
 import struts_blog.models.Login;
 
