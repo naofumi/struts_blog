@@ -7,13 +7,14 @@ import org.apache.struts2.dispatcher.SessionMap;
 
 import java.util.Map;
 
-public abstract class BaseAction extends ActionSupport implements SessionAware, Preparable {
+public abstract class BaseAction extends ActionSupport implements SessionAware {
     public final static String VISITS_COUNT_SESSION_KEY = "vcsk";
     public String flash;
     protected SessionMap<String, Object> sessionMap;
 
     public void withSession(Map<String, Object> session) {
         this.sessionMap = (SessionMap<String, Object>) session;
+        prepareFlash();
     }
 
     public int getVisitsCount() {
@@ -29,8 +30,12 @@ public abstract class BaseAction extends ActionSupport implements SessionAware, 
         sessionMap.put(VISITS_COUNT_SESSION_KEY, visitsCount + 1);
     }
 
-    public void prepare() {
-        prepareFlash();
+    public void setFlash(String flash) {
+        sessionMap.put("flash", flash);
+    }
+
+    public String getFlash() {
+        return flash;
     }
 
     private void prepareFlash() {
@@ -39,12 +44,5 @@ public abstract class BaseAction extends ActionSupport implements SessionAware, 
             this.flash = value;
         }
         sessionMap.remove("flash");
-    }
-    public void setFlash(String flash) {
-        sessionMap.put("flash", flash);
-    }
-
-    public String getFlash() {
-        return flash;
     }
 }
