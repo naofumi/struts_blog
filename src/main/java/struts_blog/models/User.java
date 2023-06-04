@@ -1,5 +1,7 @@
 package struts_blog.models;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 public class User {
     private int id;
     private String email;
@@ -7,7 +9,7 @@ public class User {
 
     public boolean isMatchingPassword(String password) {
         // TODO: This should use a hashing algorithm
-        return password.equals(passwordDigest);
+        return getHashedString(password).equals(passwordDigest);
     }
 
     public int getId() {
@@ -28,7 +30,7 @@ public class User {
 
     public void setPassword(String password) {
         // TODO: This should use a hashing algorithm
-        this.passwordDigest = password;
+        this.passwordDigest = getHashedString(password);
     }
     public String getPasswordDigest() {
         return passwordDigest;
@@ -36,5 +38,9 @@ public class User {
 
     public void setPasswordDigest(String passwordDigest) {
         this.passwordDigest = passwordDigest;
+    }
+
+    private String getHashedString(String original) {
+        return DigestUtils.md5Hex(original);
     }
 }
