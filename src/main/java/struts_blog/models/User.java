@@ -8,7 +8,6 @@ public class User {
     private String passwordDigest;
 
     public boolean isMatchingPassword(String password) {
-        // TODO: This should use a hashing algorithm
         return getHashedString(password).equals(passwordDigest);
     }
 
@@ -29,7 +28,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        // TODO: This should use a hashing algorithm
         this.passwordDigest = getHashedString(password);
     }
     public String getPasswordDigest() {
@@ -41,6 +39,6 @@ public class User {
     }
 
     private String getHashedString(String original) {
-        return DigestUtils.md5Hex(original);
+        return DigestUtils.sha512Hex(original);
     }
 }
