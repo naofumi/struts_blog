@@ -24,10 +24,13 @@
             <div class="text-danger"><s:fielderror><s:param value="%{'user.email'}"/></s:fielderror></div>
         </div>
         <div class="form-group mt-3">
-            <label for="user_email">Password</label>
-            <textarea id="user_password"
-                      name="user.password"
-                      class="form-control"><s:property value="user.password"/></textarea>
+            <label for="user_password">Password</label>
+            <input id="user_password"
+                   type="text"
+                   value="<s:property value="user.password" />"
+                   name="user.password"
+                   class="form-control"
+            />
             <div class="text-danger"><s:fielderror><s:param value="%{'user.password'}"/></s:fielderror></div>
         </div>
         <input type="submit" value="Submit" class="btn btn-warning mt-5"/>

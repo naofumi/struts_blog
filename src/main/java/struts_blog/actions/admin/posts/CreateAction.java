@@ -20,12 +20,12 @@ public class CreateAction extends AdminBaseAction {
 	public String execute() throws UnauthenticatedException {
 		authenticate();
 
-		if (postDao.create(post)) {
-			return SUCCESS;
-		} else {
-			return ERROR;
-		}
+		this.post = postDao.createAndReturnSaved(post);
+
+		return SUCCESS;
 	}
+
+	public long getId() { return post.getId(); }
 
 	public Post getPost() {
 		return post;

@@ -2,7 +2,21 @@ package struts_blog.daos;
 
 import java.sql.*;
 import java.util.ArrayList;
-
+/*
+* The base Data Access Object for the current application.
+*
+* This has the following design features.
+*
+* 1. It is designed for simple access to the database.
+* 2. It also allows us to mock out the database access.
+*
+* Notes
+*
+* 1. With `createAndReturnSaved()`, the `id` of the object sent in as the argument
+*    will be set from the `id` generated after saving in the database.
+*    This is useful for auto-incremented rows, for example.
+*    (see the implementations for examples)
+* */
 abstract class DaoBase<T> {
     abstract protected String getTable();
 
@@ -129,8 +143,20 @@ abstract class DaoBase<T> {
         }
     }
 
+    public abstract boolean update(T object);
+
+    public abstract boolean create(T object);
+
+    public abstract T createAndReturnSaved(T object);
+
     protected boolean isNotZero(int changedRows) {
         return changedRows != 0;
     }
 
+    protected int getIdOfLastInsert(Connection conn) throws SQLException {
+        PreparedStatement lastInsertStatement = conn.prepareStatement("SELECT LAST_INSERT_ID()");
+        ResultSet lastInsertRs = lastInsertStatement.executeQuery();
+        lastInsertRs.next();
+        return lastInsertRs.getInt(1);
+    }
 }

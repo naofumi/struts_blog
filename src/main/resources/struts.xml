@@ -77,6 +77,14 @@
 				class="struts_blog.actions.admin.users.NewAction">
 			<result name="success">/WEB-INF/content/admin/users/new.jsp</result>
 		</action>
+		<action name="create"
+				class="struts_blog.actions.admin.users.CreateAction">
+			<result type="redirectAction" name="success">
+				<param name="actionName">show</param>
+				<param name="id">${user.id}</param>
+			</result>
+			<result name="input">/WEB-INF/content/admin/users/new.jsp</result>
+		</action>
 	</package>
 
 	<package name="admin_posts" extends="struts-default, exception_handling" namespace="/admin/posts">
@@ -100,7 +108,7 @@
 				class="struts_blog.actions.admin.posts.CreateAction">
 			<result type="redirectAction" name="success">
 				<param name="actionName">show</param>
-				<param name="id">${post.id}</param>
+				<param name="id">${id}</param>
 			</result>
 			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
 		</action>

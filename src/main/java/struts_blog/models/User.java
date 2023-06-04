@@ -26,6 +26,10 @@ public class User {
         this.email = email;
     }
 
+    public void setPassword(String password) {
+        // TODO: This should use a hashing algorithm
+        this.passwordDigest = password;
+    }
     public String getPasswordDigest() {
         return passwordDigest;
     }

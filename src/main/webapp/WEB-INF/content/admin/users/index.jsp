@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col text-end">
-                <a href="users/new" class="btn btn-primary">New User</a>
+                <a href="new" class="btn btn-primary">New User</a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
             <tr>
                 <td><s:property value="email"/></td>
                 <td>
-                    <s:url action="users/show" var="showLink">
+                    <s:url action="show" var="showLink">
                         <s:param name="id"><s:property value="id"/></s:param>
                     </s:url> <a href="${showLink}" class="btn btn-secondary">Show</a>
                 </td>

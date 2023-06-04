@@ -25,12 +25,6 @@ public class UserDao extends DaoBase<User> {
         }
     }
 
-    /*
-     * With MySQL, you can use `SELECT LAST_INSERT_ID();` to get the
-     * ID of the row that was inserted. However, this is apparently not an
-     * SQL standard, and I will not use that here.
-     * Maybe later
-     */
     public boolean create(User user) {
         try(Connection conn = getConnection()) {
             String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
@@ -40,6 +34,23 @@ public class UserDao extends DaoBase<User> {
 
             int changedRows = ps.executeUpdate();
             return isNotZero(changedRows);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User createAndReturnSaved(User user) {
+        try(Connection conn = getConnection()) {
+            String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sqlString);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPasswordDigest());
+
+            ps.executeUpdate();
+
+            user.setId(getIdOfLastInsert(conn));
+
+            return user;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

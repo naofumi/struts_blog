@@ -3,10 +3,6 @@ package struts_blog.daos;
 import junit.framework.TestCase;
 import struts_blog.models.User;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.function.Function;
-
 public class UserDaoTest extends TestCase {
     UserDao userDao = new UserDao();
 
@@ -20,7 +16,6 @@ public class UserDaoTest extends TestCase {
     }
 
     public void testFindByEmailWithExistingEmail() {
-//        User result = userDao.findByEmail("naofumi@mac.com");
         User result = userDao.findBy("email", "naofumi@mac.com");
         assertEquals("naofumi@mac.com", result.getEmail());
     }
@@ -30,6 +25,14 @@ public class UserDaoTest extends TestCase {
         assertNull(result);
     }
 
+    public void createAndReturnSavedUser() {
+        User user = new User();
+        user.setEmail("test@mac.com");
+        user.setPasswordDigest("hoge1234");
+
+        User createdUser = userDao.createAndReturnSaved(user);
+        System.out.println(createdUser.getId());
+    }
 }
 
 

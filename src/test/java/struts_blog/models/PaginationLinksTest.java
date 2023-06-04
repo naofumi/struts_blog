@@ -10,7 +10,7 @@ public class PaginationLinksTest extends TestCase {
     }
 
     public void testWhenPageIs1() {
-        PaginationLinks paginationLinks = new PaginationLinks("/posts", 1, 5);
+        PaginationLinks paginationLinks = new PaginationLinks("/posts", 1, 10,5);
 
         assertNull(paginationLinks.getPrevious());
         assertEquals("/posts?page=2", paginationLinks.getNext());
@@ -20,7 +20,7 @@ public class PaginationLinksTest extends TestCase {
     }
 
     public void testWhenPageIsMiddle() {
-        PaginationLinks paginationLinks = new PaginationLinks("/posts", 3, 5);
+        PaginationLinks paginationLinks = new PaginationLinks("/posts", 3, 10, 5);
 
         assertEquals("/posts?page=2", paginationLinks.getPrevious());
         assertEquals("/posts?page=4", paginationLinks.getNext());

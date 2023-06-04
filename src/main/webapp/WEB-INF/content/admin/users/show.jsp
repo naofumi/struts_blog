@@ -12,11 +12,11 @@
 <div class="container">
     <h1 class="mt-5"><s:property value="user.email"/>: Show</h1>
 
-    <s:url action="users/edit" var="editLink">
+    <s:url action="edit" var="editLink">
         <s:param name="id"><s:property value="id"/></s:param>
     </s:url> <a href="${editLink}" class="btn btn-secondary">Edit</a>
 
-    <form action="users/delete" method="POST" class="d-inline">
+    <form action="delete" method="POST" class="d-inline">
         <input type="hidden" name="id" value="<s:property value="id" />"/>
         <input type="submit" class="btn btn-danger ms-5" value="Delete">
     </form>
