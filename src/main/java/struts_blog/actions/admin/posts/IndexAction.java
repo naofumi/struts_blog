@@ -2,13 +2,13 @@ package struts_blog.actions.admin.posts;
 
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
-import struts_blog.models.Paginatable;
+import struts_blog.models.PaginationLinks;
 import struts_blog.models.Post;
 import struts_blog.daos.PostDao;
 
 import java.util.ArrayList;
 
-public class IndexAction extends AdminBaseAction implements Paginatable {
+public class IndexAction extends AdminBaseAction {
 
     private static final long serialVersionUID = 1L;
     private ArrayList<Post> posts;
@@ -39,29 +39,12 @@ public class IndexAction extends AdminBaseAction implements Paginatable {
         return posts;
     }
 
-    /* Paginatable interface */
     public void setPage(int page) {
 		this.page = page;
     }
 
-    @Override
-    public String getBaseUrl() {
-        return "/struts_blog/admin/posts/index";
+    public PaginationLinks getPaginationLinks() {
+        return new PaginationLinks("/struts_blog/admin/posts/index", page, postDao.getCount(), PER_PAGE);
     }
-
-    @Override
-    public int getPage() {
-        return this.page;
-    }
-
-    @Override
-    public int getCount() {
-        return postDao.getCount();
-    }
-    @Override
-    public int getPerPage() {
-        return PER_PAGE;
-    }
-    /* end of Paginatable interface */
 
 }

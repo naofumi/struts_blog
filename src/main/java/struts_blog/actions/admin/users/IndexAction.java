@@ -18,8 +18,6 @@ public class IndexAction extends AdminBaseAction {
 
     private ArrayList<User> users;
     private int page;
-    private int maxPages;
-
     UserDao userDao = new UserDao();
 
     public IndexAction() {
@@ -34,7 +32,6 @@ public class IndexAction extends AdminBaseAction {
         authenticate();
 
         this.users = userDao.getAllWithPage(page, 5);
-        this.maxPages = (userDao.getCount() / PER_PAGE) + 1;
 
         return SUCCESS;
     }
@@ -44,7 +41,7 @@ public class IndexAction extends AdminBaseAction {
     }
 
     public PaginationLinks getPaginationLinks() {
-        return new PaginationLinks("/struts_blog/users/index", page, maxPages);
+        return new PaginationLinks("/struts_blog/users/index", page, userDao.getCount(), PER_PAGE);
     }
 
     public ArrayList<User> getUsers() {
