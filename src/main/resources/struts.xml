@@ -21,9 +21,8 @@
 	</package>
 
 	<package name="root" extends="struts-default" namespace="/">
-		<action name=""
-				class="struts_blog.actions.IndexAction">
-			<result name="success">/WEB-INF/content/index.jsp</result>
+		<action name="">
+			<result type="redirectAction">index</result>
 		</action>
 		<action name="index"
 				class="struts_blog.actions.IndexAction">
@@ -34,6 +33,13 @@
 	<package name="posts" extends="struts-default" namespace="/posts">
 		<action name="show" class="struts_blog.actions.posts.ShowAction">
 			<result name="success">/WEB-INF/content/posts/show.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="about" extends="struts-default" namespace="/about">
+		<action name="show" class="struts_blog.actions.about.ShowAction">
+			<result name="success">/WEB-INF/content/about/show.jsp</result>
 		</action>
 	</package>
 
@@ -92,31 +98,22 @@
 		</action>
 		<action name="create"
 				class="struts_blog.actions.admin.posts.CreateAction">
-			<!-- Need to figure out how to handle the token interceptor during testing
-            -->
-			<!--			<interceptor-ref name="token" />-->
-			<interceptor-ref name="defaultStack" />
 			<result type="redirectAction" name="success">
-				<param name="namespace">/</param>
-				<param name="actionName">posts</param>
+				<param name="actionName">show</param>
 				<param name="id">${post.id}</param>
 			</result>
 			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
 		</action>
 		<action name="update"
 				class="struts_blog.actions.admin.posts.UpdateAction">
-			<!--			<interceptor-ref name="token" />-->
-			<interceptor-ref name="defaultStack" />
 			<result type="redirectAction" name="success">
 				<param name="actionName">show</param>
 				<param name="id">${post.id}</param>
 			</result>
+			<result name="input">/WEB-INF/content/admin/posts/edit.jsp</result>
 		</action>
 		<action name="delete" class="struts_blog.actions.admin.posts.DeleteAction">
-			<!--			<interceptor-ref name="token" />-->
-			<interceptor-ref name="defaultStack" />
 			<result type="redirectAction" name="success">
-				<param name="namespace">/admin/posts</param>
 				<param name="actionName">index</param>
 			</result>
 		</action>

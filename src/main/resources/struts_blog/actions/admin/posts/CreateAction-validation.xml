@@ -2,12 +2,12 @@
 
 <validators>
     <field name="post.title">
-        <field-validator type="required">
+        <field-validator type="requiredstring">
             <message>Title is required</message>
         </field-validator>
     </field>
     <field name="post.content">
-        <field-validator type="required">
+        <field-validator type="requiredstring">
             <message>Content is required</message>
         </field-validator>
     </field>

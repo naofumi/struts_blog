@@ -21,10 +21,10 @@
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/struts_blog/index">Home</a>
                 <s:if test="loggedIn">
-                    <a class="nav-link" href="/struts_blog/admin/posts">All Posts</a>
+                    <a class="nav-link" href="/struts_blog/admin/posts/index">All Posts</a>
                     <a class="nav-link" href="/struts_blog/admin/users/index">All Users</a>
                 </s:if>
-                <a class="nav-link" href="/struts_blog/about/index">About</a>
+                <a class="nav-link" href="/struts_blog/about/show">About</a>
                 <a class="nav-link disabled">Disabled</a>
             </div>
         </div>

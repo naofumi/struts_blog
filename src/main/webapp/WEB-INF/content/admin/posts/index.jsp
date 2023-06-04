@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col text-end">
-                <a href="posts/new" class="btn btn-primary">New Post</a>
+                <a href="new" class="btn btn-primary">New Post</a>
             </div>
         </div>
     </div>
