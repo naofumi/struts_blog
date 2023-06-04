@@ -1,6 +1,5 @@
 package struts_blog.actions.admin.posts;
 
-import struts_blog.actions.BaseAction;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Post;
@@ -21,7 +20,7 @@ public class CreateAction extends AdminBaseAction {
 	public String execute() throws UnauthenticatedException {
 		authenticate();
 
-		if (postDao.createPost(post)) {
+		if (postDao.create(post)) {
 			return SUCCESS;
 		} else {
 			return ERROR;

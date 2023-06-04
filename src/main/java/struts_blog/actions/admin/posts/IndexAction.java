@@ -46,7 +46,7 @@ public class IndexAction extends AdminBaseAction implements Paginatable {
 
     @Override
     public String getBaseUrl() {
-        return "/struts_blog/posts";
+        return "/struts_blog/admin/posts/index";
     }
 
     @Override

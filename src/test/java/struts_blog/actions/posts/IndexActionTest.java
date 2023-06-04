@@ -31,6 +31,7 @@ package struts_blog.actions.posts;
 import com.opensymphony.xwork2.ActionSupport;
 import junit.framework.TestCase;
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.posts.IndexAction;
 import struts_blog.models.Post;
 
@@ -46,19 +47,22 @@ public class IndexActionTest extends TestCase {
         super.setUp();
     }
 
-    public void test_execute_returns_success() {
+    public void test_execute_returns_success() throws UnauthenticatedException {
+        action.withSession(new HashMap(Map.of("user_id", 1)));
         String result = action.execute();
         assertEquals(ActionSupport.SUCCESS, result);
     }
 
-    public void test_execute_sets_visitCount_to_1_on_initial_visit() {
+    public void test_execute_sets_visitCount_to_1_on_initial_visit() throws UnauthenticatedException {
+        action.withSession(new HashMap(Map.of("user_id", 1)));
         action.execute();
 
         assertEquals(1, action.getVisitsCount());
     }
 
-    public void test_execute_increments_visitCount_on_subsequent_visits() {
+    public void test_execute_increments_visitCount_on_subsequent_visits() throws UnauthenticatedException {
         HashMap<String, Object> previousSession = new HashMap<>(Map.ofEntries(
+                entry("user_id",1),
                 entry(BaseAction.VISITS_COUNT_SESSION_KEY, 3)
         ));
 
@@ -68,7 +72,8 @@ public class IndexActionTest extends TestCase {
         assertEquals(4, action.getVisitsCount());
     }
 
-    public void test_execute_sets_getPost() {
+    public void test_execute_sets_getPost() throws UnauthenticatedException {
+        action.withSession(new HashMap(Map.of("user_id", 1)));
         action.execute();
 
         List<Post> posts = action.getPosts();

@@ -6,6 +6,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.junit.StrutsTestCase;
 import struts_blog.actions.admin.posts.IndexAction;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
 * Here we are testing the capabilities of the `StrutsTestCase`.
 *
@@ -32,6 +35,10 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
         this.actionProxy = getActionProxy("/posts");
         this.action = (IndexAction) actionProxy.getAction();
 
+        HashMap<String, Object> mockSession = new HashMap<>();
+        mockSession.put("user_id", 1);
+        setSessionOnActionProxy(actionProxy, mockSession);
+
         String result = actionProxy.execute();
 
         assertEquals(ActionSupport.SUCCESS, result);
@@ -40,6 +47,10 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
     public void test_execute_sets_getPost() throws Exception {
         this.actionProxy = getActionProxy("/posts");
         this.action = (IndexAction) actionProxy.getAction();
+
+        HashMap<String, Object> mockSession = new HashMap<>();
+        mockSession.put("user_id", 1);
+        setSessionOnActionProxy(actionProxy, mockSession);
 
         actionProxy.execute();
 
@@ -52,5 +63,10 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
         // I haven't yet set it up to return JSP content
         assertEquals("", body);
         assertEquals(200, response.getStatus());
+    }
+
+    private void setSessionOnActionProxy(ActionProxy actionProxy, Map sessionMap) {
+        //  https://stackoverflow.com/a/19653568
+        actionProxy.getInvocation().getInvocationContext().setSession(sessionMap);
     }
 }

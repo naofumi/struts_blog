@@ -15,12 +15,19 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.junit.StrutsTestCase;
 import struts_blog.actions.admin.posts.CreateAction;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CreateActionTestWithStrutsTest extends StrutsTestCase {
     protected ActionProxy actionProxy;
     protected CreateAction action;
 
     public void test_path_maps_here() {
-        this.actionProxy = getActionProxy("/posts/create");
+        this.actionProxy = getActionProxy("/admin/posts/create");
+
+        HashMap<String, Object> mockSession = new HashMap<>();
+        mockSession.put("user_id", 1);
+        setSessionOnActionProxy(actionProxy, mockSession);
 
         assertEquals("create", actionProxy.getActionName());
         assertNotNull(actionProxy);
@@ -30,7 +37,12 @@ public class CreateActionTestWithStrutsTest extends StrutsTestCase {
         request.setParameter("post.title", "Test Title");
         request.setParameter("post.content", "Test Content");
 
-        this.actionProxy = getActionProxy("/posts/create");
+        this.actionProxy = getActionProxy("/admin/posts/create");
+
+        HashMap<String, Object> mockSession = new HashMap<>();
+        mockSession.put("user_id", 1);
+        setSessionOnActionProxy(actionProxy, mockSession);
+
         this.action = (CreateAction) actionProxy.getAction();
         String result = actionProxy.execute();
 
@@ -41,13 +53,24 @@ public class CreateActionTestWithStrutsTest extends StrutsTestCase {
         request.setParameter("post.title", "");
         request.setParameter("post.content", "Test Content");
 
-        this.actionProxy = getActionProxy("/posts/create");
+        this.actionProxy = getActionProxy("/admin/posts/create");
+
+//        HashMap<String, Object> mockSession = new HashMap<>();
+//        mockSession.put("user_id", 1);
+//        setSessionOnActionProxy(actionProxy, mockSession);
+
         this.action = (CreateAction) actionProxy.getAction();
         String result = actionProxy.execute();
 
-        assertEquals(action.getFieldErrors().size(), 1);
+        assertEquals(1, action.getFieldErrors().size());
         assertEquals("Title is required.", action.getFieldErrors().get("post.title").get(0));
 
         assertEquals(ActionSupport.INPUT, result);
     }
+
+    private void setSessionOnActionProxy(ActionProxy actionProxy, Map sessionMap) {
+        //  https://stackoverflow.com/a/19653568
+        actionProxy.getInvocation().getInvocationContext().setSession(sessionMap);
+    }
+
 }

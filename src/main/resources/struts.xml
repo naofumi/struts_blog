@@ -20,6 +20,106 @@
 		</global-exception-mappings>
 	</package>
 
-	<include file="strutsIncludes/user.xml" />
-	<include file="strutsIncludes/admin.xml" />
+	<package name="root" extends="struts-default" namespace="/">
+		<action name=""
+				class="struts_blog.actions.IndexAction">
+			<result name="success">/WEB-INF/content/index.jsp</result>
+		</action>
+		<action name="index"
+				class="struts_blog.actions.IndexAction">
+			<result name="success">/WEB-INF/content/index.jsp</result>
+		</action>
+	</package>
+
+	<package name="posts" extends="struts-default" namespace="/posts">
+		<action name="show" class="struts_blog.actions.posts.ShowAction">
+			<result name="success">/WEB-INF/content/posts/show.jsp</result>
+		</action>
+	</package>
+
+	<package name="sessions" extends="struts-default" namespace="/sessions">
+		<action name="new"
+				class="struts_blog.actions.sessions.NewAction">
+			<result name="success">/WEB-INF/content/sessions/new.jsp</result>
+		</action>
+		<action name="create" class="struts_blog.actions.sessions.CreateAction">
+			<result type="redirectAction" name="success">
+				<param name="namespace">/admin/posts</param>
+				<param name="actionName">index</param>
+			</result>
+			<result name="input">/WEB-INF/content/sessions/new.jsp</result>
+		</action>
+		<action name="delete"
+				class="struts_blog.actions.sessions.DeleteAction">
+			<interceptor-ref name="defaultStack" />
+			<result type="redirectAction" name="success">
+				<param name="namespace">/</param>
+				<param name="actionName">index</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="admin_users" extends="struts-default, exception_handling" namespace="/admin/users">
+		<action name="index" class="struts_blog.actions.admin.users.IndexAction">
+			<result name="success">/WEB-INF/content/admin/users/index.jsp</result>
+		</action>
+		<action name="show"
+				class="struts_blog.actions.admin.users.ShowAction">
+			<result name="success">/WEB-INF/content/admin/users/show.jsp</result>
+		</action>
+		<action name="new"
+				class="struts_blog.actions.admin.users.NewAction">
+			<result name="success">/WEB-INF/content/admin/users/new.jsp</result>
+		</action>
+	</package>
+
+	<package name="admin_posts" extends="struts-default, exception_handling" namespace="/admin/posts">
+		<action name="index"
+				class="struts_blog.actions.admin.posts.IndexAction">
+			<result name="success">/WEB-INF/content/admin/posts/index.jsp</result>
+		</action>
+		<action name="show"
+				class="struts_blog.actions.admin.posts.ShowAction">
+			<result name="success">/WEB-INF/content/admin/posts/show.jsp</result>
+		</action>
+		<action name="new"
+				class="struts_blog.actions.admin.posts.NewAction">
+			<result name="success">/WEB-INF/content/admin/posts/new.jsp</result>
+		</action>
+		<action name="edit"
+				class="struts_blog.actions.admin.posts.EditAction">
+			<result name="success">/WEB-INF/content/admin/posts/edit.jsp</result>
+		</action>
+		<action name="create"
+				class="struts_blog.actions.admin.posts.CreateAction">
+			<!-- Need to figure out how to handle the token interceptor during testing
+            -->
+			<!--			<interceptor-ref name="token" />-->
+			<interceptor-ref name="defaultStack" />
+			<result type="redirectAction" name="success">
+				<param name="namespace">/</param>
+				<param name="actionName">posts</param>
+				<param name="id">${post.id}</param>
+			</result>
+			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
+		</action>
+		<action name="update"
+				class="struts_blog.actions.admin.posts.UpdateAction">
+			<!--			<interceptor-ref name="token" />-->
+			<interceptor-ref name="defaultStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">show</param>
+				<param name="id">${post.id}</param>
+			</result>
+		</action>
+		<action name="delete" class="struts_blog.actions.admin.posts.DeleteAction">
+			<!--			<interceptor-ref name="token" />-->
+			<interceptor-ref name="defaultStack" />
+			<result type="redirectAction" name="success">
+				<param name="namespace">/admin/posts</param>
+				<param name="actionName">index</param>
+			</result>
+		</action>
+	</package>
+
 </struts>

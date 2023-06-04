@@ -2,11 +2,15 @@ package struts_blog.actions.posts;
 
 import com.opensymphony.xwork2.ActionSupport;
 import junit.framework.TestCase;
+import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.posts.CreateAction;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
+import javax.print.attribute.HashPrintJobAttributeSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateActionTest extends TestCase {
     private CreateAction action;
@@ -18,7 +22,11 @@ public class CreateActionTest extends TestCase {
         this.postDao = new PostDao();
     }
 
-    public void test_execute_returns_success() {
+    public void test_execute_returns_success() throws UnauthenticatedException {
+        HashMap<String, Object> mockSession = new HashMap<>();
+        mockSession.put("user_id", 1);
+        action.withSession(mockSession);
+
         Post post = createPost("Test title", "Test content");
         action.setPost(post);
 
@@ -27,7 +35,11 @@ public class CreateActionTest extends TestCase {
         assertEquals(ActionSupport.SUCCESS, result);
     }
 
-    public void test_execute_saves_post_into_database() {
+    public void test_execute_saves_post_into_database() throws UnauthenticatedException {
+        HashMap<String, Object> mockSession = new HashMap<>();
+        mockSession.put("user_id", 1);
+        action.withSession(mockSession);
+
         Post post = createPost("Test title", "Test content");
         action.setPost(post);
 

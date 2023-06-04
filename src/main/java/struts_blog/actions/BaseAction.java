@@ -5,15 +5,16 @@ import com.opensymphony.xwork2.Preparable;
 import org.apache.struts2.action.SessionAware;
 import org.apache.struts2.dispatcher.SessionMap;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseAction extends ActionSupport implements SessionAware {
     public final static String VISITS_COUNT_SESSION_KEY = "vcsk";
     public String flash;
-    protected SessionMap<String, Object> sessionMap;
+    protected Map<String, Object> sessionMap = new HashMap<String, Object>();
 
     public void withSession(Map<String, Object> session) {
-        this.sessionMap = (SessionMap<String, Object>) session;
+        this.sessionMap = session;
         prepareFlash();
     }
 

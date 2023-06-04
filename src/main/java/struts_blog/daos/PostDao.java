@@ -9,7 +9,7 @@ public class PostDao extends DaoBase<Post> {
         return "posts";
     }
 
-    public boolean updatePost(Post post) {
+    public boolean update(Post post) {
         try(Connection conn = getConnection()) {
             String sqlString = "UPDATE posts SET title = ?, content = ? WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sqlString);
@@ -30,7 +30,7 @@ public class PostDao extends DaoBase<Post> {
      * SQL standard, and I will not use that here.
      * Maybe later
      */
-    public boolean createPost(Post post) {
+    public boolean create(Post post) {
         try(Connection conn = getConnection()) {
             String sqlString = "INSERT INTO posts (title, content) VALUES (?, ?)";
             PreparedStatement ps = conn.prepareStatement(sqlString);

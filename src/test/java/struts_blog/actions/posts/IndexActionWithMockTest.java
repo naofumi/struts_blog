@@ -31,19 +31,22 @@ package struts_blog.actions.posts;
 import com.opensymphony.xwork2.ActionSupport;
 import junit.framework.TestCase;
 import org.mockito.Mockito;
+import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.posts.IndexAction;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class IndexActionWithMockTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
     }
 
-    public void test_execute_returns_success() {
+    public void test_execute_returns_success() throws UnauthenticatedException {
         PostDao postDaoMock = Mockito.mock(PostDao.class);
         ArrayList<Post> posts = new ArrayList<>(List.of(
                 createPost(1, "Mock Title 1", "Mock Content 1"),
@@ -52,6 +55,7 @@ public class IndexActionWithMockTest extends TestCase {
 
         Mockito.when(postDaoMock.getAll()).thenReturn(posts);
         IndexAction action = new IndexAction(postDaoMock);
+        action.withSession(new HashMap(Map.of("user_id", 1)));
 
         String result = action.execute();
 

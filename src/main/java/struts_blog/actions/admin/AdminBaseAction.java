@@ -1,5 +1,6 @@
 package struts_blog.actions.admin;
 
+import org.apache.struts2.dispatcher.SessionMap;
 import struts_blog.actions.BaseAction;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.daos.UserDao;
