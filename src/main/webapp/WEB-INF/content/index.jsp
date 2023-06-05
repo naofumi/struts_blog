@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/layouts/head.jspf">
     <jsp:param name="title" value="Struts Blog"/>
 </jsp:include>
-<body>
+<body class="background_image">
 <%@ include file="/WEB-INF/layouts/topNav.jspf" %>
 <div class="container">
     <h1 class="mt-5">Struts Blog</h1>
