@@ -22,6 +22,7 @@ Information is available here https://struts.apache.org/plugins/config-browser/
 ### CSRF protection
 
 1. You can do this using the token interceptor.
+2. However, I haven't found a good way to work around this when testing. I'm leaving it off for the time being.
 
 ### POST for destructive actions
 
