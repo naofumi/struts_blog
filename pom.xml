@@ -41,17 +41,16 @@
             <artifactId>struts2-config-browser-plugin</artifactId>
             <version>${struts2.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>8.0.33</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-junit-plugin</artifactId>
             <version>${struts2.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -116,11 +115,10 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
+                    <source>19</source>
+                    <target>19</target>
                 </configuration>
             </plugin>
         </plugins>
