@@ -29,7 +29,7 @@ public class OneTimeTokenService {
         String randomString = RandomStringUtils.randomAlphanumeric(10);
         String oneTimeToken = id + "T" + randomString;
 
-        updateUsersOneTimeToken(user, oneTimeToken);
+        updateOneTimeTokenOnUser(oneTimeToken, user);
 
         return oneTimeToken;
     }
@@ -43,7 +43,20 @@ public class OneTimeTokenService {
         }
     }
 
-    private void updateUsersOneTimeToken(User user, String oneTimeToken) {
+    /*
+    * The ugly thing with Services is that you will create a lot of methods with
+    * two or more arguments. Good names for these are hard.
+    *
+    * With an object-oriented approach using a Domain model, it is easy to identify
+    * which argument is the Subject and which argument is the Object when calling the
+    * method. However, with functions, the difference between each argument and how
+    * they relate to each other is harder to describe.
+    *
+    * Here, I am trying to say that the OneTimeToken is an attribute of User and that
+    * has to be updated. I am resorting to the use of `On` as part of the name,
+    * but I'm not sure if this makes it obvious.
+    * */
+    private void updateOneTimeTokenOnUser(String oneTimeToken, User user) {
         user.setOneTimeToken(oneTimeToken);
         userDao.update(user);
     }
