@@ -8,6 +8,15 @@ The application is build using Maven. The IDE should pick this up.
 mvn jetty:start
 ```
 
+## Checking configuration
+
+The Config browser plugin is installed. Access at the following URL.
+
+http://localhost:8080/struts_blog/config-browser/actionNames.action
+
+Information is available here https://struts.apache.org/plugins/config-browser/
+
+
 ## Things to study about Struts
 
 ### CSRF protection
