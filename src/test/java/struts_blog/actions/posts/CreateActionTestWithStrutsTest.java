@@ -63,7 +63,7 @@ public class CreateActionTestWithStrutsTest extends StrutsTestCase {
         String result = actionProxy.execute();
 
         assertEquals(1, action.getFieldErrors().size());
-        assertEquals("Title is required.", action.getFieldErrors().get("post.title").get(0));
+        assertEquals("Title is required", action.getFieldErrors().get("post.title").get(0));
 
         assertEquals(ActionSupport.INPUT, result);
     }

@@ -25,14 +25,14 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
     }
 
     public void test_path_routes_here() {
-        this.actionProxy = getActionProxy("/posts");
+        this.actionProxy = getActionProxy("/admin/posts/index.action");
         this.action = (IndexAction) actionProxy.getAction();
 
         assertNotNull(this.action);
     }
 
     public void test_execute_returns_success() throws Exception {
-        this.actionProxy = getActionProxy("/posts");
+        this.actionProxy = getActionProxy("/admin/posts/index.action");
         this.action = (IndexAction) actionProxy.getAction();
 
         HashMap<String, Object> mockSession = new HashMap<>();
@@ -45,8 +45,9 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
     }
 
     public void test_execute_sets_getPost() throws Exception {
-        this.actionProxy = getActionProxy("/posts");
-        this.action = (IndexAction) actionProxy.getAction();
+        // Setting the session via the request field doesn't seem to work
+        // when using actionProxy.execute()
+        this.actionProxy = getActionProxy("/admin/posts/index.action");
 
         HashMap<String, Object> mockSession = new HashMap<>();
         mockSession.put("user_id", 1);
@@ -54,11 +55,14 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
 
         actionProxy.execute();
 
-        assertEquals("tako", action.getPosts().get(0).getTitle());
+        this.action = (IndexAction) actionProxy.getAction();
+
+        assertEquals("qwer", action.getPosts().get(0).getTitle());
     }
 
     public void test_can_execute_test_executeAction() throws Exception {
-        String body = executeAction("/posts");
+        request.getSession().setAttribute("user_id", 1);
+        String body = executeAction("/admin/posts/index.action");
 
         // I haven't yet set it up to return JSP content
         assertEquals("", body);

@@ -5,6 +5,8 @@ import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Post;
 
+import java.io.Serial;
+
 public class NewAction extends AdminBaseAction {
 	private static final long serialVersionUID = 1L;
 

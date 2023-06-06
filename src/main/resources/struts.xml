@@ -57,7 +57,6 @@
 		</action>
 		<action name="delete"
 				class="struts_blog.actions.sessions.DeleteAction">
-			<interceptor-ref name="defaultStack" />
 			<result type="redirectAction" name="success">
 				<param name="namespace">/</param>
 				<param name="actionName">index</param>
@@ -108,7 +107,7 @@
 				class="struts_blog.actions.admin.posts.CreateAction">
 			<result type="redirectAction" name="success">
 				<param name="actionName">show</param>
-				<param name="id">${id}</param>
+				<param name="id">${post.id}</param>
 			</result>
 			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
 		</action>

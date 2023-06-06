@@ -25,8 +25,6 @@ public class CreateAction extends AdminBaseAction {
 		return SUCCESS;
 	}
 
-	public long getId() { return post.getId(); }
-
 	public Post getPost() {
 		return post;
 	}
