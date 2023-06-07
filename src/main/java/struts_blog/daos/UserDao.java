@@ -10,9 +10,8 @@ import java.sql.SQLException;
 
 public class UserDao extends DaoBase<User> {
 
-
     public boolean update(User user) {
-        try(Connection conn = getConnection()) {
+        try (Connection conn = getConnection()) {
             String sqlString = "UPDATE users SET email = ?, password_digest = ? WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sqlString);
             ps.setString(1, user.getEmail());
@@ -26,7 +25,6 @@ public class UserDao extends DaoBase<User> {
         }
     }
 
-
     protected PreparedStatement getPreparedStatementForCreate(Connection conn, User user) throws SQLException {
         String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
         PreparedStatement ps = conn.prepareStatement(sqlString);
@@ -37,7 +35,7 @@ public class UserDao extends DaoBase<User> {
     }
 
     public User createAndReturnSaved(User user) {
-        try(Connection conn = getConnection()) {
+        try (Connection conn = getConnection()) {
             String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
             PreparedStatement ps = conn.prepareStatement(sqlString);
             ps.setString(1, user.getEmail());

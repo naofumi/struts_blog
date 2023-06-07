@@ -43,12 +43,15 @@ public class UserDaoTest extends TestCase {
         assertEquals("hello@ma.com", result.getEmail());
     }
 
-    public void createAndReturnSavedUser() {
+    public void testCreateAndReturnSavedUser() {
         User user = new User();
         user.setEmail("test@mac.com");
         user.setPasswordDigest("hoge1234");
 
         User createdUser = userDao.createAndReturnSaved(user);
-        System.out.println(createdUser.getId());
+
+        assertNotNull(createdUser.getId()); // assert id was injected after creation
+        User result = userDao.find(createdUser.getId()); // confirm that an entry with that Id really exists
+        assertEquals("test@mac.com", result.getEmail());
     }
 }

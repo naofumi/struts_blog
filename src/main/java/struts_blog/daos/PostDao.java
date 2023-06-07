@@ -26,16 +26,22 @@ public class PostDao extends DaoBase<Post> {
 
     public boolean create(Post post) {
         try(Connection conn = getConnection()) {
-            String sqlString = "INSERT INTO posts (title, content) VALUES (?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sqlString);
-            ps.setString(1, post.getTitle());
-            ps.setString(2, post.getContent());
+            PreparedStatement ps = getPreparedStatementForCreate(conn, post);
 
             int changedRows = ps.executeUpdate();
             return isNotZero(changedRows);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected PreparedStatement getPreparedStatementForCreate(Connection conn, Post post) throws SQLException {
+        String sqlString = "INSERT INTO posts (title, content) VALUES (?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sqlString);
+        ps.setString(1, post.getTitle());
+        ps.setString(2, post.getContent());
+        return ps;
     }
 
     public Post createAndReturnSaved(Post post) {
@@ -56,7 +62,7 @@ public class PostDao extends DaoBase<Post> {
     }
 
 
-    protected Post objectFromResultSet(ResultSet resultSet) throws SQLException {
+    protected Post getObjectFromResultSet(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong("id");
         String title = resultSet.getString("title");
         String content = resultSet.getString("content");
@@ -65,5 +71,15 @@ public class PostDao extends DaoBase<Post> {
         post.setTitle(title);
         post.setContent(content);
         return post;
+    }
+
+    @Override
+    public void refreshTableData() {
+        super.refreshTableData();
+
+        Post post = new Post();
+        post.setTitle("My first Blog Post");
+        post.setContent("My first Blog Post Content");
+        create(post);
     }
 }

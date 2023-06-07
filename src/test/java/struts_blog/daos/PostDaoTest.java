@@ -21,6 +21,7 @@ public class PostDaoTest extends TestCase {
 
     public void test_find_with_valid_id() {
         Post result = postDao.find(1);
+
         assertEquals("My first Blog Post", result.getTitle());
     }
 }
