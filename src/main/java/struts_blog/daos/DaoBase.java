@@ -20,7 +20,7 @@ import java.util.ArrayList;
 abstract class DaoBase<T> {
     abstract protected String getTable();
 
-    abstract protected T objectFromResultSet(ResultSet resultSet) throws SQLException;
+    abstract protected T getObjectFromResultSet(ResultSet resultSet) throws SQLException;
 
     String connectionUrl = "jdbc:mysql://localhost:3306/struts_blog?serverTimezone=UTC";
 
@@ -37,7 +37,7 @@ abstract class DaoBase<T> {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                results.add(objectFromResultSet(rs));
+                results.add(getObjectFromResultSet(rs));
             }
             return results;
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ abstract class DaoBase<T> {
             ps.setInt(1, limit);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                results.add(objectFromResultSet(rs));
+                results.add(getObjectFromResultSet(rs));
             }
             return results;
         } catch (SQLException e) {
@@ -88,7 +88,7 @@ abstract class DaoBase<T> {
             ps.setLong(2, offset);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                results.add(objectFromResultSet(rs));
+                results.add(getObjectFromResultSet(rs));
             }
             return results;
         } catch (SQLException e) {
@@ -104,7 +104,7 @@ abstract class DaoBase<T> {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return objectFromResultSet(rs);
+                return getObjectFromResultSet(rs);
             } else {
                 return null;
             }
@@ -121,7 +121,7 @@ abstract class DaoBase<T> {
             ps.setString(1, value);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return objectFromResultSet(rs);
+                return getObjectFromResultSet(rs);
             } else {
                 return null;
             }
@@ -132,7 +132,7 @@ abstract class DaoBase<T> {
 
     public boolean delete(int id) {
         try (Connection conn = getConnection()) {
-            String sqlString = "DELETE FROM posts WHERE id = ?";
+            String sqlString = "DELETE FROM " + getTable() + " WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sqlString);
             ps.setInt(1, id);
 
@@ -158,9 +158,20 @@ abstract class DaoBase<T> {
 
     public abstract boolean update(T object);
 
-    public abstract boolean create(T object);
-
     public abstract T createAndReturnSaved(T object);
+
+    public boolean create(T object) {
+        try(Connection conn = getConnection()) {
+            PreparedStatement ps = getPreparedStatementForCreate(conn, object);
+
+            int changedRows = ps.executeUpdate();
+            return isNotZero(changedRows);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    abstract protected PreparedStatement getPreparedStatementForCreate(Connection conn, T object) throws SQLException;
 
     protected boolean isNotZero(int changedRows) {
         return changedRows != 0;
