@@ -14,6 +14,7 @@ public class PaginationLinksTest extends TestCase {
 
         assertNull(paginationLinks.getPrevious());
         assertEquals("/posts?page=2", paginationLinks.getNext());
+
         Map<String, String> middleMap = Map.of("1", "/posts?page=1", "2", "/posts?page=2", "3", "/posts?page=3",
                                                 "4", "/posts?page=4", "5", "/posts?page=5");
         assertEquals(middleMap, paginationLinks.getMiddle());

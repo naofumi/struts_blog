@@ -2,62 +2,34 @@ package struts_blog.daos;
 
 import junit.framework.TestCase;
 import struts_blog.models.User;
+import struts_blog.setup.DbSetup;
 
 public class UserDaoTest extends TestCase {
     UserDao userDao = new UserDao();
 
     public void setUp() throws Exception {
         super.setUp();
+        new DbSetup().setUpDb();
     }
 
-    public void testFindWithValidId() {
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        new DbSetup().setUpDb();
+    }
+
+    public void test_find_with_valid_id() {
         User result = userDao.find(1);
         assertEquals("naofumi@mac.com", result.getEmail());
     }
 
-    public void testFindByEmailWithExistingEmail() {
+    public void test_find_by_email_with_existing_email() {
         User result = userDao.findBy("email", "naofumi@mac.com");
         assertEquals("naofumi@mac.com", result.getEmail());
     }
 
-    public void testFindByEmailWithNonExistingEmail() {
+    public void test_find_by_email_with_non_existing_email() {
         User result = userDao.findBy("email", "boo@mac.com");
         assertNull(result);
     }
-
-    public void createAndReturnSavedUser() {
-        User user = new User();
-        user.setEmail("test@mac.com");
-        user.setPasswordDigest("hoge1234");
-
-        User createdUser = userDao.createAndReturnSaved(user);
-        System.out.println(createdUser.getId());
-    }
 }
-
-
-//public class PaginationLinksTest extends TestCase {
-//    public void setUp() throws Exception {
-//        super.setUp();
-//    }
-//
-//    public void testWhenPageIs1() {
-//        PaginationLinks paginationLinks = new PaginationLinks("/posts", 1L, 5L);
-//
-//        assertEquals(null, paginationLinks.getPrevious());
-//        assertEquals("/posts?page=2", paginationLinks.getNext());
-//        Map<String, String> middleMap = Map.of("1", "/posts?page=1", "2", "/posts?page=2", "3", "/posts?page=3",
-//                "4", "/posts?page=4", "5", "/posts?page=5");
-//        assertEquals(middleMap, paginationLinks.getMiddle());
-//    }
-//
-//    public void testWhenPageIsMiddle() {
-//        PaginationLinks paginationLinks = new PaginationLinks("/posts", 3L, 5L);
-//
-//        assertEquals("/posts?page=2", paginationLinks.getPrevious());
-//        assertEquals("/posts?page=4", paginationLinks.getNext());
-//        Map<String, String> middleMap = Map.of("1", "/posts?page=1", "2", "/posts?page=2", "3", "/posts?page=3",
-//                "4", "/posts?page=4", "5", "/posts?page=5");
-//        assertEquals(middleMap, paginationLinks.getMiddle());
-//    }
-//}

@@ -1,6 +1,8 @@
 package struts_blog.daos;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import struts_blog.models.Post;
+import struts_blog.models.User;
 
 import java.sql.*;
 
@@ -55,7 +57,6 @@ public class PostDao extends DaoBase<Post> {
         }
     }
 
-
     protected Post objectFromResultSet(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong("id");
         String title = resultSet.getString("title");
@@ -65,5 +66,16 @@ public class PostDao extends DaoBase<Post> {
         post.setTitle(title);
         post.setContent(content);
         return post;
+    }
+
+    @Override
+    public void refreshTableData() {
+        super.refreshTableData();
+
+        Post post = new Post();
+        post.setTitle("My first Blog Post");
+        post.setContent("My first Blog Post Content");
+        create(post);
+
     }
 }

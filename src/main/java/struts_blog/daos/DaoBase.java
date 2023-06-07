@@ -143,6 +143,19 @@ abstract class DaoBase<T> {
         }
     }
 
+    public boolean truncate() {
+        try (Connection conn = getConnection()) {
+            String sqlString = "TRUNCATE TABLE " + getTable();
+            PreparedStatement ps = conn.prepareStatement(sqlString);
+
+            int changedRows = ps.executeUpdate();
+            return isNotZero(changedRows);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public abstract boolean update(T object);
 
     public abstract boolean create(T object);
@@ -153,6 +166,9 @@ abstract class DaoBase<T> {
         return changedRows != 0;
     }
 
+    public void refreshTableData() {
+        truncate();
+    }
     protected int getIdOfLastInsert(Connection conn) throws SQLException {
         PreparedStatement lastInsertStatement = conn.prepareStatement("SELECT LAST_INSERT_ID()");
         ResultSet lastInsertRs = lastInsertStatement.executeQuery();

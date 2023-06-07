@@ -1,5 +1,6 @@
 package struts_blog.daos;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import struts_blog.models.User;
 
 import java.sql.Connection;
@@ -54,6 +55,16 @@ public class UserDao extends DaoBase<User> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void refreshTableData() {
+        super.refreshTableData();
+
+        User user = new User();
+        user.setEmail("naofumi@mac.com");
+        user.setPasswordDigest(DigestUtils.sha512Hex("password"));
+        create(user);
     }
 
     @Override
