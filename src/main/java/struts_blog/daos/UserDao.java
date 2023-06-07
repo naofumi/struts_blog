@@ -25,18 +25,14 @@ public class UserDao extends DaoBase<User> {
         }
     }
 
-    public boolean create(User user) {
-        try(Connection conn = getConnection()) {
-            String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sqlString);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPasswordDigest());
 
-            int changedRows = ps.executeUpdate();
-            return isNotZero(changedRows);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    protected PreparedStatement getPreparedStatementForCreate(Connection conn, User user) throws SQLException {
+        String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sqlString);
+        ps.setString(1, user.getEmail());
+        ps.setString(2, user.getPasswordDigest());
+
+        return ps;
     }
 
     public User createAndReturnSaved(User user) {
@@ -61,7 +57,7 @@ public class UserDao extends DaoBase<User> {
         return "users";
     }
 
-    protected User objectFromResultSet(ResultSet resultSet) throws SQLException {
+    protected User getObjectFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String email = resultSet.getString("email");
         String passwordDigest = resultSet.getString("password_digest");

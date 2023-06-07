@@ -38,6 +38,11 @@ public class PostDao extends DaoBase<Post> {
         }
     }
 
+    @Override
+    protected PreparedStatement getPreparedStatementForCreate(Connection conn, Post object) throws SQLException {
+        return null;
+    }
+
     public Post createAndReturnSaved(Post post) {
         try(Connection conn = getConnection()) {
             String sqlString = "INSERT INTO posts (title, content) VALUES (?, ?)";
@@ -56,7 +61,7 @@ public class PostDao extends DaoBase<Post> {
     }
 
 
-    protected Post objectFromResultSet(ResultSet resultSet) throws SQLException {
+    protected Post getObjectFromResultSet(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong("id");
         String title = resultSet.getString("title");
         String content = resultSet.getString("content");

@@ -19,6 +19,15 @@ public class PaginationLinksTest extends TestCase {
         assertEquals(middleMap, paginationLinks.getMiddle());
     }
 
+    public void testWhenPageIs100() {
+        PaginationLinks paginationLinks = new PaginationLinks("/posts", 100, 10,5);
+
+        assertEquals(null, paginationLinks.getPrevious());
+        assertEquals(null, paginationLinks.getNext());
+        Map<String, String> middleMap = Map.of();
+        assertEquals(middleMap, paginationLinks.getMiddle());
+    }
+
     public void testWhenPageIsMiddle() {
         PaginationLinks paginationLinks = new PaginationLinks("/posts", 3, 10, 5);
 

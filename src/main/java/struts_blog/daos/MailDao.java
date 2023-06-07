@@ -43,6 +43,11 @@ public class MailDao extends DaoBase<Mail> {
         }
     }
 
+    @Override
+    protected PreparedStatement getPreparedStatementForCreate(Connection conn, Mail object) throws SQLException {
+        return null;
+    }
+
     public Mail createAndReturnSaved(Mail mail) {
         try(Connection conn = getConnection()) {
             String sqlString = "INSERT INTO mails (title, send_to, body) VALUES (?, ?, ?)";
@@ -62,7 +67,7 @@ public class MailDao extends DaoBase<Mail> {
     }
 
 
-    protected Mail objectFromResultSet(ResultSet resultSet) throws SQLException {
+    protected Mail getObjectFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String title = resultSet.getString("title");
         String sendTo = resultSet.getString("send_to");
