@@ -31,7 +31,7 @@ public class CreateActionWithMockTest extends TestCase {
         String result = action.execute();
 
         assertEquals(ActionSupport.SUCCESS, result);
-        verify(postDaoMock).create(post);
+        verify(postDaoMock).createAndReturnSaved(post);
     }
 
     public void test_execute_creates_new_post() throws UnauthenticatedException {
@@ -46,7 +46,7 @@ public class CreateActionWithMockTest extends TestCase {
         action.setPost(post);
         action.execute();
 
-        verify(postDaoMock).create(post);
+        verify(postDaoMock).createAndReturnSaved(post);
     }
 
     private Post createPost(String title, String content) {

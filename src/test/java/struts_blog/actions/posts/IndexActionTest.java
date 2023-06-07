@@ -77,6 +77,6 @@ public class IndexActionTest extends TestCase {
         action.execute();
 
         List<Post> posts = action.getPosts();
-        assertEquals("tako", posts.get(0).getTitle());
+        assertEquals("My first Blog Post", posts.get(0).getTitle());
     }
 }

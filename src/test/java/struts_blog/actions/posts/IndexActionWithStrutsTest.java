@@ -57,7 +57,7 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
 
         this.action = (IndexAction) actionProxy.getAction();
 
-        assertEquals("qwer", action.getPosts().get(0).getTitle());
+        assertEquals("My first Blog Post", action.getPosts().get(0).getTitle());
     }
 
     public void test_can_execute_test_executeAction() throws Exception {
