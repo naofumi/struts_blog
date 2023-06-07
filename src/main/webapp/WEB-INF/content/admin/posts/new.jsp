@@ -30,6 +30,7 @@
             <div class="text-danger"><s:fielderror><s:param value="%{'post.content'}"/></s:fielderror></div>
         </div>
         <input type="submit" value="Submit" class="btn btn-warning mt-5"/>
+        <input type="submit" formaction="chained_create" value="Submit with Chaining" class="btn btn-warning mt-5"/>
     </form>
 </div>
 </body>
