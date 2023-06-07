@@ -17,7 +17,7 @@ import java.util.ArrayList;
 *    This is useful for auto-incremented rows, for example.
 *    (see the implementations for examples)
 * */
-abstract class DaoBase<T> {
+abstract class DaoBase<T> implements Refreshable {
     abstract protected String getTable();
 
     abstract protected T getObjectFromResultSet(ResultSet resultSet) throws SQLException;
@@ -153,7 +153,6 @@ abstract class DaoBase<T> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public abstract boolean update(T object);
