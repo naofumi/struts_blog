@@ -4,13 +4,13 @@ import struts_blog.daos.MailDao;
 import struts_blog.daos.PostDao;
 import struts_blog.daos.UserDao;
 
-public class DbSetup {
+public class TestSetup {
     UserDao userDao = new UserDao();
     PostDao postDao = new PostDao();
     MailDao mailDao = new MailDao();
 
     public static void main(String[] args) {
-        DbSetup instance = new DbSetup();
+        TestSetup instance = new TestSetup();
         instance.setUpDb();
     }
 

@@ -2,21 +2,20 @@ package struts_blog.daos;
 
 import junit.framework.TestCase;
 import struts_blog.models.Post;
-import struts_blog.models.User;
-import struts_blog.setup.DbSetup;
+import struts_blog.setup.TestSetup;
 
 public class PostDaoTest extends TestCase {
     PostDao postDao = new PostDao();
 
     public void setUp() throws Exception {
         super.setUp();
-        new DbSetup().setUpDb();
+        new TestSetup().setUpDb();
     }
 
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-        new DbSetup().setUpDb();
+        new TestSetup().setUpDb();
     }
 
     public void test_find_with_valid_id() {
