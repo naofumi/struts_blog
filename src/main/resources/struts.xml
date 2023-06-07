@@ -36,6 +36,26 @@
 		</action>
 	</package>
 
+	<package name="guests" extends="struts-default" namespace="/guests">
+		<action name="index" class="struts_blog.actions.guests.IndexAction">
+			<result name="success">/WEB-INF/content/guests/index.jsp</result>
+		</action>
+		<action name="nickname" class="struts_blog.actions.guests.NicknameFormAction">
+			<result name="success">/WEB-INF/content/guests/nicknameForm.jsp</result>
+		</action>
+		<action name="createNickname" class="struts_blog.actions.guests.NicknameCreateAction">
+			<result name="input">/WEB-INF/content/guests/nicknameForm.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">country</param>
+			</result>
+		</action>
+		<action name="country" class="struts_blog.actions.guests.CountryFormAction">
+			<result name="success">/WEB-INF/content/guests/country.jsp</result>
+		</action>
+		<action name="twitter" class="struts_blog.actions.guests.TwitterFormAction">
+			<result name="success">/WEB-INF/content/guests/twitter.jsp</result>
+		</action>
+	</package>
 
 	<package name="about" extends="struts-default" namespace="/about">
 		<action name="show" class="struts_blog.actions.about.ShowAction">
@@ -95,6 +115,12 @@
 				class="struts_blog.actions.admin.posts.ShowAction">
 			<result name="success">/WEB-INF/content/admin/posts/show.jsp</result>
 		</action>
+		<action name="chained_back"
+				class="struts_blog.actions.admin.posts.ChainedBackAction">
+			<result type="chain" name="success">
+				<param name="actionName">index</param>
+			</result>
+		</action>
 		<action name="new"
 				class="struts_blog.actions.admin.posts.NewAction">
 			<result name="success">/WEB-INF/content/admin/posts/new.jsp</result>
@@ -106,6 +132,14 @@
 		<action name="create"
 				class="struts_blog.actions.admin.posts.CreateAction">
 			<result type="redirectAction" name="success">
+				<param name="actionName">show</param>
+				<param name="id">${post.id}</param>
+			</result>
+			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
+		</action>
+		<action name="chained_create"
+				class="struts_blog.actions.admin.posts.ChainedCreateAction">
+			<result type="chain" name="success">
 				<param name="actionName">show</param>
 				<param name="id">${post.id}</param>
 			</result>

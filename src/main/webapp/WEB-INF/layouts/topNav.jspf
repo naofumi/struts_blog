@@ -24,6 +24,7 @@
                     <a class="nav-link" href="/struts_blog/admin/posts/index">All Posts</a>
                     <a class="nav-link" href="/struts_blog/admin/users/index">All Users</a>
                 </s:if>
+                <a class="nav-link" href="/struts_blog/guests/index">Guests</a>
                 <a class="nav-link" href="/struts_blog/about/show">About</a>
                 <a class="nav-link disabled">Disabled</a>
             </div>
