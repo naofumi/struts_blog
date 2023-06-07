@@ -45,7 +45,7 @@ public class OneTimeTokenService {
 
     /*
     * The ugly thing with Services is that you will create a lot of methods with
-    * two or more arguments. Good names for these are hard.
+    * two or more arguments. Coming up with good names for these is hard.
     *
     * With an object-oriented approach using a Domain model, it is easy to identify
     * which argument is the Subject and which argument is the Object when calling the
