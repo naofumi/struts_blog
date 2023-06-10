@@ -57,6 +57,6 @@ public class IndexActionTest extends TestCase {
 
         List<Guest> guests = action.getGuests();
         assertEquals("Country 1", guests.get(0).getCountry());
-        assertEquals("My first Blog Post", guests.get(0).getNickname());
+        assertEquals("Nickname 1", guests.get(0).getNickname());
     }
 }
