@@ -8,13 +8,21 @@ The application is build using Maven. The IDE should pick this up.
 mvn jetty:start
 ```
 
+You can access the top page of the site from http://localhost:8080/struts_blog/index
+
 ## Database
 
 This application depends on a MySQL database. 
 
+### Installation
+
 1. Install MySQL for your local development environment.
 2. Configure the connection settings in `src/main/java/struts_blog/daos/DaoBase.java`.
 3. To set up the tables, consult the SQL dump file in the `db` directory.
+
+### Seeding the database
+
+You can seed the database by running the `main()` method in `struts_blog.setup.TestSetup`.
 
 ## Checking configuration
 

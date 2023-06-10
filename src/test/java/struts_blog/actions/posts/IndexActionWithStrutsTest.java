@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.struts2.junit.StrutsTestCase;
 import struts_blog.actions.admin.posts.IndexAction;
+import struts_blog.setup.TestSetup;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,13 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        new TestSetup().setUpDb();
+    }
+
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
+        new TestSetup().setUpDb();
     }
 
     public void test_path_routes_here() {

@@ -1,15 +1,15 @@
 package struts_blog.models;
 
-public class Post {
-    private long id;
+public class Post implements Indexable {
+    private int id;
     private String title;
     private String content;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -28,4 +28,5 @@ public class Post {
     public void setContent(String content) {
         this.content = content;
     }
+
 }

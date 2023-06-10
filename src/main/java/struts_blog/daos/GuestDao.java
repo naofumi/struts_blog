@@ -37,6 +37,11 @@ public class GuestDao extends DaoBase<Guest> {
     }
 
     @Override
+    protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, Guest object) throws SQLException {
+        return null;
+    }
+
+    @Override
     protected PreparedStatement getPreparedStatementForCreate(Connection conn, Guest guest) throws SQLException {
         String sqlString = "INSERT INTO guests (nickname, country, twitter) VALUES (?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sqlString);
@@ -66,7 +71,7 @@ public class GuestDao extends DaoBase<Guest> {
 
 
     protected Guest getObjectFromResultSet(ResultSet resultSet) throws SQLException {
-        long id = resultSet.getLong("id");
+        int id = resultSet.getInt("id");
         String nickname = resultSet.getString("nickname");
         String country = resultSet.getString("country");
         String twitter = resultSet.getString("twitter");

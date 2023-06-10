@@ -25,7 +25,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 *    problem with it.
 *
 * */
-public class User {
+public class User implements Indexable {
     private int id;
     private String email;
     private String passwordDigest;

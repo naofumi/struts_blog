@@ -18,7 +18,7 @@ public class IndexAction extends AdminBaseAction {
     PostDao postDao = new PostDao();
 
     public IndexAction() {
-		this.page = 1;
+        this.page = 1;
     }
 
     public IndexAction(PostDao postDao) {
@@ -40,7 +40,7 @@ public class IndexAction extends AdminBaseAction {
     }
 
     public void setPage(int page) {
-		this.page = page;
+        this.page = page;
     }
 
     public PaginationLinks getPaginationLinks() {

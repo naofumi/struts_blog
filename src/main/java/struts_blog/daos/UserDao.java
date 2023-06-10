@@ -34,21 +34,12 @@ public class UserDao extends DaoBase<User> {
         return ps;
     }
 
-    public User createAndReturnSaved(User user) {
-        try (Connection conn = getConnection()) {
-            String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sqlString);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPasswordDigest());
-
-            ps.executeUpdate();
-
-            user.setId(getIdOfLastInsert(conn));
-
-            return user;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, User user) throws SQLException {
+        String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sqlString);
+        ps.setString(1, user.getEmail());
+        ps.setString(2, user.getPasswordDigest());
+        return ps;
     }
 
     @Override

@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.Map.entry;
+import static org.junit.Assert.assertThrows;
 
 public class IndexActionTest extends TestCase {
     private IndexAction action = new IndexAction();
@@ -51,6 +52,14 @@ public class IndexActionTest extends TestCase {
         action.withSession(new HashMap(Map.of("user_id", 1)));
         String result = action.execute();
         assertEquals(ActionSupport.SUCCESS, result);
+    }
+
+    public void test_execute_fails_if_unauthenticated() {
+        Exception exception = assertThrows(UnauthenticatedException.class, () -> {
+            action.execute();
+        });
+
+        assertEquals("You must log in to access the page", exception.getMessage());
     }
 
     public void test_execute_sets_visitCount_to_1_on_initial_visit() throws UnauthenticatedException {

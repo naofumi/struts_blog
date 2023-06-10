@@ -1,7 +1,7 @@
 package struts_blog.models;
 
-public class Guest {
-    private long id;
+public class Guest implements Indexable {
+    private int id;
     private String nickname;
     private String country;
     private String twitter;
@@ -10,7 +10,7 @@ public class Guest {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
