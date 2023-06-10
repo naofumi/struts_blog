@@ -1,6 +1,7 @@
 package struts_blog.daos;
 
 import struts_blog.models.Post;
+import struts_blog.models.User;
 
 import java.sql.*;
 
@@ -36,6 +37,11 @@ public class PostDao extends DaoBase<Post> {
     }
 
     @Override
+    protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, Post post) throws SQLException {
+        return null;
+    }
+
+    @Override
     protected PreparedStatement getPreparedStatementForCreate(Connection conn, Post post) throws SQLException {
         String sqlString = "INSERT INTO posts (title, content) VALUES (?, ?)";
         PreparedStatement ps = conn.prepareStatement(sqlString);
@@ -63,7 +69,7 @@ public class PostDao extends DaoBase<Post> {
 
 
     protected Post getObjectFromResultSet(ResultSet resultSet) throws SQLException {
-        long id = resultSet.getLong("id");
+        int id = resultSet.getInt("id");
         String title = resultSet.getString("title");
         String content = resultSet.getString("content");
         Post post = new Post();

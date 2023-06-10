@@ -1,6 +1,6 @@
 package struts_blog.models;
 
-public class Mail {
+public class Mail implements Indexable {
     private int id;
     private String title;
     private String sendTo;

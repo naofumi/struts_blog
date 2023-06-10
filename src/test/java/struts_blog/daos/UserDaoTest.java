@@ -33,17 +33,25 @@ public class UserDaoTest extends TestCase {
         assertNull(result);
     }
 
-    public void testCreateUser() {
+    public void testCreateUserInsertsNewUserIntoDatabase() {
         User user = new User();
         user.setEmail("hello@ma.com");
         user.setPasswordDigest("passwordDigest");
         userDao.create(user);
 
         User result = userDao.findBy("email", "hello@ma.com");
-        assertEquals("hello@ma.com", result.getEmail());
+        assertEquals("passwordDigest", result.getPasswordDigest());
     }
 
-    public void testCreateAndReturnSavedUser() {
+    public void testCreateUserReturnsTrueWhenSuccessful() {
+        User user = new User();
+        user.setEmail("hello@ma.com");
+        user.setPasswordDigest("passwordDigest");
+
+        assertTrue(userDao.create(user));
+    }
+
+    public void testCreateAndReturnSavedUserInsertsNewUserAndSetsTheId() {
         User user = new User();
         user.setEmail("test@mac.com");
         user.setPasswordDigest("hoge1234");

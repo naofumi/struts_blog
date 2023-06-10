@@ -1,6 +1,7 @@
 package struts_blog.daos;
 
 import struts_blog.models.Mail;
+import struts_blog.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,6 +42,11 @@ public class MailDao extends DaoBase<Mail> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, Mail mail) throws SQLException {
+        return null;
     }
 
     @Override

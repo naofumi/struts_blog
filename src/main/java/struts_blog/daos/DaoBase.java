@@ -1,5 +1,10 @@
 package struts_blog.daos;
 
+import struts_blog.models.Indexable;
+import struts_blog.models.Mail;
+import struts_blog.models.Post;
+import struts_blog.models.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 /*
@@ -17,7 +22,7 @@ import java.util.ArrayList;
 *    This is useful for auto-incremented rows, for example.
 *    (see the implementations for examples)
 * */
-abstract class DaoBase<T> {
+abstract class DaoBase<T extends Indexable> {
     abstract protected String getTable();
 
     abstract protected T getObjectFromResultSet(ResultSet resultSet) throws SQLException;
@@ -157,15 +162,27 @@ abstract class DaoBase<T> {
     }
 
     public abstract boolean update(T object);
-
-    public abstract T createAndReturnSaved(T object);
-
+    
     public boolean create(T object) {
         try(Connection conn = getConnection()) {
             PreparedStatement ps = getPreparedStatementForCreate(conn, object);
 
             int changedRows = ps.executeUpdate();
             return isNotZero(changedRows);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    abstract protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, T object) throws SQLException;
+    public T createAndReturnSaved(T object) {
+        try (Connection conn = getConnection()) {
+            PreparedStatement ps = preparedStatementForCreateAndReturnSaved(conn, object);
+            ps.executeUpdate();
+
+            object.setId(getIdOfLastInsert(conn));
+
+            return object;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

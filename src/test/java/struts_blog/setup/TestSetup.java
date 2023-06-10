@@ -19,5 +19,4 @@ public class TestSetup {
         postDao.refreshTableData();
         mailDao.refreshTableData();
     }
-
 }
