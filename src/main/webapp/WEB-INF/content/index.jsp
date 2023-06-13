@@ -24,9 +24,6 @@
             </div>
         </s:iterator>
     </div>
-    <div class="text-end">
-        <a href="posts" class="btn btn-outline-secondary">View all posts</a>
-    </div>
 </div>
 </body>
 </html>

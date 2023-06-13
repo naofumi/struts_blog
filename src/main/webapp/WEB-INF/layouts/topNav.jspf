@@ -9,7 +9,7 @@
         </s:if>
         <s:else>
             <div class="text-end">
-                <a href="/struts_blog/sessions/new" class="btn btn-primary">Login</a>
+                <a href="<s:url namespace="/sessions" action='new' />" class="btn btn-primary">Login</a>
             </div>
         </s:else>
 
@@ -19,10 +19,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/struts_blog/index">Home</a>
+                <a class="nav-link active" aria-current="page" href="<s:url action='index' />">Home</a>
                 <s:if test="loggedIn">
-                    <a class="nav-link" href="/struts_blog/admin/posts/index">All Posts</a>
-                    <a class="nav-link" href="/struts_blog/admin/users/index">All Users</a>
+                    <a class="nav-link" href="<s:url namespace='/admin/posts' action='index' />">All Posts</a>
+                    <a class="nav-link" href="<s:url namespace='/admin/users' action='index' />">All Users</a>
                 </s:if>
                 <a class="nav-link" href="/struts_blog/guests/index">Guests</a>
                 <a class="nav-link" href="/struts_blog/about/show">About</a>
