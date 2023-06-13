@@ -1,10 +1,9 @@
-package struts_blog.actions.posts;
+package struts_blog.actions.users;
 
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
-
 import org.apache.struts2.junit.StrutsTestCase;
-import struts_blog.actions.admin.posts.IndexAction;
+import struts_blog.actions.admin.users.IndexAction;
 import struts_blog.setup.TestSetup;
 
 import java.util.HashMap;
@@ -33,14 +32,14 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
     }
 
     public void test_path_routes_here() {
-        this.actionProxy = getActionProxy("/admin/posts/index.action");
+        this.actionProxy = getActionProxy("/admin/users/index.action");
         this.action = (IndexAction) actionProxy.getAction();
 
         assertNotNull(this.action);
     }
 
     public void test_execute_returns_success() throws Exception {
-        this.actionProxy = getActionProxy("/admin/posts/index.action");
+        this.actionProxy = getActionProxy("/admin/users/index.action");
         this.action = (IndexAction) actionProxy.getAction();
 
         HashMap<String, Object> mockSession = new HashMap<>();
@@ -52,10 +51,10 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
         assertEquals(ActionSupport.SUCCESS, result);
     }
 
-    public void test_execute_sets_getPost() throws Exception {
+    public void test_execute_sets_getUsers() throws Exception {
         // Setting the session via the request field doesn't seem to work
         // when using actionProxy.execute()
-        this.actionProxy = getActionProxy("/admin/posts/index.action");
+        this.actionProxy = getActionProxy("/admin/users/index.action");
 
         HashMap<String, Object> mockSession = new HashMap<>();
         mockSession.put("user_id", 1);
@@ -65,12 +64,12 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
 
         this.action = (IndexAction) actionProxy.getAction();
 
-        assertEquals("My first Blog Post", action.getPosts().get(0).getTitle());
+        assertEquals("naofumi@mac.com", action.getUsers().get(0).getEmail());
     }
 
     public void test_can_execute_test_executeAction() throws Exception {
         request.getSession().setAttribute("user_id", 1);
-        String body = executeAction("/admin/posts/index.action");
+        String body = executeAction("/admin/users/index.action");
 
         // I haven't yet set it up to return JSP content
         assertEquals("", body);
