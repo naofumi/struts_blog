@@ -53,13 +53,31 @@ public class IndexActionWithMockTest extends TestCase {
                 createPost(2, "Mock Title 2", "Mock Content 2")
         ));
 
-        Mockito.when(postDaoMock.getAll()).thenReturn(posts);
+        Mockito.when(postDaoMock.getAllWithPage(1, 5)).thenReturn(posts);
+
         IndexAction action = new IndexAction(postDaoMock);
         action.withSession(new HashMap(Map.of("user_id", 1)));
 
         String result = action.execute();
 
         assertEquals(ActionSupport.SUCCESS, result);
+    }
+
+    public void test_execute_returns_posts() throws UnauthenticatedException {
+        PostDao postDaoMock = Mockito.mock(PostDao.class);
+        ArrayList<Post> posts = new ArrayList<>(List.of(
+                createPost(1, "Mock Title 1", "Mock Content 1"),
+                createPost(2, "Mock Title 2", "Mock Content 2")
+        ));
+
+        Mockito.when(postDaoMock.getAllWithPage(1, 5)).thenReturn(posts);
+
+        IndexAction action = new IndexAction(postDaoMock);
+        action.withSession(new HashMap(Map.of("user_id", 1)));
+
+        String result = action.execute();
+
+        assertEquals("Mock Title 1", action.getPosts().get(0).getTitle());
     }
 
     private Post createPost(int id, String title, String content) {

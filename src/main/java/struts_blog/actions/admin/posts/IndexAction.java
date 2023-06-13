@@ -22,6 +22,7 @@ public class IndexAction extends AdminBaseAction {
     }
 
     public IndexAction(PostDao postDao) {
+        this.page = 1;
         this.postDao = postDao;
     }
 
@@ -30,7 +31,7 @@ public class IndexAction extends AdminBaseAction {
 
         incrementVisitsCount();
 
-        this.posts = postDao.getAllWithPage(page, 5);
+        this.posts = new PostDao().getAllWithPage(page, 5);
 
         return SUCCESS;
     }

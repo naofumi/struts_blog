@@ -25,10 +25,6 @@ public class CreateActionTestWithStrutsTest extends StrutsTestCase {
     public void test_path_maps_here() {
         this.actionProxy = getActionProxy("/admin/posts/create");
 
-        HashMap<String, Object> mockSession = new HashMap<>();
-        mockSession.put("user_id", 1);
-        setSessionOnActionProxy(actionProxy, mockSession);
-
         assertEquals("create", actionProxy.getActionName());
         assertNotNull(actionProxy);
     }
@@ -55,9 +51,7 @@ public class CreateActionTestWithStrutsTest extends StrutsTestCase {
 
         this.actionProxy = getActionProxy("/admin/posts/create");
 
-//        HashMap<String, Object> mockSession = new HashMap<>();
-//        mockSession.put("user_id", 1);
-//        setSessionOnActionProxy(actionProxy, mockSession);
+        // We don't need authentication information because we do not reach the Action
 
         this.action = (CreateAction) actionProxy.getAction();
         String result = actionProxy.execute();
