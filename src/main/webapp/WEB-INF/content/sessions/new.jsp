@@ -26,7 +26,7 @@
             <div class="text-danger"><s:fielderror><s:param value="%{'login.email'}"/></s:fielderror></div>
             <label for="login_password">password</label>
             <input id="login_password"
-                   type="text"
+                   type="password"
                    value="<s:property value="login.password" />"
                    name="login.password"
                    class="form-control"

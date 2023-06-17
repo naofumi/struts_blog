@@ -8,6 +8,8 @@ public class NicknameCreateAction extends BaseAction {
 
     public String execute() {
         GuestForm guestFormInSession = GuestForm.createFromSession(sessionMap);
+        // update the guestForm from the session with the guestForm information
+        // from HTTP parameters.
         guestFormInSession.updateWithGuestForm(guestForm);
 
         guestFormInSession.saveToSession(sessionMap);
