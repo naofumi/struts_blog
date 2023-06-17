@@ -39,6 +39,11 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
         return flash;
     }
 
+    protected void invalidateSession() {
+        if (sessionMap instanceof SessionMap) {
+            ((SessionMap<String, Object>)sessionMap).invalidate();
+        }
+    }
     private void prepareFlash() {
         String value = (String)sessionMap.get("flash");
         if ((value != null) && (value.length() > 0)) {

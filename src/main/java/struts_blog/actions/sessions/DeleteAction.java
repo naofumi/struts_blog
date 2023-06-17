@@ -7,9 +7,7 @@ public class DeleteAction extends BaseAction {
     private static final long serialVersionUID = 1L;
 
     public String execute() {
-        if (sessionMap instanceof SessionMap) {
-            ((SessionMap<String, Object>)sessionMap).invalidate();
-        }
+        invalidateSession();
 
         return SUCCESS;
     }
