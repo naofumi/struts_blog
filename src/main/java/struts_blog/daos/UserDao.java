@@ -10,19 +10,14 @@ import java.sql.SQLException;
 
 public class UserDao extends DaoBase<User> {
 
-    public boolean update(User user) {
-        try (Connection conn = getConnection()) {
-            String sqlString = "UPDATE users SET email = ?, password_digest = ? WHERE id = ?";
-            PreparedStatement ps = conn.prepareStatement(sqlString);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPasswordDigest());
-            ps.setLong(3, user.getId());
+    protected PreparedStatement getPreparedStatementForUpdate(Connection conn, User user) throws SQLException {
+        String sqlString = "UPDATE users SET email = ?, password_digest = ? WHERE id = ?";
+        PreparedStatement ps = conn.prepareStatement(sqlString);
+        ps.setString(1, user.getEmail());
+        ps.setString(2, user.getPasswordDigest());
+        ps.setInt(3, user.getId());
 
-            int changedRows = ps.executeUpdate();
-            return isNotZero(changedRows);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return ps;
     }
 
     protected PreparedStatement getPreparedStatementForCreate(Connection conn, User user) throws SQLException {
@@ -34,22 +29,19 @@ public class UserDao extends DaoBase<User> {
         return ps;
     }
 
-    protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, User user) throws SQLException {
-        String sqlString = "INSERT INTO users (email, password_digest) VALUES (?, ?)";
-        PreparedStatement ps = conn.prepareStatement(sqlString);
-        ps.setString(1, user.getEmail());
-        ps.setString(2, user.getPasswordDigest());
-        return ps;
-    }
-
     @Override
     public void refreshTableData() {
         super.refreshTableData();
 
-        User user = new User();
-        user.setEmail("naofumi@mac.com");
-        user.setPasswordDigest(DigestUtils.sha512Hex("password"));
-        create(user);
+        User user1 = new User();
+        user1.setEmail("naofumi@mac.com");
+        user1.setPasswordDigest(DigestUtils.sha512Hex("password"));
+        create(user1);
+
+        User user2 = new User();
+        user2.setEmail("spongebob@example.com");
+        user2.setPasswordDigest(DigestUtils.sha512Hex("password"));
+        create(user2);
     }
 
     @Override

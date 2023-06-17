@@ -7,25 +7,29 @@ import struts_blog.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+
 /*
-* The base Data Access Object for the current application.
-*
-* This has the following design features.
-*
-* 1. It is designed for simple access to the database.
-* 2. It also allows us to mock out the database access.
-*
-* Notes
-*
-* 1. With `createAndReturnSaved()`, the `id` of the object sent in as the argument
-*    will be set from the `id` generated after saving in the database.
-*    This is useful for auto-incremented rows, for example.
-*    (see the implementations for examples)
-* */
+ * The base Data Access Object for the current application.
+ *
+ * This has the following design features.
+ *
+ * 1. It is designed for simple access to the database.
+ * 2. It also allows us to mock out the database access.
+ *
+ * Notes
+ *
+ * 1. With `createAndReturnSaved()`, the `id` of the object sent in as the argument
+ *    will be set from the `id` generated after saving in the database.
+ *    This is useful for auto-incremented rows, for example.
+ *    (see the implementations for examples)
+ * */
 abstract class DaoBase<T extends Indexable> implements Refreshable {
     abstract protected String getTable();
 
     abstract protected T getObjectFromResultSet(ResultSet resultSet) throws SQLException;
+
+    abstract protected PreparedStatement getPreparedStatementForCreate(Connection conn, T object) throws SQLException;
+    abstract protected PreparedStatement getPreparedStatementForUpdate(Connection conn, T object) throws SQLException;
 
     String connectionUrl = "jdbc:mysql://localhost:3306/struts_blog?serverTimezone=UTC";
 
@@ -160,10 +164,8 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
         }
     }
 
-    public abstract boolean update(T object);
-    
     public boolean create(T object) {
-        try(Connection conn = getConnection()) {
+        try (Connection conn = getConnection()) {
             PreparedStatement ps = getPreparedStatementForCreate(conn, object);
 
             int changedRows = ps.executeUpdate();
@@ -173,10 +175,9 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
         }
     }
 
-    abstract protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, T object) throws SQLException;
     public T createAndReturnSaved(T object) {
         try (Connection conn = getConnection()) {
-            PreparedStatement ps = preparedStatementForCreateAndReturnSaved(conn, object);
+            PreparedStatement ps = getPreparedStatementForCreate(conn, object);
             ps.executeUpdate();
 
             object.setId(getIdOfLastInsert(conn));
@@ -187,15 +188,25 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
         }
     }
 
-    abstract protected PreparedStatement getPreparedStatementForCreate(Connection conn, T object) throws SQLException;
+    public boolean update(T object) {
+        try (Connection conn = getConnection()) {
+            PreparedStatement ps = getPreparedStatementForUpdate(conn, object);
 
-    protected boolean isNotZero(int changedRows) {
-        return changedRows != 0;
+            int changedRows = ps.executeUpdate();
+            return isNotZero(changedRows);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void refreshTableData() {
         truncate();
     }
+
+    protected boolean isNotZero(int changedRows) {
+        return changedRows != 0;
+    }
+
     protected int getIdOfLastInsert(Connection conn) throws SQLException {
         PreparedStatement lastInsertStatement = conn.prepareStatement("SELECT LAST_INSERT_ID()");
         ResultSet lastInsertRs = lastInsertStatement.executeQuery();

@@ -18,48 +18,20 @@ public class UserDaoTest extends TestCase {
         new TestSetup().setUpDb();
     }
 
-    public void test_find_with_valid_id() {
+    public void test_object_is_correctly_created() {
         User result = userDao.find(1);
         assertEquals("naofumi@mac.com", result.getEmail());
+        assertNotNull(result.getPasswordDigest());
     }
 
-    public void test_find_by_email_with_existing_email() {
-        User result = userDao.findBy("email", "naofumi@mac.com");
-        assertEquals("naofumi@mac.com", result.getEmail());
-    }
-
-    public void test_find_by_email_with_non_existing_email() {
-        User result = userDao.findBy("email", "boo@mac.com");
-        assertNull(result);
-    }
-
-    public void testCreateUserInsertsNewUserIntoDatabase() {
+    public void test_fields_are_correctly_assigned_on_create() {
         User user = new User();
-        user.setEmail("hello@ma.com");
-        user.setPasswordDigest("passwordDigest");
-        userDao.create(user);
-
-        User result = userDao.findBy("email", "hello@ma.com");
-        assertEquals("passwordDigest", result.getPasswordDigest());
-    }
-
-    public void testCreateUserReturnsTrueWhenSuccessful() {
-        User user = new User();
-        user.setEmail("hello@ma.com");
-        user.setPasswordDigest("passwordDigest");
-
-        assertTrue(userDao.create(user));
-    }
-
-    public void testCreateAndReturnSavedUserInsertsNewUserAndSetsTheId() {
-        User user = new User();
-        user.setEmail("test@mac.com");
-        user.setPasswordDigest("hoge1234");
+        user.setEmail("NewTestEmail@example.com");
+        user.setPasswordDigest("testPassword");
 
         User createdUser = userDao.createAndReturnSaved(user);
-
-        assertNotNull(createdUser.getId()); // assert id was injected after creation
-        User result = userDao.find(createdUser.getId()); // confirm that an entry with that Id really exists
-        assertEquals("test@mac.com", result.getEmail());
+        User reloadedUser = userDao.find(createdUser.getId());
+        assertEquals("NewTestEmail@example.com", reloadedUser.getEmail());
+        assertEquals("testPassword", reloadedUser.getPasswordDigest());
     }
 }

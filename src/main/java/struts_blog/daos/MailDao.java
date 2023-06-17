@@ -45,12 +45,10 @@ public class MailDao extends DaoBase<Mail> {
     }
 
     @Override
-    protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, Mail mail) throws SQLException {
+    protected PreparedStatement getPreparedStatementForCreate(Connection conn, Mail object) throws SQLException {
         return null;
     }
-
-    @Override
-    protected PreparedStatement getPreparedStatementForCreate(Connection conn, Mail object) throws SQLException {
+    protected PreparedStatement getPreparedStatementForUpdate(Connection conn, Mail object) throws SQLException {
         return null;
     }
 

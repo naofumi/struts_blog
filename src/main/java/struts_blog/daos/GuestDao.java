@@ -1,6 +1,7 @@
 package struts_blog.daos;
 
 import struts_blog.models.Guest;
+import struts_blog.models.Mail;
 
 import java.sql.*;
 
@@ -10,7 +11,7 @@ public class GuestDao extends DaoBase<Guest> {
     }
 
     public boolean update(Guest guest) {
-        try(Connection conn = getConnection()) {
+        try (Connection conn = getConnection()) {
             String sqlString = "UPDATE guests SET nickname = ?, country = ?, twitter = ? WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sqlString);
             ps.setString(1, guest.getNickname());
@@ -26,7 +27,7 @@ public class GuestDao extends DaoBase<Guest> {
     }
 
     public boolean create(Guest guest) {
-        try(Connection conn = getConnection()) {
+        try (Connection conn = getConnection()) {
             PreparedStatement ps = getPreparedStatementForCreate(conn, guest);
 
             int changedRows = ps.executeUpdate();
@@ -34,11 +35,6 @@ public class GuestDao extends DaoBase<Guest> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    protected PreparedStatement preparedStatementForCreateAndReturnSaved(Connection conn, Guest object) throws SQLException {
-        return null;
     }
 
     @Override
@@ -51,8 +47,13 @@ public class GuestDao extends DaoBase<Guest> {
         return ps;
     }
 
+    @Override
+    protected PreparedStatement getPreparedStatementForUpdate(Connection conn, Guest object) throws SQLException {
+        return null;
+    }
+
     public Guest createAndReturnSaved(Guest guest) {
-        try(Connection conn = getConnection()) {
+        try (Connection conn = getConnection()) {
             String sqlString = "INSERT INTO guests (nickname, country, twitter) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sqlString);
             ps.setString(1, guest.getNickname());
@@ -68,7 +69,6 @@ public class GuestDao extends DaoBase<Guest> {
             throw new RuntimeException(e);
         }
     }
-
 
     protected Guest getObjectFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
@@ -98,6 +98,5 @@ public class GuestDao extends DaoBase<Guest> {
         guest2.setCountry("Country 2");
         guest2.setTwitter("Twitter 2");
         create(guest2);
-
     }
 }
