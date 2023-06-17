@@ -24,7 +24,7 @@
             <div class="text-danger"><s:fielderror><s:param value="%{'post.title'}"/></s:fielderror></div>
         </div>
 
-        <input type="submit" value="Submit" class="btn btn-warning mt-5"/>
+        <input type="submit" value="Submit Nickname" class="btn btn-warning mt-5"/>
     </form>
 </div>
 </body>

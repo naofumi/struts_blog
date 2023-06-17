@@ -28,26 +28,19 @@
 * */
 
 package struts_blog.actions.guests;
-import com.opensymphony.xwork2.ActionSupport;
-import junit.framework.TestCase;
+import com.opensymphony.xwork2.ActionProxy;
 import org.apache.struts2.junit.StrutsTestCase;
-import struts_blog.actions.BaseAction;
 import struts_blog.actions.UnauthenticatedException;
-import struts_blog.actions.guests.IndexAction;
 import struts_blog.models.Guest;
-import struts_blog.models.Post;
+import struts_blog.models.GuestForm;
 import struts_blog.setup.TestSetup;
 
 import javax.servlet.ServletException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import static java.util.Map.entry;
+import static org.junit.Assert.assertThrows;
 
-public class IndexActionTest extends StrutsTestCase {
+public class CountryFormActionTest extends StrutsTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -61,13 +54,30 @@ public class IndexActionTest extends StrutsTestCase {
     }
 
     public void test_execute_returns_success() throws ServletException, UnsupportedEncodingException {
-        String body = executeAction("/guests/index.action");
-        List<Guest> guests = (List<Guest>)findValueAfterExecute("guests");
+        GuestForm sessionGuestForm = new GuestForm();
+        sessionGuestForm.setNickname("New Nickname");
+        request.getSession().setAttribute("guest", sessionGuestForm);
 
-        assertEquals("Nickname 1", guests.get(0).getNickname());
+        String body = executeAction("/guests/countryForm.action");
+
+        GuestForm guestForm = (GuestForm)findValueAfterExecute("guestForm");
+
+        assertEquals("New Nickname", guestForm.getNickname());
+        assertEquals("", guestForm.getCountry());
         assertEquals(200, response.getStatus());
-        assertEquals("/WEB-INF/content/guests/index.jsp", response.getForwardedUrl());
+        assertEquals("/WEB-INF/content/guests/countryForm.jsp", response.getForwardedUrl());
         // I haven't yet set it up to return JSP content
         assertEquals("", body);
     }
+
+    public void test_execute_redirect_back_to_nickname_if_missing() throws Exception {
+        ActionProxy actionProxy = getActionProxy("/guests/countryForm.action");
+        CountryFormAction action = (CountryFormAction) actionProxy.getAction();
+        String result = actionProxy.execute();
+
+        assertEquals("backToNickname", result);
+        assertEquals(302, response.getStatus());
+    }
+
+
 }

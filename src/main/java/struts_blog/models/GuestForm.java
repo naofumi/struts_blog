@@ -1,6 +1,5 @@
 package struts_blog.models;
 
-import java.awt.*;
 import java.util.Map;
 
 public class GuestForm {
@@ -9,28 +8,28 @@ public class GuestForm {
     private String twitter = "";
     static private final String GUEST_KEY = "guest";
 
-    static public GuestForm createFromSession(Map<String, Object> sessionMap) {
-        GuestForm guestForm = new GuestForm();
-        if (sessionMap == null) {
-            // This is a null object with all values set to non-null defaults
+    static public GuestForm retrieveFromSession(Map<String, Object> sessionMap) {
+        if (sessionMap != null && sessionMap.get("guest") != null) {
+            return (GuestForm)sessionMap.get("guest");
+        } else {
             return new GuestForm();
         }
-
-        guestForm.setFieldsFromSessionMap(sessionMap);
-        return guestForm;
     }
 
-    /* We want to change this implementation. Instead of saving the GuestForm as a Map in the session,
-    *  we want to save it as is, which means as a GuestForm object. */
-    private void setFieldsFromSessionMap(Map<String, Object> sessionMap) {
-        Map<String, Object> guestFormMap = (Map<String, Object>) sessionMap.get(GUEST_KEY);
-        if (guestFormMap == null) {
-            return;
+    public void updateFromOtherGuestForm(GuestForm guestForm) {
+        if (!guestForm.getNickname().isBlank()) {
+            this.nickname = guestForm.getNickname();
         }
+        if (!guestForm.getCountry().isBlank()) {
+            this.country = guestForm.getCountry();
+        }
+        if (!guestForm.getTwitter().isBlank()) {
+            this.twitter = guestForm.getTwitter();
+        }
+    }
 
-        setNickname((String) guestFormMap.get("nickname"));
-        setCountry((String) guestFormMap.get("country"));
-        setTwitter((String) guestFormMap.get("country"));
+    public void saveToSession(Map<String, Object> sessionMap) {
+        sessionMap.put(GUEST_KEY, this);
     }
 
     public String getNickname() {
@@ -57,19 +56,4 @@ public class GuestForm {
         this.twitter = twitter;
     }
 
-    public void updateWithGuestForm(GuestForm guestForm) {
-        if (!guestForm.getNickname().isBlank()) {
-            this.nickname = guestForm.getNickname();
-        }
-        if (!guestForm.getCountry().isBlank()) {
-            this.country = guestForm.getCountry();
-        }
-        if (!guestForm.getTwitter().isBlank()) {
-            this.twitter = guestForm.getTwitter();
-        }
-    }
-
-    public void saveToSession(Map<String, Object> sessionMap) {
-        sessionMap.put(GUEST_KEY, this);
-    }
 }

@@ -3,7 +3,7 @@ package struts_blog.actions.guests;
 import struts_blog.actions.BaseAction;
 import struts_blog.models.GuestForm;
 
-public class NicknameCreateAction extends BaseAction {
+public class CountryCreateAction extends BaseAction {
     private GuestForm guestForm;
 
     public String execute() {

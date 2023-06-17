@@ -40,20 +40,53 @@
 		<action name="index" class="struts_blog.actions.guests.IndexAction">
 			<result name="success">/WEB-INF/content/guests/index.jsp</result>
 		</action>
-		<action name="nickname" class="struts_blog.actions.guests.NicknameFormAction">
+		<action name="nicknameForm" class="struts_blog.actions.guests.NicknameFormAction">
 			<result name="success">/WEB-INF/content/guests/nicknameForm.jsp</result>
 		</action>
 		<action name="createNickname" class="struts_blog.actions.guests.NicknameCreateAction">
 			<result name="input">/WEB-INF/content/guests/nicknameForm.jsp</result>
 			<result name="success" type="redirectAction">
-				<param name="actionName">country</param>
+				<param name="actionName">countryForm</param>
 			</result>
 		</action>
-		<action name="country" class="struts_blog.actions.guests.CountryFormAction">
-			<result name="success">/WEB-INF/content/guests/country.jsp</result>
+		<action name="countryForm" class="struts_blog.actions.guests.CountryFormAction">
+			<result name="success">/WEB-INF/content/guests/countryForm.jsp</result>
+			<result name="backToNickname" type="redirectAction">
+				<param name="actionName">nicknameForm</param>
+			</result>
 		</action>
-		<action name="twitter" class="struts_blog.actions.guests.TwitterFormAction">
-			<result name="success">/WEB-INF/content/guests/twitter.jsp</result>
+		<action name="createCountry" class="struts_blog.actions.guests.CountryCreateAction">
+			<result name="input">/WEB-INF/content/guests/countryForm.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">twitterForm</param>
+			</result>
+		</action>
+		<action name="twitterForm" class="struts_blog.actions.guests.TwitterFormAction">
+			<result name="success">/WEB-INF/content/guests/twitterForm.jsp</result>
+			<result name="backToNickname" type="redirectAction">
+				<param name="actionName">nicknameForm</param>
+			</result>
+			<result name="backToCountry" type="redirectAction">
+				<param name="actionName">countryForm</param>
+			</result>
+		</action>
+		<action name="createTwitter" class="struts_blog.actions.guests.TwitterCreateAction">
+			<result name="input">/WEB-INF/content/guests/twitterForm.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">confirmForm</param>
+			</result>
+		</action>
+		<action name="confirmForm" class="struts_blog.actions.guests.ConfirmFormAction">
+			<result name="success">/WEB-INF/content/guests/confirmForm.jsp</result>
+			<result name="backToNickname" type="redirectAction">
+				<param name="actionName">nicknameForm</param>
+			</result>
+			<result name="backToCountry" type="redirectAction">
+				<param name="actionName">countryForm</param>
+			</result>
+			<result name="backToTwitter" type="redirectAction">
+				<param name="actionName">twitterForm</param>
+			</result>
 		</action>
 	</package>
 

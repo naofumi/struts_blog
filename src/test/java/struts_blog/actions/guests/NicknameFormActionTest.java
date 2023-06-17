@@ -28,26 +28,16 @@
 * */
 
 package struts_blog.actions.guests;
-import com.opensymphony.xwork2.ActionSupport;
-import junit.framework.TestCase;
 import org.apache.struts2.junit.StrutsTestCase;
-import struts_blog.actions.BaseAction;
-import struts_blog.actions.UnauthenticatedException;
-import struts_blog.actions.guests.IndexAction;
 import struts_blog.models.Guest;
-import struts_blog.models.Post;
+import struts_blog.models.GuestForm;
 import struts_blog.setup.TestSetup;
 
 import javax.servlet.ServletException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static java.util.Map.entry;
-
-public class IndexActionTest extends StrutsTestCase {
+public class NicknameFormActionTest extends StrutsTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -61,13 +51,14 @@ public class IndexActionTest extends StrutsTestCase {
     }
 
     public void test_execute_returns_success() throws ServletException, UnsupportedEncodingException {
-        String body = executeAction("/guests/index.action");
-        List<Guest> guests = (List<Guest>)findValueAfterExecute("guests");
+        String body = executeAction("/guests/nicknameForm.action");
+        GuestForm guestForm = (GuestForm)findValueAfterExecute("guestForm");
 
-        assertEquals("Nickname 1", guests.get(0).getNickname());
+        assertEquals("", guestForm.getNickname());
         assertEquals(200, response.getStatus());
-        assertEquals("/WEB-INF/content/guests/index.jsp", response.getForwardedUrl());
+        assertEquals("/WEB-INF/content/guests/nicknameForm.jsp", response.getForwardedUrl());
         // I haven't yet set it up to return JSP content
         assertEquals("", body);
     }
+
 }

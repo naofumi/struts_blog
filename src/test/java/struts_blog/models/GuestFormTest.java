@@ -13,22 +13,25 @@ public class GuestFormTest extends TestCase {
     public void tearDown() throws Exception {
     }
 
-    public void testCreateFromSessionWithValidSession() {
-        Map<String, Object> session = Map.of("guest", Map.of("nickname", "Test Nickname"));
-        GuestForm guestForm = GuestForm.createFromSession(session);
+    public void test_RetrieveFromSession_with_valid_session() {
+        GuestForm guestFormInSession = new GuestForm();
+        guestFormInSession.setNickname("Test Nickname");
+        Map<String, Object> session = Map.of("guest", guestFormInSession);
+
+        GuestForm guestForm = GuestForm.retrieveFromSession(session);
 
         assertEquals("Test Nickname", guestForm.getNickname());
     }
 
     public void testCreateFromSessionWithNullSession() {
-        GuestForm guestForm = GuestForm.createFromSession(null);
+        GuestForm guestForm = GuestForm.retrieveFromSession(null);
 
         assertEquals("", guestForm.getNickname());
     }
 
     public void testCreateFromSessionWithEmptySession() {
         Map<String, Object> session = Map.of();
-        GuestForm guestForm = GuestForm.createFromSession(session);
+        GuestForm guestForm = GuestForm.retrieveFromSession(session);
 
         assertEquals("", guestForm.getNickname());
     }
@@ -40,39 +43,43 @@ public class GuestFormTest extends TestCase {
     }
 
     public void testUpdateWithGuestFormWithSameKeysWillOverrideValues() {
-        Map<String, Object> session = Map.of("guest", Map.of("nickname", "old Nickname"));
-        GuestForm guestForm = GuestForm.createFromSession(session);
+        GuestForm guestFormInSession = new GuestForm();
+        guestFormInSession.setNickname("old Nickname");
+        GuestForm guestForm = GuestForm.retrieveFromSession(Map.of("guest", guestFormInSession));
 
         GuestForm newGuestForm = new GuestForm();
         newGuestForm.setNickname("new nickname");
 
-        guestForm.updateWithGuestForm(newGuestForm);
+        guestForm.updateFromOtherGuestForm(newGuestForm);
 
         assertEquals("new nickname", guestForm.getNickname());
     }
 
     public void testUpdateWithGuestFormWhenNewGuestFormIsEmptyWillNotChangeValues() {
-        Map<String, Object> session = Map.of("guest", Map.of("nickname", "old Nickname"));
-        GuestForm guestForm = GuestForm.createFromSession(session);
+        GuestForm guestFormInSession = new GuestForm();
+        guestFormInSession.setNickname("old Nickname");
+        Map<String, Object> session = Map.of("guest", guestFormInSession);
+        GuestForm guestForm = GuestForm.retrieveFromSession(session);
 
         GuestForm newGuestForm = new GuestForm();
 
-        guestForm.updateWithGuestForm(newGuestForm);
+        guestForm.updateFromOtherGuestForm(newGuestForm);
 
         assertEquals("old Nickname", guestForm.getNickname());
     }
 
     public void testUpdateWithGuestFormWhenNewGuestFormHasNewKeysOnlyWillAdditivelyMergeKeys() {
-        Map<String, Object> session = Map.of("guest", Map.of("nickname", "old Nickname"));
-        GuestForm guestForm = GuestForm.createFromSession(session);
+        GuestForm guestFormFromSession = new GuestForm();
+        guestFormFromSession.setNickname("old Nickname");
+        Map<String, Object> session = Map.of("guest", guestFormFromSession);
+        GuestForm guestForm = GuestForm.retrieveFromSession(session);
 
         GuestForm newGuestForm = new GuestForm();
         newGuestForm.setCountry("United States of China");
 
-        guestForm.updateWithGuestForm(newGuestForm);
+        guestForm.updateFromOtherGuestForm(newGuestForm);
 
         assertEquals("old Nickname", guestForm.getNickname());
         assertEquals("United States of China", guestForm.getCountry());
     }
-
 }

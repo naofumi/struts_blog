@@ -5,8 +5,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.struts2.junit.StrutsTestCase;
 import struts_blog.actions.admin.posts.IndexAction;
+import struts_blog.models.Post;
 import struts_blog.setup.TestSetup;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +56,8 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
 
     public void test_execute_sets_getPost() throws Exception {
         // Setting the session via the request field doesn't seem to work
-        // when using actionProxy.execute()
+        // when using actionProxy.execute() although setting request parameters
+        // seems to work fine.
         this.actionProxy = getActionProxy("/admin/posts/index.action");
 
         HashMap<String, Object> mockSession = new HashMap<>();
@@ -68,13 +71,28 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
         assertEquals("My first Blog Post", action.getPosts().get(0).getTitle());
     }
 
+    /*
+    * As far as I have been able to discover, `executeAction` does the best
+    * job of simulating an HTTP request as it goes through the Interceptor stack
+    * and returns values.
+    *
+    * Set up the session and parameter values and then call `executeAction()`.
+    * Instead of directly querying the action via getters, you can use `findValueAfterExecute()` to
+    * get the state of the action.
+    *
+    * You can query the response object for status and JSP template. You can also get at
+    * the response headers.
+    * */
     public void test_can_execute_test_executeAction() throws Exception {
         request.getSession().setAttribute("user_id", 1);
         String body = executeAction("/admin/posts/index.action");
+        ArrayList<Post> posts = (ArrayList<Post>)findValueAfterExecute("posts");//findValueAfterExecute("")
 
+        assertEquals("My first Blog Post", posts.get(0).getTitle());
+        assertEquals(200, response.getStatus());
+        assertEquals("/WEB-INF/content/admin/posts/index.jsp", response.getForwardedUrl());
         // I haven't yet set it up to return JSP content
         assertEquals("", body);
-        assertEquals(200, response.getStatus());
     }
 
     private void setSessionOnActionProxy(ActionProxy actionProxy, Map sessionMap) {
