@@ -34,4 +34,16 @@ public class UserDaoTest extends TestCase {
         assertEquals("NewTestEmail@example.com", reloadedUser.getEmail());
         assertEquals("testPassword", reloadedUser.getPasswordDigest());
     }
+
+    public void test_fields_are_correctly_assigned_on_update() {
+        User user = userDao.findBy("email", "spongebob@example.com");
+        user.setEmail("NewTestEmail@example.com");
+        user.setPasswordDigest("testPassword");
+
+        userDao.update(user);
+
+        User reloadedUser = userDao.find(user.getId());
+        assertEquals("NewTestEmail@example.com", reloadedUser.getEmail());
+        assertEquals("testPassword", reloadedUser.getPasswordDigest());
+    }
 }
