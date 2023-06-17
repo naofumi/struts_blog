@@ -24,7 +24,7 @@
                     <a class="nav-link" href="<s:url namespace='/admin/posts' action='index' />">All Posts</a>
                     <a class="nav-link" href="<s:url namespace='/admin/users' action='index' />">All Users</a>
                 </s:if>
-                <a class="nav-link" href="<s:url namespace='/guests' action='index' />">Guests</a>
+                <a id="guest_menu" class="nav-link" href="<s:url namespace='/guests' action='index' />">Guests</a>
                 <a class="nav-link" href="<s:url namespace='/about' action='show' />">About</a>
                 <a class="nav-link disabled">Disabled</a>
             </div>
