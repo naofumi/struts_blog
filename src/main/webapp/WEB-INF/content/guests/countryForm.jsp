@@ -26,12 +26,14 @@
         </div>
         <div class="form-group mt-3">
             <label for="guestForm_country">Country</label>
-            <input id="guestForm_country"
-                   type="text"
-                   value="<s:property value="guestForm.country" />"
-                   name="guestForm.country"
-                   class="form-control"
-            />
+            <select id="guestForm_country" name="guestForm.country" class="form-select">
+                <s:iterator value="countries" var="country">
+                    <option value="<s:property value="name" />"
+                            <s:if test="guestForm.country == #country.name">selected</s:if>>
+                        <s:property value="name" />
+                    </option>
+                </s:iterator>
+            </select>
             <div class="text-danger"><s:fielderror><s:param value="%{'guestForm.country'}"/></s:fielderror></div>
         </div>
 

@@ -1,7 +1,11 @@
 package struts_blog.actions.guests;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.models.Country;
 import struts_blog.models.GuestForm;
+
+import java.io.IOException;
+import java.util.List;
 
 public class CountryFormAction extends BaseAction {
     private GuestForm guestForm;
@@ -17,5 +21,9 @@ public class CountryFormAction extends BaseAction {
 
     public GuestForm getGuestForm() {
         return guestForm;
+    }
+
+    public List<Country> getCountries() throws IOException {
+        return Country.getAllCountries();
     }
 }
