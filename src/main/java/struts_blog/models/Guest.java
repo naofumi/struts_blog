@@ -6,7 +6,7 @@ public class Guest implements Indexable {
     private String country;
     private String twitter;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

@@ -58,7 +58,7 @@ public class GuestDao extends DaoBase<Guest> {
             PreparedStatement ps = conn.prepareStatement(sqlString);
             ps.setString(1, guest.getNickname());
             ps.setString(2, guest.getCountry());
-            ps.setString(2, guest.getTwitter());
+            ps.setString(3, guest.getTwitter());
 
             ps.executeUpdate();
 
@@ -84,9 +84,7 @@ public class GuestDao extends DaoBase<Guest> {
     }
 
     @Override
-    public void refreshTableData() {
-        super.refreshTableData();
-
+    public void seedFreshData() {
         Guest guest1 = new Guest();
         guest1.setNickname("Nickname 1");
         guest1.setCountry("Country 1");

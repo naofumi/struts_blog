@@ -9,32 +9,6 @@ public class PostDao extends DaoBase<Post> {
         return "posts";
     }
 
-    public boolean update(Post post) {
-        try(Connection conn = getConnection()) {
-            String sqlString = "UPDATE posts SET title = ?, content = ? WHERE id = ?";
-            PreparedStatement ps = conn.prepareStatement(sqlString);
-            ps.setString(1, post.getTitle());
-            ps.setString(2, post.getContent());
-            ps.setLong(3, post.getId());
-
-            int changedRows = ps.executeUpdate();
-            return isNotZero(changedRows);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public boolean create(Post post) {
-        try(Connection conn = getConnection()) {
-            PreparedStatement ps = getPreparedStatementForCreate(conn, post);
-
-            int changedRows = ps.executeUpdate();
-            return isNotZero(changedRows);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     protected PreparedStatement getPreparedStatementForCreate(Connection conn, Post post) throws SQLException {
         String sqlString = "INSERT INTO posts (title, content) VALUES (?, ?)";
@@ -43,28 +17,17 @@ public class PostDao extends DaoBase<Post> {
         ps.setString(2, post.getContent());
         return ps;
     }
+
     @Override
-    protected PreparedStatement getPreparedStatementForUpdate(Connection conn, Post object) throws SQLException {
-        return null;
+    protected PreparedStatement getPreparedStatementForUpdate(Connection conn, Post post) throws SQLException {
+        String sqlString = "UPDATE posts SET title = ?, content = ? WHERE id = ?";
+        PreparedStatement ps = conn.prepareStatement(sqlString);
+        ps.setString(1, post.getTitle());
+        ps.setString(2, post.getContent());
+        ps.setLong(3, post.getId());
+
+        return ps;
     }
-
-    public Post createAndReturnSaved(Post post) {
-        try(Connection conn = getConnection()) {
-            String sqlString = "INSERT INTO posts (title, content) VALUES (?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sqlString);
-            ps.setString(1, post.getTitle());
-            ps.setString(2, post.getContent());
-
-            ps.executeUpdate();
-
-            post.setId(getIdOfLastInsert(conn));
-
-            return post;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 
     protected Post getObjectFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
@@ -78,9 +41,7 @@ public class PostDao extends DaoBase<Post> {
     }
 
     @Override
-    public void refreshTableData() {
-        super.refreshTableData();
-
+    protected void seedFreshData() {
         Post post = new Post();
         post.setTitle("My first Blog Post");
         post.setContent("My first Blog Post Content");

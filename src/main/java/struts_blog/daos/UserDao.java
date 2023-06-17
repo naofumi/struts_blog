@@ -30,9 +30,7 @@ public class UserDao extends DaoBase<User> {
     }
 
     @Override
-    public void refreshTableData() {
-        super.refreshTableData();
-
+    public void seedFreshData() {
         User user1 = new User();
         user1.setEmail("naofumi@mac.com");
         user1.setPasswordDigest(DigestUtils.sha512Hex("password"));

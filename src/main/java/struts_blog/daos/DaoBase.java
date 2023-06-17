@@ -9,12 +9,24 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /*
- * The base Data Access Object for the current application.
+ * The base Data Access Object.
  *
  * This has the following design features.
  *
- * 1. It is designed for simple access to the database.
- * 2. It also allows us to mock out the database access.
+ * 1. It is designed to work with only one database table that
+ *    is directly mapped to the Entity.
+ *    For example, if you have a Post entity with the properties
+ *    `title` and `content` and you have the setters and getters for these,
+ *    `DaoBase` will allow you to easily create a PostDao to do CRUD operations
+ *    on the `posts` table with the fields `title` and `content`.
+ * 2. For general use, you are required to subclass `DaoBase` and create a `PostDaoBase`
+ *    for example. You are then required to override `getTable()`, `getObjectFromResultSet()`,
+ *    `getPreparedStatementForCreate()` and `getPreparedStatementForUpdate()`. This
+ *    will allow you to use all the CRUD methods provided.
+ * 3. `DaoBase` also lets you refresh the database which is good for seeding during
+ *     development or testing. Call `refreshTableData()` to truncate the table
+ *     and to seed new data. To seed data, you need to override `seedFreshData()` and
+ *     provide the code to seed the database.
  *
  * Notes
  *
@@ -29,6 +41,7 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
     abstract protected T getObjectFromResultSet(ResultSet resultSet) throws SQLException;
 
     abstract protected PreparedStatement getPreparedStatementForCreate(Connection conn, T object) throws SQLException;
+
     abstract protected PreparedStatement getPreparedStatementForUpdate(Connection conn, T object) throws SQLException;
 
     String connectionUrl = "jdbc:mysql://localhost:3306/struts_blog?serverTimezone=UTC";
@@ -201,6 +214,11 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
 
     public void refreshTableData() {
         truncate();
+        seedFreshData();
+    }
+
+    protected void seedFreshData() {
+        // Override with code to seed data
     }
 
     protected boolean isNotZero(int changedRows) {
