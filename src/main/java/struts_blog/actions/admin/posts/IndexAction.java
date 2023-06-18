@@ -1,5 +1,6 @@
 package struts_blog.actions.admin.posts;
 
+import struts_blog.actions.Titleable;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.PaginationLinks;
@@ -8,7 +9,7 @@ import struts_blog.daos.PostDao;
 
 import java.util.ArrayList;
 
-public class IndexAction extends AdminBaseAction {
+public class IndexAction extends AdminBaseAction implements Titleable {
 
     private static final long serialVersionUID = 1L;
     private ArrayList<Post> posts;
@@ -48,4 +49,8 @@ public class IndexAction extends AdminBaseAction {
         return new PaginationLinks("/struts_blog/admin/posts/index", page, postDao.getCount(), PER_PAGE);
     }
 
+    @Override
+    public String getTitle() {
+        return "List of Posts";
+    }
 }

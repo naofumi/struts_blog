@@ -1,9 +1,10 @@
 package struts_blog.actions.guests;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.Titleable;
 import struts_blog.models.GuestForm;
 
-public class NicknameCreateAction extends BaseAction {
+public class NicknameCreateAction extends BaseAction implements Titleable {
     private GuestForm guestForm;
 
     public String execute() {
@@ -23,5 +24,10 @@ public class NicknameCreateAction extends BaseAction {
 
     public void setGuestForm(GuestForm guestForm) {
         this.guestForm = guestForm;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Set Nickname for Guest";
     }
 }

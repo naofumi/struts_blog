@@ -1,6 +1,7 @@
 package struts_blog.actions.admin.users;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.Titleable;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.PostDao;
@@ -11,7 +12,7 @@ import struts_blog.models.User;
 
 import java.util.ArrayList;
 
-public class IndexAction extends AdminBaseAction {
+public class IndexAction extends AdminBaseAction implements Titleable {
 
     private static final long serialVersionUID = 1L;
     private static final int PER_PAGE = 5;
@@ -46,5 +47,10 @@ public class IndexAction extends AdminBaseAction {
 
     public ArrayList<User> getUsers() {
         return users;
+    }
+
+    @Override
+    public String getTitle() {
+        return "List of Users";
     }
 }

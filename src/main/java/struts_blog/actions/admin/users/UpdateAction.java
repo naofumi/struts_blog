@@ -1,12 +1,13 @@
 package struts_blog.actions.admin.users;
 
+import struts_blog.actions.Titleable;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.UserDao;
 import struts_blog.models.OneTimeTokenService;
 import struts_blog.models.User;
 
-public class UpdateAction extends AdminBaseAction {
+public class UpdateAction extends AdminBaseAction implements Titleable {
     private static final long serialVersionUID = 1L;
     private User user;
 
@@ -30,5 +31,10 @@ public class UpdateAction extends AdminBaseAction {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Update User";
     }
 }

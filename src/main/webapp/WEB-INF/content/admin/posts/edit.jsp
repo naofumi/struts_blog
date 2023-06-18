@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/layouts/head.jspf">
-    <jsp:param name="title" value="Edit Post"/>
+    <jsp:param name="title" value="${windowTitle}"/>
 </jsp:include>
 <body>
 <%@ include file="/WEB-INF/layouts/topNav.jspf" %>

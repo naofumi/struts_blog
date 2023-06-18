@@ -1,11 +1,12 @@
 package struts_blog.actions.admin.posts;
 
+import struts_blog.actions.Titleable;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
-public class ChainedCreateAction extends AdminBaseAction {
+public class ChainedCreateAction extends AdminBaseAction implements Titleable {
 	private static final long serialVersionUID = 1L;
 	private Post post;
 
@@ -34,4 +35,9 @@ public class ChainedCreateAction extends AdminBaseAction {
 	}
 
 	public long getId() { return post.getId(); }
+
+	@Override
+	public String getTitle() {
+		return "Create Post";
+	}
 }

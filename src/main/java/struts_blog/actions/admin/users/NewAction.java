@@ -1,12 +1,13 @@
 package struts_blog.actions.admin.users;
 
 import com.opensymphony.xwork2.ActionSupport;
+import struts_blog.actions.Titleable;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Post;
 import struts_blog.models.User;
 
-public class NewAction extends AdminBaseAction {
+public class NewAction extends AdminBaseAction implements Titleable {
 	private static final long serialVersionUID = 1L;
 
 	public NewAction() {
@@ -16,5 +17,10 @@ public class NewAction extends AdminBaseAction {
 		authenticate();
 
 		return SUCCESS;
+	}
+
+	@Override
+	public String getTitle() {
+		return "New User";
 	}
 }

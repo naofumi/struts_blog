@@ -1,10 +1,11 @@
 package struts_blog.actions.posts;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.Titleable;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
-public class ShowAction extends BaseAction {
+public class ShowAction extends BaseAction implements Titleable {
     private int id;
     private Post post;
 
@@ -30,5 +31,10 @@ public class ShowAction extends BaseAction {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Show Post";
     }
 }

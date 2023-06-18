@@ -1,9 +1,10 @@
 package struts_blog.actions.guests;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.Titleable;
 import struts_blog.models.GuestForm;
 
-public class ConfirmFormAction extends BaseAction {
+public class ConfirmFormAction extends BaseAction implements Titleable {
     private GuestForm guestForm;
 
     public String execute() {
@@ -24,4 +25,8 @@ public class ConfirmFormAction extends BaseAction {
         return guestForm;
     }
 
+    @Override
+    public String getTitle() {
+        return "Confirm Guest";
+    }
 }

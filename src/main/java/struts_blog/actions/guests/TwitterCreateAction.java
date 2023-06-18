@@ -1,12 +1,13 @@
 package struts_blog.actions.guests;
 
 import struts_blog.actions.BaseAction;
+import struts_blog.actions.Titleable;
 import struts_blog.models.GuestForm;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TwitterCreateAction extends BaseAction {
+public class TwitterCreateAction extends BaseAction implements Titleable {
     private GuestForm guestForm;
 
     public void validate() {
@@ -38,5 +39,10 @@ public class TwitterCreateAction extends BaseAction {
 
     public void setGuestForm(GuestForm guestForm) {
         this.guestForm = guestForm;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Set Twitter for Guest";
     }
 }

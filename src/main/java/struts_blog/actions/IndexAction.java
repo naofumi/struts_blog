@@ -5,7 +5,7 @@ import struts_blog.models.Post;
 
 import java.util.ArrayList;
 
-public class IndexAction extends BaseAction {
+public class IndexAction extends BaseAction implements Titleable {
     ArrayList<Post> posts;
     PostDao postDao = new PostDao();
 
@@ -23,6 +23,11 @@ public class IndexAction extends BaseAction {
 
     public ArrayList<Post> getPosts() {
         return posts;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Top";
     }
 }
 
