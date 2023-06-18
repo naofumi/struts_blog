@@ -56,7 +56,7 @@ public class ConfirmFormActionTest extends StrutsTestCase {
         GuestForm sessionGuestForm = new GuestForm();
         sessionGuestForm.setNickname("New Nickname");
         sessionGuestForm.setCountry("New Country");
-        sessionGuestForm.setCountry("New Twitter");
+        sessionGuestForm.setTwitter("New Twitter");
         request.getSession().setAttribute("guest", sessionGuestForm);
 
         String body = executeAction("/guests/confirmForm.action");
@@ -66,7 +66,6 @@ public class ConfirmFormActionTest extends StrutsTestCase {
         assertEquals("New Nickname", guestForm.getNickname());
         assertEquals("New Country", guestForm.getCountry());
         assertEquals("New Twitter", guestForm.getTwitter());
-        assertEquals("", guestForm.getTwitter());
         assertEquals(200, response.getStatus());
         assertEquals("/WEB-INF/content/guests/confirmForm.jsp", response.getForwardedUrl());
         // I haven't yet set it up to return JSP content
