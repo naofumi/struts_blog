@@ -29,10 +29,11 @@ public class User implements Indexable {
     private int id;
     private String email;
     /*
-    * The password field is only used when creating or updating the User.
+    * The password and passwordConfirm fields is only used when creating or updating the User.
     * It is necessary to run validations against the password.
     */
     private String password;
+    private String passwordConfirm;
     private String passwordDigest;
     private String oneTimeToken;
 
@@ -69,6 +70,13 @@ public class User implements Indexable {
     }
     public void setPassword(String password) {
         this.password = password;
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String password) {
+        this.passwordConfirm = password;
     }
     public String getPasswordDigest() {
         return passwordDigest;

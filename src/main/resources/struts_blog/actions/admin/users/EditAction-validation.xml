@@ -18,5 +18,15 @@
             <param name="trim">true</param>
             <message>You password needs to be a minimum of 6 letters</message>
         </field-validator>
+        <field-validator type="expression">
+            <param name="expression">user.password == user.passwordConfirm</param>
+            <message>Password and Password Confirmation must match</message>
+        </field-validator>
+    </field>
+    <field name="user.passwordConfirm">
+        <field-validator type="expression">
+            <param name="expression">user.password == user.passwordConfirm</param>
+            <message>Password and Password Confirmation must match</message>
+        </field-validator>
     </field>
 </validators>

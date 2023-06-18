@@ -1,4 +1,5 @@
-<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
 
 <validators>
     <field name="user.email">
@@ -17,6 +18,16 @@
             <param name="minLength">6</param>
             <param name="trim">true</param>
             <message>You password needs to be a minimum of 6 letters</message>
+        </field-validator>
+        <field-validator type="fieldexpression">
+            <param name="expression">user.password == user.passwordConfirm</param>
+            <message>Password and Password Confirmation must match</message>
+        </field-validator>
+    </field>
+    <field name="user.passwordConfirm">
+        <field-validator type="fieldexpression">
+            <param name="expression">user.password == user.passwordConfirm</param>
+            <message>Password and Password Confirmation must match</message>
         </field-validator>
     </field>
 </validators>
