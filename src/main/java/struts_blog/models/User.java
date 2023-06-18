@@ -68,8 +68,15 @@ public class User implements Indexable {
     public String getPassword() {
         return password;
     }
+
+    // Automatically sets the passwordDigest too if password not blank.
     public void setPassword(String password) {
         this.password = password;
+
+        if (!password.isBlank()) {
+            this.passwordDigest = getHashedString(password);
+        }
+    }
 
     public String getPasswordConfirm() {
         return passwordConfirm;
