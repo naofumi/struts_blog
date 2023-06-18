@@ -20,8 +20,21 @@ public class UpdateAction extends AdminBaseAction implements Titleable {
         } else {
             return ERROR;
         }
+    }
 
-
+    @Override
+    public void validate() {
+        User user = getUser();
+        if (user.getPassword().isBlank() && user.getPasswordConfirm().isBlank()) {
+            return;
+        }
+        if (!user.getPassword().equals(user.getPasswordConfirm())) {
+            addFieldError("user.password","Password and Password Confirmation must match");
+            addFieldError("user.passwordConfirm","Password and Password Confirmation must match");
+        }
+        if (user.getPassword().length() < 6) {
+            addFieldError("user.password","You password needs to be a minimum of 6 letters");
+        }
     }
 
     public User getUser() {
