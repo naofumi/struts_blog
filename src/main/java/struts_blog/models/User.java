@@ -28,6 +28,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class User implements Indexable {
     private int id;
     private String email;
+    /*
+    * The password field is only used when creating or updating the User.
+    * It is necessary to run validations against the password.
+    */
+    private String password;
     private String passwordDigest;
     private String oneTimeToken;
 
@@ -59,8 +64,11 @@ public class User implements Indexable {
         this.oneTimeToken = oneTimeToken;
     }
 
+    public String getPassword() {
+        return password;
+    }
     public void setPassword(String password) {
-        this.passwordDigest = getHashedString(password);
+        this.password = password;
     }
     public String getPasswordDigest() {
         return passwordDigest;

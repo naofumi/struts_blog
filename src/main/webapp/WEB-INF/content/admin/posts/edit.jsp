@@ -12,7 +12,7 @@
 <div class="container">
     <h1 class="mt-5"><s:property value="post.title"/>Edit</h1>
     <form action="update" method="post">
-        <input type="hidden" name="post.id" value="<s:property value="post.id" />"/>
+        <s:hidden key="post.id"></s:hidden>
         <s:include value="_form.jsp">
         </s:include>
         <input type="submit" value="Update" class="btn btn-warning mt-5"/>

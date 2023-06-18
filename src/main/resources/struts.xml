@@ -137,6 +137,10 @@
 			</result>
 			<result name="input">/WEB-INF/content/admin/users/new.jsp</result>
 		</action>
+		<action name="edit"
+				class="struts_blog.actions.admin.users.EditAction">
+			<result name="success">/WEB-INF/content/admin/users/edit.jsp</result>
+		</action>
 	</package>
 
 	<package name="admin_posts" extends="struts-default, exception_handling" namespace="/admin/posts">

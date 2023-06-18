@@ -8,7 +8,7 @@
 * This may also help when the Action uses the ActionContext for example,
 * and we cannot run the test without a mock for that.
 * */
-package struts_blog.actions.posts;
+package struts_blog.actions.admin.posts;
 
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;

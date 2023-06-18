@@ -1,4 +1,4 @@
-package struts_blog.actions.users;
+package struts_blog.actions.admin.users;
 
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;

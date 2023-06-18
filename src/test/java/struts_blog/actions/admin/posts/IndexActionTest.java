@@ -27,7 +27,7 @@
 *
 * */
 
-package struts_blog.actions.posts;
+package struts_blog.actions.admin.posts;
 import com.opensymphony.xwork2.ActionSupport;
 import junit.framework.TestCase;
 import struts_blog.actions.BaseAction;
