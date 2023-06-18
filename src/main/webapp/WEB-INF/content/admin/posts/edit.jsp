@@ -9,6 +9,19 @@
 </jsp:include>
 <body>
 <%@ include file="/WEB-INF/layouts/topNav.jspf" %>
+
+<div class="container" id="nav-buttons">
+    <div class="row mt-3">
+        <div class="col text-start">
+            <s:url namespace="/admin/posts" action="show" var="showUrl">
+                <s:param name="id" value="post.id"/>
+            </s:url>
+            <a href="${showUrl}" class="btn btn-outline-secondary">&lt; Back to show</a>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
 <div class="container">
     <h1 class="mt-5"><s:property value="post.title"/>Edit</h1>
     <form action="update" method="post">

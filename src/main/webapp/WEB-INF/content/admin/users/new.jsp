@@ -12,36 +12,8 @@
 <div class="container">
     <h1 class="mt-5">New User</h1>
     <form action="create" method="post">
-        <s:token/>
-        <div class="form-group mt-3">
-            <s:textfield key="user.email"
-                         label="Email"
-                         labelSeparator=""
-                         cssClass="form-control"
-                         errorPosition="bottom"
-                         cssErrorClass="border border-danger">
-            </s:textfield>
-        </div>
-        <div class="form-group mt-3">
-            <s:textfield type="password"
-                         key="user.password"
-                         label="Password"
-                         labelSeparator=""
-                         cssClass="form-control"
-                         errorPosition="bottom"
-                         cssErrorClass="border border-danger">
-            </s:textfield>
-        </div>
-        <div class="form-group mt-3">
-            <s:textfield type="password"
-                         key="user.passwordConfirm"
-                         label="Password Confirmation"
-                         labelSeparator=""
-                         cssClass="form-control"
-                         errorPosition="bottom"
-                         cssErrorClass="border border-danger">
-            </s:textfield>
-        </div>
+        <s:include value="_form.jsp">
+        </s:include>
         <input type="submit" value="Submit" class="btn btn-warning mt-5"/>
     </form>
 </div>

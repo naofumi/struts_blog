@@ -141,6 +141,14 @@
 				class="struts_blog.actions.admin.users.EditAction">
 			<result name="success">/WEB-INF/content/admin/users/edit.jsp</result>
 		</action>
+		<action name="update"
+				class="struts_blog.actions.admin.users.UpdateAction">
+			<result type="redirectAction" name="success">
+				<param name="actionName">show</param>
+				<param name="id">${user.id}</param>
+			</result>
+			<result name="input">/WEB-INF/content/admin/users/edit.jsp</result>
+		</action>
 	</package>
 
 	<package name="admin_posts" extends="struts-default, exception_handling" namespace="/admin/posts">

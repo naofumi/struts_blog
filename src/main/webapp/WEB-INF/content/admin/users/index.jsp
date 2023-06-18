@@ -9,21 +9,23 @@
 </jsp:include>
 <body>
 <%@ include file="/WEB-INF/layouts/topNav.jspf" %>
-<div class="container">
-    <h1 class="mt-5">List of Users</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col text-end">
-                <a href="new" class="btn btn-primary">New User</a>
-            </div>
+
+<div class="container" id="nav-buttons">
+    <div class="row mt-3">
+        <div class="col text-start">
+        </div>
+        <div class="col text-end">
+            <a href="<s:url namespace="/admin/users" action="new"/>" class="btn btn-primary">New</a>
         </div>
     </div>
+</div>
+
+<div class="container">
+    <h1 class="mb-5">List of Users</h1>
     <table class="table">
         <thead>
         <tr>
             <th>Title</th>
-            <th>Content</th>
             <th></th>
         </tr>
         </thead>
