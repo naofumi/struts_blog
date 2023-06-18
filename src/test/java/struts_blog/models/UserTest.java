@@ -33,4 +33,24 @@ public class UserTest extends TestCase {
         // Confirm that we are saving the password as a digest and not as clear text
         assertNotSame("testPassword", reloadedUser.getPasswordDigest());
     }
+
+    public void test_setting_password_to_blank_will_not_update_password() {
+        /* This is necessary to allow Users to be updated without sending the password itself
+        *  to the HTTP form */
+
+        // Setup
+        User user = new User();
+        user.setEmail("testUser@example.com");
+        user.setPassword("testPassword");
+        assertTrue(user.isMatchingPassword("testPassword"));
+
+        // Set password to blank and confirm matching has not changed
+        user.setPassword("");
+        assertTrue(user.isMatchingPassword("testPassword"));
+
+        // Set password to something other than blank and confirm matching has changed
+        user.setPassword("testPassword2");
+        assertFalse(user.isMatchingPassword("testPassword"));
+        assertTrue(user.isMatchingPassword("testPassword2"));
+    }
 }
