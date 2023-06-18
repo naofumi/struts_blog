@@ -1,13 +1,10 @@
 package struts_blog.actions.admin.users;
 
-import struts_blog.actions.BaseAction;
 import struts_blog.actions.Titleable;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
-import struts_blog.daos.PostDao;
 import struts_blog.daos.UserDao;
 import struts_blog.models.PaginationLinks;
-import struts_blog.models.Post;
 import struts_blog.models.User;
 
 import java.util.ArrayList;

@@ -1,9 +1,11 @@
 package struts_blog.daos;
 
 import struts_blog.models.Guest;
-import struts_blog.models.Mail;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class GuestDao extends DaoBase<Guest> {
     protected String getTable() {

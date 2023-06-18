@@ -1,7 +1,6 @@
 package struts_blog.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.Preparable;
 import org.apache.struts2.action.SessionAware;
 import org.apache.struts2.dispatcher.SessionMap;
 

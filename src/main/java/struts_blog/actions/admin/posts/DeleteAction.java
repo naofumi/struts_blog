@@ -1,6 +1,5 @@
 package struts_blog.actions.admin.posts;
 
-import struts_blog.actions.BaseAction;
 import struts_blog.actions.Titleable;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.PostDao;

@@ -1,9 +1,6 @@
 package struts_blog.daos;
 
 import struts_blog.models.Indexable;
-import struts_blog.models.Mail;
-import struts_blog.models.Post;
-import struts_blog.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;

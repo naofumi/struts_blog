@@ -4,7 +4,6 @@ import struts_blog.actions.Titleable;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.UserDao;
-import struts_blog.models.OneTimeTokenService;
 import struts_blog.models.User;
 
 public class UpdateAction extends AdminBaseAction implements Titleable {

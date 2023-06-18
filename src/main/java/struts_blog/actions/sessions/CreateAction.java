@@ -1,12 +1,9 @@
 package struts_blog.actions.sessions;
 
-import org.apache.struts2.dispatcher.SessionMap;
 import struts_blog.actions.BaseAction;
 import struts_blog.actions.Titleable;
 import struts_blog.models.Login;
 import struts_blog.models.User;
-
-import java.util.Objects;
 
 public class CreateAction extends BaseAction implements Titleable {
     private Login login;

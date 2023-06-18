@@ -5,7 +5,6 @@ import struts_blog.actions.Titleable;
 import struts_blog.daos.GuestDao;
 import struts_blog.models.Guest;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class IndexAction extends BaseAction implements Titleable {
