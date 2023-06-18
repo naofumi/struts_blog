@@ -190,6 +190,13 @@
 			</result>
 			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
 		</action>
+		<action name="no_redirect_create"
+				class="struts_blog.actions.admin.posts.NoRedirectCreateAction">
+			<result name="success">
+				/WEB-INF/content/admin/posts/show.jsp
+			</result>
+			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
+		</action>
 		<action name="update"
 				class="struts_blog.actions.admin.posts.UpdateAction">
 			<result type="redirectAction" name="success">

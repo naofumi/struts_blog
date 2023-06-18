@@ -25,7 +25,8 @@
         <s:include value="_form.jsp">
         </s:include>
         <input type="submit" value="Create" class="btn btn-warning mt-5"/>
-        <input type="submit" formaction="chained_create" value="Submit with Chaining" class="btn btn-warning mt-5"/>
+        <input type="submit" formaction="chained_create" value="Submit with Chaining" class="btn btn-outline-warning mt-5"/>
+        <input type="submit" formaction="no_redirect_create" value="Submit without Redirect" class="btn btn-outline-warning mt-5"/>
     </form>
 </div>
 </body>

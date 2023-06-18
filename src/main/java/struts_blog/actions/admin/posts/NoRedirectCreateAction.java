@@ -6,7 +6,7 @@ import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
-public class UpdateAction extends AdminBaseAction implements Titleable {
+public class NoRedirectCreateAction extends AdminBaseAction implements Titleable {
 	private static final long serialVersionUID = 1L;
 	private Post post;
 
@@ -15,11 +15,9 @@ public class UpdateAction extends AdminBaseAction implements Titleable {
 	public String execute() throws UnauthenticatedException {
 		authenticate();
 
-		if (postDao.update(post)){
-			return SUCCESS;
-		} else {
-			return ERROR;
-		}
+		this.post = postDao.createAndReturnSaved(post);
+
+		return SUCCESS;
 	}
 
 	public Post getPost() {
@@ -30,8 +28,10 @@ public class UpdateAction extends AdminBaseAction implements Titleable {
 		this.post = post;
 	}
 
+	public long getId() { return post.getId(); }
+
 	@Override
 	public String getTitle() {
-		return "Update Post";
+		return "Show Post";
 	}
 }

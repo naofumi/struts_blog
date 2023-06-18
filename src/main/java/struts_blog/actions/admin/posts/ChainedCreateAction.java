@@ -38,6 +38,6 @@ public class ChainedCreateAction extends AdminBaseAction implements Titleable {
 
 	@Override
 	public String getTitle() {
-		return "Create Post";
+		return "Show Post";
 	}
 }
