@@ -1,3 +1,9 @@
 .background_image {
     background-image: url("../images/background.jpg");
 }
+
+.errorMessage {
+    color: #ff0000;
+    font-weight: bold;
+    display: block;
+}
