@@ -1,5 +1,11 @@
 package struts_blog.models;
-
+/*
+* Mail
+*
+* The purpose of this class is to provide a simple mailing system so that we can test how one-time tokens
+* work. Maybe I'll use a mock email service instead, because then we can learn more about connecting to an
+* external service.
+* */
 public class Mail implements Indexable {
     private int id;
     private String title;

@@ -2,41 +2,23 @@ package struts_blog.models;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-/*
-* This user uses a oneTimeToken for authentication via emails, etc.
-* Instead of putting this logic inside the Domain Model (here) as I
-* would normally do, I am experimenting with using a Service for this.
-*
-* The OneTimeTokenService is handling this.
-*
-* Some of the things that I have noticed
-*
-* 1. The Service very much violates the "tell-don't-ask" principle. It
-*    is manipulating the User object and doing all kinds of things with it.
-* 2. Because the Service has to do lots of stuff directly with the User object,
-*    it is forcing us to open up parts of the User object that I'm not totally
-*    comfortable with. For example, `setOneTimeToken()` is a setter that I
-*    really don't want to expose.
-* 3. One of my original hesitations about putting more logic into the Domain Model
-*    was due to the need for the User object to depend on the UserDao. It felt a
-*    bit strange at first, but on second thoughts, it's probably a good thing.
-*    A User object needing to persist itself is a natural thing, and because we
-*    are using a Dao, we aren't exposing the User to the SQL either. There is not
-*    problem with it.
-*
-* */
 public class User implements Indexable {
     private int id;
     private String email;
     /*
-    * The password and passwordConfirm fields is only used when creating or updating the User.
-    * It is necessary to run validations against the password.
+    * The password and passwordConfirm fields are only used when creating or updating the User.
+    * There are necessary to run validations against the password.
+    * (The values are injected into the UserAction using the setters. During validation, the values are
+    *  retrieved using the getters. That's why we need both the getters and setters here)
     */
     private String password;
     private String passwordConfirm;
     private String passwordDigest;
     private String oneTimeToken;
 
+    /*
+    * This checks whether the passwordDigest matches the password sent in as the argument.
+    * */
     public boolean isMatchingPassword(String password) {
         return getHashedString(password).equals(passwordDigest);
     }
@@ -85,6 +67,14 @@ public class User implements Indexable {
     public void setPasswordConfirm(String password) {
         this.passwordConfirm = password;
     }
+    /*
+    * Ideally, I would like to hide the getter and setter for passwordDigest since I
+    * consider it internal, and it should not be necessary for how the authentication system
+    * works. However, because we are using an external DAO for persistence, this needs to
+    * be exposed. This is unlike the ActiveRecord pattern where the Entity should be responsible
+    * for its own persistence. With the ActiveRecord pattern, we can encapsulate sensitive fields
+    * inside the Entity and completely hide it from the outside. With the DAO pattern however, we need to expose it.
+    * */
     public String getPasswordDigest() {
         return passwordDigest;
     }
