@@ -14,24 +14,23 @@
     <form action="create" method="post">
         <s:token/>
         <div class="form-group mt-3">
-            <label for="user_email">Email</label>
-            <input id="user_email"
-                   type="text"
-                   value="<s:property value="user.email" />"
-                   name="user.email"
-                   class="form-control"
-            />
-            <div class="text-danger"><s:fielderror><s:param value="%{'user.email'}"/></s:fielderror></div>
+            <s:textfield key="user.email"
+                         label="Email"
+                         labelSeparator=""
+                         cssClass="form-control"
+                         errorPosition="bottom"
+                         cssErrorClass="border border-danger">
+            </s:textfield>
         </div>
         <div class="form-group mt-3">
-            <label for="user_password">Password</label>
-            <input id="user_password"
-                   type="text"
-                   value="<s:property value="user.password" />"
-                   name="user.password"
-                   class="form-control"
-            />
-            <div class="text-danger"><s:fielderror><s:param value="%{'user.password'}"/></s:fielderror></div>
+            <s:textfield type="password"
+                         key="user.password"
+                         label="Password"
+                         labelSeparator=""
+                         cssClass="form-control"
+                         errorPosition="bottom"
+                         cssErrorClass="border border-danger">
+            </s:textfield>
         </div>
         <input type="submit" value="Submit" class="btn btn-warning mt-5"/>
     </form>
