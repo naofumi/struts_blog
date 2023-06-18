@@ -44,7 +44,7 @@ public class PostDao extends DaoBase<Post> {
     protected void seedFreshData() {
         Post post = new Post();
         post.setTitle("My first Blog Post");
-        post.setContent("My first Blog Post Content");
+        post.setContent("My first Blog Post Content with <b>Bold</b> stuff and some XSS <script>alert('hello')</script>");
         create(post);
     }
 }
