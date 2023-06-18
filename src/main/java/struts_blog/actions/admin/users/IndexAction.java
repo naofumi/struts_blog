@@ -41,7 +41,7 @@ public class IndexAction extends AdminBaseAction {
     }
 
     public PaginationLinks getPaginationLinks() {
-        return new PaginationLinks("/struts_blog/users/index", page, userDao.getCount(), PER_PAGE);
+        return new PaginationLinks("/struts_blog/admin/users/index.action", page, userDao.getCount(), PER_PAGE);
     }
 
     public ArrayList<User> getUsers() {

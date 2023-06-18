@@ -32,6 +32,16 @@
                          cssErrorClass="border border-danger">
             </s:textfield>
         </div>
+        <div class="form-group mt-3">
+            <s:textfield type="password"
+                         key="user.passwordConfirm"
+                         label="Password Confirmation"
+                         labelSeparator=""
+                         cssClass="form-control"
+                         errorPosition="bottom"
+                         cssErrorClass="border border-danger">
+            </s:textfield>
+        </div>
         <input type="submit" value="Submit" class="btn btn-warning mt-5"/>
     </form>
 </div>
