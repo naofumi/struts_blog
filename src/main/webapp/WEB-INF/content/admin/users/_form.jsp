@@ -23,7 +23,7 @@
 </div>
 <div class="form-group mt-3">
     <s:textfield type="password"
-                 key="user.passwordConfirm"
+                 key="passwordConfirm"
                  label="Password Confirmation"
                  labelSeparator=""
                  cssClass="form-control"

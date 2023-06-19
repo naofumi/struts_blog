@@ -5,14 +5,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class User implements Indexable {
     private int id;
     private String email;
-    /*
-     * The password and passwordConfirm fields are only used when creating or updating the User.
-     * There are necessary to run validations against the password.
-     * (The values are injected into the UserAction using the setters. During validation, the values are
-     *  retrieved using the getters. That's why we need both the getters and setters here)
-     */
     private String password;
-    private String passwordConfirm;
     private String passwordDigest;
     private String oneTimeToken;
 
@@ -51,22 +44,9 @@ public class User implements Indexable {
         return password;
     }
 
-    /*
-     * From a UI perspective, we need to check whether the password field is blank or not
-     * and adjusting behaviour accordingly. If the password field is blank, then we will leave
-     * the password as is. This is an Action concern (Business logic) and not a Domain Model concern.
-     * */
     public void setPassword(String password) {
         this.password = password;
         this.passwordDigest = getHashedString(password);
-    }
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String password) {
-        this.passwordConfirm = password;
     }
 
     /*

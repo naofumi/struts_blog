@@ -33,9 +33,10 @@ import struts_blog.models.User;
 public class CreateAction extends AdminBaseAction implements Titleable {
     private static final long serialVersionUID = 1L;
     UserDao userDao = new UserDao();
-//    private Mailer mailer;
+    //    private Mailer mailer;
     OneTimeTokenService oneTimeTokenService = new OneTimeTokenService();
     private User user;
+    private String passwordConfirm;
 
     public CreateAction() {
     }
@@ -47,12 +48,20 @@ public class CreateAction extends AdminBaseAction implements Titleable {
     public String execute() throws UnauthenticatedException {
         authenticate();
 
-        this.user = userDao.createAndReturnSaved(user);
+        User newUser = createUserFromForm();
+        this.user = userDao.createAndReturnSaved(newUser);
 
         String oneTimePassword = oneTimeTokenService.generateOneTimeTokenForUser(user);
 //        mailer.send(user.getEmail(), user.getOneTimeToken());
 
         return SUCCESS;
+    }
+
+    private User createUserFromForm() {
+        User newUser = new User();
+        newUser.setEmail(user.getEmail());
+        newUser.setPassword(user.getPassword());
+        return newUser;
     }
 
     public User getUser() {
@@ -61,6 +70,14 @@ public class CreateAction extends AdminBaseAction implements Titleable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     @Override

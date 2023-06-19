@@ -33,9 +33,9 @@ public class UpdateActionTest extends TestCase {
         User user = userDao.findBy("email", "spongebob@example.com");
         user.setEmail("newEmail@example.com");
         user.setPassword("new password");
-        user.setPasswordConfirm("new password");
 
         action.setUser(user);
+        action.setPasswordConfirm("new password");
 
         String result = action.execute();
 
@@ -56,9 +56,9 @@ public class UpdateActionTest extends TestCase {
 
         user.setEmail("newEmail@example.com");
         user.setPassword("");
-        user.setPasswordConfirm("");
 
         action.setUser(user);
+        action.setPasswordConfirm("");
 
         String result = action.execute();
 

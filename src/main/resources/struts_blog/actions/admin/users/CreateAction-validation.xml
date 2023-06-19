@@ -20,13 +20,13 @@
             <message>You password needs to be a minimum of 6 letters</message>
         </field-validator>
         <field-validator type="fieldexpression">
-            <param name="expression">user.password == user.passwordConfirm</param>
+            <param name="expression">user.password == passwordConfirm</param>
             <message>Password and Password Confirmation must match</message>
         </field-validator>
     </field>
-    <field name="user.passwordConfirm">
+    <field name="passwordConfirm">
         <field-validator type="fieldexpression">
-            <param name="expression">user.password == user.passwordConfirm</param>
+            <param name="expression">user.password == passwordConfirm</param>
             <message>Password and Password Confirmation must match</message>
         </field-validator>
     </field>
