@@ -6,6 +6,14 @@ import struts_blog.models.Login;
 import struts_blog.models.User;
 
 public class CreateAction extends BaseAction implements Titleable {
+    /*
+     * The reason what we use a Login model is because I
+     * thought it might be a good idea to back the Action with a
+     * separate model (instead of having setters/getters in the Action).
+     *
+     * I don't necessarily think that this is a good idea, but I'm
+     * experimenting ;)
+     * */
     private Login login;
 
     public String execute() {

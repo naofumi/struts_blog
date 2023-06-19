@@ -42,7 +42,7 @@ public class UpdateActionTest extends TestCase {
         assertEquals("success", result);
         User reloadedUser = userDao.find(user.getId());
         assertEquals("newEmail@example.com", reloadedUser.getEmail());
-        assertTrue(reloadedUser.isMatchingPassword("new password"));
+        assertTrue(reloadedUser.isCorrectPassword("new password"));
     }
 
     public void test_user_updated_with_blank_password() throws UnauthenticatedException {
@@ -52,7 +52,7 @@ public class UpdateActionTest extends TestCase {
 
         User user = userDao.findBy("email", "spongebob@example.com");
 
-        assertTrue(user.isMatchingPassword("password"));
+        assertTrue(user.isCorrectPassword("password"));
 
         user.setEmail("newEmail@example.com");
         user.setPassword("");
@@ -63,7 +63,7 @@ public class UpdateActionTest extends TestCase {
         String result = action.execute();
 
         User reloadedUser = userDao.find(user.getId());
-        assertTrue(reloadedUser.isMatchingPassword("password"));
+        assertTrue(reloadedUser.isCorrectPassword("password"));
     }
 
 }

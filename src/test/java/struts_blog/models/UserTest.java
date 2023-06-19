@@ -28,7 +28,7 @@ public class UserTest extends TestCase {
         User reloadedUser = userDao.find(user.getId());
         assertEquals("testUser@example.com", reloadedUser.getEmail());
         assertNull(reloadedUser.getPassword());
-        assertTrue(user.isMatchingPassword("testPassword"));
+        assertTrue(user.isCorrectPassword("testPassword"));
 
         // Confirm that we are saving the password as a digest and not as clear text
         assertNotSame("testPassword", reloadedUser.getPasswordDigest());
@@ -42,10 +42,10 @@ public class UserTest extends TestCase {
         User user = new User();
         user.setEmail("testUser@example.com");
         user.setPassword("testPassword");
-        assertTrue(user.isMatchingPassword("testPassword"));
+        assertTrue(user.isCorrectPassword("testPassword"));
 
         // Set password to blank and confirm matching changed
         user.setPassword("");
-        assertFalse(user.isMatchingPassword("testPassword"));
+        assertFalse(user.isCorrectPassword("testPassword"));
     }
 }

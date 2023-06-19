@@ -34,6 +34,7 @@ import junit.framework.TestCase;
 import struts_blog.actions.BaseAction;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.models.Post;
+import struts_blog.setup.AuthenticationMockable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +43,7 @@ import java.util.Map;
 import static java.util.Map.entry;
 import static org.junit.Assert.assertThrows;
 
-public class IndexActionTest extends TestCase {
+public class IndexActionTest extends TestCase implements AuthenticationMockable {
     private IndexAction action = new IndexAction();
 
     public void setUp() throws Exception {
@@ -55,7 +56,24 @@ public class IndexActionTest extends TestCase {
         assertEquals(ActionSupport.SUCCESS, result);
     }
 
+    public void test_execute_with_mocked_authentication() throws UnauthenticatedException {
+        action.setAuthenticationService(mockedAuthenticationServiceForEmail("naofumi@mac.com"));
+
+        String result = action.execute();
+        assertEquals(ActionSupport.SUCCESS, result);
+    }
+
     public void test_execute_fails_if_unauthenticated() {
+        Exception exception = assertThrows(UnauthenticatedException.class, () -> {
+            action.execute();
+        });
+
+        assertEquals("You must log in to access the page", exception.getMessage());
+    }
+
+    public void test_execute_fails_with_mocked_unauthentication() throws UnauthenticatedException {
+        action.setAuthenticationService(mockedAuthenticationServiceUnauthenticated());
+
         Exception exception = assertThrows(UnauthenticatedException.class, () -> {
             action.execute();
         });

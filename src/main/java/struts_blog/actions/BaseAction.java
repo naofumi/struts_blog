@@ -57,6 +57,11 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
         sessionMap.remove("flash");
     }
 
+    // Dependency injection
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
     public User getCurrentUser() {
         // Memoization
         if (currentUser != null) {
@@ -66,7 +71,7 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
         return this.currentUser = authenticationService.userFromSession(sessionMap);
     }
 
-    public boolean isLoggedIn() {
+    private boolean isLoggedIn() {
         return getCurrentUser() != null;
     }
 

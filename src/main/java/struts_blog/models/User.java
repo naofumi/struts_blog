@@ -2,18 +2,19 @@ package struts_blog.models;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class User implements Indexable {
+public class User implements Indexable, Authenticable {
     private int id;
     private String email;
     private String password;
     private String passwordDigest;
     private String oneTimeToken;
 
-    /*
-     * This checks whether the passwordDigest matches the password sent in as the argument.
-     * */
-    public boolean isMatchingPassword(String password) {
+    public boolean isCorrectPassword(String password) {
         return getHashedString(password).equals(passwordDigest);
+    }
+
+    private String getHashedString(String original) {
+        return DigestUtils.sha512Hex(original);
     }
 
     public int getId() {
@@ -63,9 +64,5 @@ public class User implements Indexable {
 
     public void setPasswordDigest(String passwordDigest) {
         this.passwordDigest = passwordDigest;
-    }
-
-    private String getHashedString(String original) {
-        return DigestUtils.sha512Hex(original);
     }
 }

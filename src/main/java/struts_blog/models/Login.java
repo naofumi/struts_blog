@@ -10,7 +10,7 @@ public class Login {
     public User getAuthenticatedUser() {
         User user = userDao.findBy("email", email);
 
-        if (user != null && user.isMatchingPassword(password)) {
+        if (user != null && user.isCorrectPassword(password)) {
             return user;
         } else {
             return null;
