@@ -7,14 +7,10 @@ import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
 public class CreateAction extends AdminBaseAction implements Titleable {
-    private static final long serialVersionUID = 1L;
     PostDao postDao = new PostDao();
     private Post post;
 
-    public CreateAction() {
-    }
-
-    public CreateAction(PostDao postDao) {
+    public void setPostDao(PostDao postDao) {
         this.postDao = postDao;
     }
 

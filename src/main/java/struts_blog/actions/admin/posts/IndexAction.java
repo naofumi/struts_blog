@@ -21,8 +21,7 @@ public class IndexAction extends AdminBaseAction implements Titleable {
         this.page = 1;
     }
 
-    public IndexAction(PostDao postDao) {
-        this.page = 1;
+    public void setPostDao(PostDao postDao) {
         this.postDao = postDao;
     }
 
@@ -52,4 +51,5 @@ public class IndexAction extends AdminBaseAction implements Titleable {
     public String getTitle() {
         return "List of Posts";
     }
+
 }
