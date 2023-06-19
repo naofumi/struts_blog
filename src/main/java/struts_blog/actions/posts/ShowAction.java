@@ -8,6 +8,8 @@ import struts_blog.models.Post;
 public class ShowAction extends BaseAction implements Titleable {
     PostDao postDao = new PostDao();
     private int id;
+
+    private String xssProtection;
     private Post post;
 
     public String execute() {
@@ -32,8 +34,17 @@ public class ShowAction extends BaseAction implements Titleable {
         this.id = id;
     }
 
+    public String getXssProtection() {
+        return xssProtection;
+    }
+
+    public void setXssProtection(String xssProtection) {
+        this.xssProtection = xssProtection;
+    }
+
     @Override
     public String getTitle() {
         return "Show Post";
     }
+
 }

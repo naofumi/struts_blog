@@ -26,7 +26,7 @@ import java.util.Map;
 * It is often used when, for example, you want to display the results for the action that
 * was performed on the immediately previous action like "Your post was successfully updated"
 * or "Successfully logged in".
-* 
+*
 * */
 public abstract class BaseAction extends ActionSupport implements SessionAware, AuthenticationAware {
     public final static String VISITS_COUNT_SESSION_KEY = "vcsk";
