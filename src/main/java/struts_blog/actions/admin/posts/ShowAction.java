@@ -7,40 +7,37 @@ import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
 public class ShowAction extends AdminBaseAction implements Titleable {
-	private int id;
+    private static final long serialVersionUID = 1L;
+    PostDao postDao = new PostDao();
+    private int id;
+    private Post post;
 
-	private static final long serialVersionUID = 1L;
+    public ShowAction() {
+        // TODO Auto-generated constructor stub
+    }
 
-	private Post post;
+    public String execute() throws UnauthenticatedException {
+        authenticate();
 
-	PostDao postDao = new PostDao();
+        this.post = postDao.find(id);
 
-	public ShowAction() {
-		// TODO Auto-generated constructor stub
-	}
+        return SUCCESS;
+    }
 
-	public String execute() throws UnauthenticatedException {
-		authenticate();
+    public Post getPost() {
+        return post;
+    }
 
-		this.post = postDao.find(id);
+    public int getId() {
+        return id;
+    }
 
-		return SUCCESS;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public Post getPost() {
-		return post;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public String getTitle() {
-		return "Show Post";
-	}
+    @Override
+    public String getTitle() {
+        return "Show Post";
+    }
 }

@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Country {
-    private String name;
-    static private List countries;
     static final private String COUNTRY_NAMES_TEXT = "/struts_blog/data/countries.txt";
+    static private List countries;
+    private String name;
+
     static public List<Country> getAllCountries() throws IOException {
         if (countries == null) {
             Country.countries = getAllCountriesFromTextFile();
@@ -21,7 +22,7 @@ public class Country {
 
     private static List<Country> getAllCountriesFromTextFile() throws IOException {
         ArrayList<Country> countries = new ArrayList<Country>();
-        for(String name: allCountryNamesArray()) {
+        for (String name : allCountryNamesArray()) {
             if (name.isBlank()) {
                 continue;
             }
@@ -31,6 +32,7 @@ public class Country {
         }
         return countries;
     }
+
     private static InputStream inputStream() {
         return Country.class.getResourceAsStream(COUNTRY_NAMES_TEXT);
     }

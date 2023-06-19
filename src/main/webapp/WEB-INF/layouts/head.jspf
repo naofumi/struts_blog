@@ -3,7 +3,8 @@
     <title>${param.title}</title>
     <link href="${pageContext.request.contextPath}/stylesheets/bootstrap/bootstrap.min.css"
           rel="stylesheet">
-    <script src="${pageContext.request.contextPath}/javascript/bootstrap/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/javascript/bootstrap/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/application.css">
     <script src="${pageContext.request.contextPath}/javascript/application.js" crossorigin="anonymous"></script>

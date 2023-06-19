@@ -12,11 +12,10 @@ import java.util.ArrayList;
 public class IndexAction extends AdminBaseAction implements Titleable {
 
     private static final long serialVersionUID = 1L;
+    private static final int PER_PAGE = 5;
+    PostDao postDao = new PostDao();
     private ArrayList<Post> posts;
     private int page;
-    private static final int PER_PAGE = 5;
-
-    PostDao postDao = new PostDao();
 
     public IndexAction() {
         this.page = 1;

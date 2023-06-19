@@ -5,9 +5,9 @@ import struts_blog.actions.admin.AdminBaseAction;
 
 public class ChainedBackAction extends AdminBaseAction {
 
-	public String execute() throws UnauthenticatedException {
-		authenticate();
+    public String execute() throws UnauthenticatedException {
+        authenticate();
 
-		return SUCCESS;
-	}
+        return SUCCESS;
+    }
 }

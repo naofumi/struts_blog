@@ -6,27 +6,27 @@ import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.models.Post;
 
 public class NewAction extends AdminBaseAction implements Titleable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Post post;
+    private Post post;
 
-	public NewAction() {
-	}
+    public NewAction() {
+    }
 
-	public String execute() throws UnauthenticatedException {
-		authenticate();
+    public String execute() throws UnauthenticatedException {
+        authenticate();
 
-		this.post = new Post();
+        this.post = new Post();
 
-		return SUCCESS;
-	}
+        return SUCCESS;
+    }
 
-	public Post getPost() {
-		return post;
-	}
+    public Post getPost() {
+        return post;
+    }
 
-	@Override
-	public String getTitle() {
-		return "New Post";
-	}
+    @Override
+    public String getTitle() {
+        return "New Post";
+    }
 }

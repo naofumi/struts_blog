@@ -1,7 +1,6 @@
 package struts_blog.services;
 
 import junit.framework.TestCase;
-import org.owasp.html.Sanitizers;
 
 public class HTMLSanitizerTest extends TestCase {
 

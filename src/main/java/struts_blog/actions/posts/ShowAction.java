@@ -6,10 +6,9 @@ import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
 public class ShowAction extends BaseAction implements Titleable {
+    PostDao postDao = new PostDao();
     private int id;
     private Post post;
-
-    PostDao postDao = new PostDao();
 
     public String execute() {
         this.post = postDao.find(id);

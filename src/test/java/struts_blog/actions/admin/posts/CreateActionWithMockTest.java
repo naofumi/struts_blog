@@ -4,7 +4,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import junit.framework.TestCase;
 import org.mockito.Mockito;
 import struts_blog.actions.UnauthenticatedException;
-import struts_blog.actions.admin.posts.CreateAction;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class IndexAction extends BaseAction implements Titleable {
     private GuestDao guestDao = new GuestDao();
     private ArrayList<Guest> guests;
+
     public String execute() {
         this.guests = guestDao.getAll();
         return SUCCESS;

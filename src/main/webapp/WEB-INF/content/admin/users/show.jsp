@@ -13,7 +13,8 @@
 <div class="container" id="nav-buttons">
     <div class="row mt-3">
         <div class="col text-start">
-            <a href="<s:url namespace="/admin/users" action="index" />" class="btn btn-outline-secondary">&lt; Back to list</a>
+            <a href="<s:url namespace="/admin/users" action="index" />" class="btn btn-outline-secondary">&lt; Back to
+                list</a>
         </div>
         <div class="col text-end">
             <s:url action="edit" var="editLink">

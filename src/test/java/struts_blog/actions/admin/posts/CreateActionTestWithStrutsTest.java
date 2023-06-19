@@ -1,19 +1,18 @@
 /*
-* Here I am using struts2.junit to write tests that use a mock request.
-* This allows us to test
-* 1. URL to Action mapping
-* 2. Interceptors
-* 3. Assigment of HTTP parameters to instance variables
-*
-* This may also help when the Action uses the ActionContext for example,
-* and we cannot run the test without a mock for that.
-* */
+ * Here I am using struts2.junit to write tests that use a mock request.
+ * This allows us to test
+ * 1. URL to Action mapping
+ * 2. Interceptors
+ * 3. Assigment of HTTP parameters to instance variables
+ *
+ * This may also help when the Action uses the ActionContext for example,
+ * and we cannot run the test without a mock for that.
+ * */
 package struts_blog.actions.admin.posts;
 
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.junit.StrutsTestCase;
-import struts_blog.actions.admin.posts.CreateAction;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -30,17 +30,10 @@
 package struts_blog.actions.guests;
 
 import junit.framework.TestCase;
-import org.apache.struts2.junit.StrutsTestCase;
-import org.mockito.exceptions.misusing.NullInsteadOfMockException;
-import struts_blog.actions.UnauthenticatedException;
-import struts_blog.models.Guest;
 import struts_blog.models.GuestForm;
 import struts_blog.setup.TestSetup;
 
-import javax.servlet.ServletException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import java.util.Map;
 
 public class NicknameCreateActionTest extends TestCase {
     @Override
@@ -55,7 +48,7 @@ public class NicknameCreateActionTest extends TestCase {
         new TestSetup().setUpDb();
     }
 
-    public void test_execute_returns_success_and_updates_session()  {
+    public void test_execute_returns_success_and_updates_session() {
         NicknameCreateAction action = new NicknameCreateAction();
         GuestForm guestForm = new GuestForm();
         guestForm.setNickname("New Nickname");
@@ -68,7 +61,7 @@ public class NicknameCreateActionTest extends TestCase {
 
         assertEquals("success", result);
 
-        GuestForm guestFormInSession = (GuestForm)sessionMap.get("guest");
+        GuestForm guestFormInSession = (GuestForm) sessionMap.get("guest");
         assertEquals("New Nickname", guestFormInSession.getNickname());
     }
 }

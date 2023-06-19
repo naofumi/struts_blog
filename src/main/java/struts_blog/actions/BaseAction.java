@@ -23,7 +23,7 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
     }
 
     public int getVisitsCount() {
-        Integer visitsCount = (Integer)sessionMap.get(VISITS_COUNT_SESSION_KEY);
+        Integer visitsCount = (Integer) sessionMap.get(VISITS_COUNT_SESSION_KEY);
         if (visitsCount == null) return 0;
 
         return visitsCount;
@@ -35,21 +35,22 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
         sessionMap.put(VISITS_COUNT_SESSION_KEY, visitsCount + 1);
     }
 
-    public void setFlash(String flash) {
-        sessionMap.put("flash", flash);
-    }
-
     public String getFlash() {
         return flash;
     }
 
+    public void setFlash(String flash) {
+        sessionMap.put("flash", flash);
+    }
+
     protected void invalidateSession() {
         if (sessionMap instanceof SessionMap) {
-            ((SessionMap<String, Object>)sessionMap).invalidate();
+            ((SessionMap<String, Object>) sessionMap).invalidate();
         }
     }
+
     private void prepareFlash() {
-        String value = (String)sessionMap.get("flash");
+        String value = (String) sessionMap.get("flash");
         if ((value != null) && (value.length() > 0)) {
             this.flash = value;
         }
@@ -75,5 +76,4 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
             throw new UnauthenticatedException("You must log in to access the page");
         }
     }
-
 }

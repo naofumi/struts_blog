@@ -30,7 +30,7 @@
                 <s:iterator value="countries" var="country">
                     <option value="<s:property value="name" />"
                             <s:if test="guestForm.country == #country.name">selected</s:if>>
-                        <s:property value="name" />
+                        <s:property value="name"/>
                     </option>
                 </s:iterator>
             </select>

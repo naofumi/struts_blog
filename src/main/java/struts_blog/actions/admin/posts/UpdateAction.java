@@ -7,31 +7,30 @@ import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
 public class UpdateAction extends AdminBaseAction implements Titleable {
-	private static final long serialVersionUID = 1L;
-	private Post post;
+    private static final long serialVersionUID = 1L;
+    PostDao postDao = new PostDao();
+    private Post post;
 
-	PostDao postDao = new PostDao();
+    public String execute() throws UnauthenticatedException {
+        authenticate();
 
-	public String execute() throws UnauthenticatedException {
-		authenticate();
+        if (postDao.update(post)) {
+            return SUCCESS;
+        } else {
+            return ERROR;
+        }
+    }
 
-		if (postDao.update(post)){
-			return SUCCESS;
-		} else {
-			return ERROR;
-		}
-	}
+    public Post getPost() {
+        return post;
+    }
 
-	public Post getPost() {
-		return post;
-	}
+    public void setPost(Post post) {
+        this.post = post;
+    }
 
-	public void setPost(Post post) {
-		this.post = post;
-	}
-
-	@Override
-	public String getTitle() {
-		return "Update Post";
-	}
+    @Override
+    public String getTitle() {
+        return "Update Post";
+    }
 }

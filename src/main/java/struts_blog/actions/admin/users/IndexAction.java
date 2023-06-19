@@ -13,13 +13,12 @@ public class IndexAction extends AdminBaseAction implements Titleable {
 
     private static final long serialVersionUID = 1L;
     private static final int PER_PAGE = 5;
-
+    UserDao userDao = new UserDao();
     private ArrayList<User> users;
     private int page;
-    UserDao userDao = new UserDao();
 
     public IndexAction() {
-		this.page = 1;
+        this.page = 1;
     }
 
     public IndexAction(UserDao userDao) {
@@ -35,7 +34,7 @@ public class IndexAction extends AdminBaseAction implements Titleable {
     }
 
     public void setPage(int page) {
-		this.page = page;
+        this.page = page;
     }
 
     public PaginationLinks getPaginationLinks() {

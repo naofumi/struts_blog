@@ -5,19 +5,19 @@ import struts_blog.actions.UnauthenticatedException;
 import struts_blog.actions.admin.AdminBaseAction;
 
 public class NewAction extends AdminBaseAction implements Titleable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public NewAction() {
-	}
+    public NewAction() {
+    }
 
-	public String execute() throws UnauthenticatedException {
-		authenticate();
+    public String execute() throws UnauthenticatedException {
+        authenticate();
 
-		return SUCCESS;
-	}
+        return SUCCESS;
+    }
 
-	@Override
-	public String getTitle() {
-		return "New User";
-	}
+    @Override
+    public String getTitle() {
+        return "New User";
+    }
 }

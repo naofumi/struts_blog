@@ -7,31 +7,32 @@ import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
 public class NoRedirectCreateAction extends AdminBaseAction implements Titleable {
-	private static final long serialVersionUID = 1L;
-	private Post post;
+    private static final long serialVersionUID = 1L;
+    PostDao postDao = new PostDao();
+    private Post post;
 
-	PostDao postDao = new PostDao();
+    public String execute() throws UnauthenticatedException {
+        authenticate();
 
-	public String execute() throws UnauthenticatedException {
-		authenticate();
+        this.post = postDao.createAndReturnSaved(post);
 
-		this.post = postDao.createAndReturnSaved(post);
+        return SUCCESS;
+    }
 
-		return SUCCESS;
-	}
+    public Post getPost() {
+        return post;
+    }
 
-	public Post getPost() {
-		return post;
-	}
+    public void setPost(Post post) {
+        this.post = post;
+    }
 
-	public void setPost(Post post) {
-		this.post = post;
-	}
+    public long getId() {
+        return post.getId();
+    }
 
-	public long getId() { return post.getId(); }
-
-	@Override
-	public String getTitle() {
-		return "Show Post";
-	}
+    @Override
+    public String getTitle() {
+        return "Show Post";
+    }
 }

@@ -1,215 +1,215 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
-    "http://struts.apache.org/dtds/struts-2.5.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
 
-	<constant name="struts.devMode" value="true" />
+    <constant name="struts.devMode" value="true"/>
 
-	<package name="exception_handling" extends="struts-default">
-		<global-results>
-			<result name="unauthenticated" type="redirectAction">
-				<param name="namespace">/sessions</param>
-				<param name="actionName">new</param>
-			</result>
-		</global-results>
+    <package name="exception_handling" extends="struts-default">
+        <global-results>
+            <result name="unauthenticated" type="redirectAction">
+                <param name="namespace">/sessions</param>
+                <param name="actionName">new</param>
+            </result>
+        </global-results>
 
-		<global-exception-mappings>
-			<exception-mapping exception="struts_blog.actions.UnauthenticatedException" result="unauthenticated" />
-		</global-exception-mappings>
-	</package>
+        <global-exception-mappings>
+            <exception-mapping exception="struts_blog.actions.UnauthenticatedException" result="unauthenticated"/>
+        </global-exception-mappings>
+    </package>
 
-	<package name="root" extends="struts-default" namespace="/">
-		<action name="">
-			<result type="redirectAction">index</result>
-		</action>
-		<action name="index"
-				class="struts_blog.actions.IndexAction">
-			<result name="success">/WEB-INF/content/index.jsp</result>
-		</action>
-	</package>
+    <package name="root" extends="struts-default" namespace="/">
+        <action name="">
+            <result type="redirectAction">index</result>
+        </action>
+        <action name="index"
+                class="struts_blog.actions.IndexAction">
+            <result name="success">/WEB-INF/content/index.jsp</result>
+        </action>
+    </package>
 
-	<package name="posts" extends="struts-default" namespace="/posts">
-		<action name="show" class="struts_blog.actions.posts.ShowAction">
-			<result name="success">/WEB-INF/content/posts/show.jsp</result>
-		</action>
-	</package>
+    <package name="posts" extends="struts-default" namespace="/posts">
+        <action name="show" class="struts_blog.actions.posts.ShowAction">
+            <result name="success">/WEB-INF/content/posts/show.jsp</result>
+        </action>
+    </package>
 
-	<package name="guests" extends="struts-default" namespace="/guests">
-		<action name="index" class="struts_blog.actions.guests.IndexAction">
-			<result name="success">/WEB-INF/content/guests/index.jsp</result>
-		</action>
-		<action name="nicknameForm" class="struts_blog.actions.guests.NicknameFormAction">
-			<result name="success">/WEB-INF/content/guests/nicknameForm.jsp</result>
-		</action>
-		<action name="createNickname" class="struts_blog.actions.guests.NicknameCreateAction">
-			<result name="input">/WEB-INF/content/guests/nicknameForm.jsp</result>
-			<result name="success" type="redirectAction">
-				<param name="actionName">countryForm</param>
-			</result>
-		</action>
-		<action name="countryForm" class="struts_blog.actions.guests.CountryFormAction">
-			<result name="success">/WEB-INF/content/guests/countryForm.jsp</result>
-			<result name="backToNickname" type="redirectAction">
-				<param name="actionName">nicknameForm</param>
-			</result>
-		</action>
-		<action name="createCountry" class="struts_blog.actions.guests.CountryCreateAction">
-			<result name="input">/WEB-INF/content/guests/countryForm.jsp</result>
-			<result name="success" type="redirectAction">
-				<param name="actionName">twitterForm</param>
-			</result>
-		</action>
-		<action name="twitterForm" class="struts_blog.actions.guests.TwitterFormAction">
-			<result name="success">/WEB-INF/content/guests/twitterForm.jsp</result>
-			<result name="backToNickname" type="redirectAction">
-				<param name="actionName">nicknameForm</param>
-			</result>
-			<result name="backToCountry" type="redirectAction">
-				<param name="actionName">countryForm</param>
-			</result>
-		</action>
-		<action name="createTwitter" class="struts_blog.actions.guests.TwitterCreateAction">
-			<result name="input">/WEB-INF/content/guests/twitterForm.jsp</result>
-			<result name="success" type="redirectAction">
-				<param name="actionName">confirmForm</param>
-			</result>
-		</action>
-		<action name="confirmForm" class="struts_blog.actions.guests.ConfirmFormAction">
-			<result name="success">/WEB-INF/content/guests/confirmForm.jsp</result>
-			<result name="backToNickname" type="redirectAction">
-				<param name="actionName">nicknameForm</param>
-			</result>
-			<result name="backToCountry" type="redirectAction">
-				<param name="actionName">countryForm</param>
-			</result>
-			<result name="backToTwitter" type="redirectAction">
-				<param name="actionName">twitterForm</param>
-			</result>
-		</action>
-	</package>
+    <package name="guests" extends="struts-default" namespace="/guests">
+        <action name="index" class="struts_blog.actions.guests.IndexAction">
+            <result name="success">/WEB-INF/content/guests/index.jsp</result>
+        </action>
+        <action name="nicknameForm" class="struts_blog.actions.guests.NicknameFormAction">
+            <result name="success">/WEB-INF/content/guests/nicknameForm.jsp</result>
+        </action>
+        <action name="createNickname" class="struts_blog.actions.guests.NicknameCreateAction">
+            <result name="input">/WEB-INF/content/guests/nicknameForm.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">countryForm</param>
+            </result>
+        </action>
+        <action name="countryForm" class="struts_blog.actions.guests.CountryFormAction">
+            <result name="success">/WEB-INF/content/guests/countryForm.jsp</result>
+            <result name="backToNickname" type="redirectAction">
+                <param name="actionName">nicknameForm</param>
+            </result>
+        </action>
+        <action name="createCountry" class="struts_blog.actions.guests.CountryCreateAction">
+            <result name="input">/WEB-INF/content/guests/countryForm.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">twitterForm</param>
+            </result>
+        </action>
+        <action name="twitterForm" class="struts_blog.actions.guests.TwitterFormAction">
+            <result name="success">/WEB-INF/content/guests/twitterForm.jsp</result>
+            <result name="backToNickname" type="redirectAction">
+                <param name="actionName">nicknameForm</param>
+            </result>
+            <result name="backToCountry" type="redirectAction">
+                <param name="actionName">countryForm</param>
+            </result>
+        </action>
+        <action name="createTwitter" class="struts_blog.actions.guests.TwitterCreateAction">
+            <result name="input">/WEB-INF/content/guests/twitterForm.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">confirmForm</param>
+            </result>
+        </action>
+        <action name="confirmForm" class="struts_blog.actions.guests.ConfirmFormAction">
+            <result name="success">/WEB-INF/content/guests/confirmForm.jsp</result>
+            <result name="backToNickname" type="redirectAction">
+                <param name="actionName">nicknameForm</param>
+            </result>
+            <result name="backToCountry" type="redirectAction">
+                <param name="actionName">countryForm</param>
+            </result>
+            <result name="backToTwitter" type="redirectAction">
+                <param name="actionName">twitterForm</param>
+            </result>
+        </action>
+    </package>
 
-	<package name="about" extends="struts-default" namespace="/about">
-		<action name="show" class="struts_blog.actions.about.ShowAction">
-			<result name="success">/WEB-INF/content/about/show.jsp</result>
-		</action>
-	</package>
+    <package name="about" extends="struts-default" namespace="/about">
+        <action name="show" class="struts_blog.actions.about.ShowAction">
+            <result name="success">/WEB-INF/content/about/show.jsp</result>
+        </action>
+    </package>
 
-	<package name="sessions" extends="struts-default" namespace="/sessions">
-		<action name="new"
-				class="struts_blog.actions.sessions.NewAction">
-			<result name="success">/WEB-INF/content/sessions/new.jsp</result>
-		</action>
-		<action name="create" class="struts_blog.actions.sessions.CreateAction">
-			<result type="redirectAction" name="success">
-				<param name="namespace">/admin/posts</param>
-				<param name="actionName">index</param>
-			</result>
-			<result name="input">/WEB-INF/content/sessions/new.jsp</result>
-		</action>
-		<action name="delete"
-				class="struts_blog.actions.sessions.DeleteAction">
-			<result type="redirectAction" name="success">
-				<param name="namespace">/</param>
-				<param name="actionName">index</param>
-			</result>
-		</action>
-	</package>
+    <package name="sessions" extends="struts-default" namespace="/sessions">
+        <action name="new"
+                class="struts_blog.actions.sessions.NewAction">
+            <result name="success">/WEB-INF/content/sessions/new.jsp</result>
+        </action>
+        <action name="create" class="struts_blog.actions.sessions.CreateAction">
+            <result type="redirectAction" name="success">
+                <param name="namespace">/admin/posts</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="input">/WEB-INF/content/sessions/new.jsp</result>
+        </action>
+        <action name="delete"
+                class="struts_blog.actions.sessions.DeleteAction">
+            <result type="redirectAction" name="success">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+        </action>
+    </package>
 
-	<package name="admin_users" extends="struts-default, exception_handling" namespace="/admin/users">
-		<action name="index" class="struts_blog.actions.admin.users.IndexAction">
-			<result name="success">/WEB-INF/content/admin/users/index.jsp</result>
-		</action>
-		<action name="show"
-				class="struts_blog.actions.admin.users.ShowAction">
-			<result name="success">/WEB-INF/content/admin/users/show.jsp</result>
-		</action>
-		<action name="new"
-				class="struts_blog.actions.admin.users.NewAction">
-			<result name="success">/WEB-INF/content/admin/users/new.jsp</result>
-		</action>
-		<action name="create"
-				class="struts_blog.actions.admin.users.CreateAction">
-			<result type="redirectAction" name="success">
-				<param name="actionName">show</param>
-				<param name="id">${user.id}</param>
-			</result>
-			<result name="input">/WEB-INF/content/admin/users/new.jsp</result>
-		</action>
-		<action name="edit"
-				class="struts_blog.actions.admin.users.EditAction">
-			<result name="success">/WEB-INF/content/admin/users/edit.jsp</result>
-		</action>
-		<action name="update"
-				class="struts_blog.actions.admin.users.UpdateAction">
-			<result type="redirectAction" name="success">
-				<param name="actionName">show</param>
-				<param name="id">${user.id}</param>
-			</result>
-			<result name="input">/WEB-INF/content/admin/users/edit.jsp</result>
-		</action>
-	</package>
+    <package name="admin_users" extends="struts-default, exception_handling" namespace="/admin/users">
+        <action name="index" class="struts_blog.actions.admin.users.IndexAction">
+            <result name="success">/WEB-INF/content/admin/users/index.jsp</result>
+        </action>
+        <action name="show"
+                class="struts_blog.actions.admin.users.ShowAction">
+            <result name="success">/WEB-INF/content/admin/users/show.jsp</result>
+        </action>
+        <action name="new"
+                class="struts_blog.actions.admin.users.NewAction">
+            <result name="success">/WEB-INF/content/admin/users/new.jsp</result>
+        </action>
+        <action name="create"
+                class="struts_blog.actions.admin.users.CreateAction">
+            <result type="redirectAction" name="success">
+                <param name="actionName">show</param>
+                <param name="id">${user.id}</param>
+            </result>
+            <result name="input">/WEB-INF/content/admin/users/new.jsp</result>
+        </action>
+        <action name="edit"
+                class="struts_blog.actions.admin.users.EditAction">
+            <result name="success">/WEB-INF/content/admin/users/edit.jsp</result>
+        </action>
+        <action name="update"
+                class="struts_blog.actions.admin.users.UpdateAction">
+            <result type="redirectAction" name="success">
+                <param name="actionName">show</param>
+                <param name="id">${user.id}</param>
+            </result>
+            <result name="input">/WEB-INF/content/admin/users/edit.jsp</result>
+        </action>
+    </package>
 
-	<package name="admin_posts" extends="struts-default, exception_handling" namespace="/admin/posts">
-		<action name="index"
-				class="struts_blog.actions.admin.posts.IndexAction">
-			<result name="success">/WEB-INF/content/admin/posts/index.jsp</result>
-		</action>
-		<action name="show"
-				class="struts_blog.actions.admin.posts.ShowAction">
-			<result name="success">/WEB-INF/content/admin/posts/show.jsp</result>
-		</action>
-		<action name="chained_back"
-				class="struts_blog.actions.admin.posts.ChainedBackAction">
-			<result type="chain" name="success">
-				<param name="actionName">index</param>
-			</result>
-		</action>
-		<action name="new"
-				class="struts_blog.actions.admin.posts.NewAction">
-			<result name="success">/WEB-INF/content/admin/posts/new.jsp</result>
-		</action>
-		<action name="edit"
-				class="struts_blog.actions.admin.posts.EditAction">
-			<result name="success">/WEB-INF/content/admin/posts/edit.jsp</result>
-		</action>
-		<action name="create"
-				class="struts_blog.actions.admin.posts.CreateAction">
-			<result type="redirectAction" name="success">
-				<param name="actionName">show</param>
-				<param name="id">${post.id}</param>
-			</result>
-			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
-		</action>
-		<action name="chained_create"
-				class="struts_blog.actions.admin.posts.ChainedCreateAction">
-			<result type="chain" name="success">
-				<param name="actionName">show</param>
-				<param name="id">${post.id}</param>
-			</result>
-			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
-		</action>
-		<action name="no_redirect_create"
-				class="struts_blog.actions.admin.posts.NoRedirectCreateAction">
-			<result name="success">
-				/WEB-INF/content/admin/posts/show.jsp
-			</result>
-			<result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
-		</action>
-		<action name="update"
-				class="struts_blog.actions.admin.posts.UpdateAction">
-			<result type="redirectAction" name="success">
-				<param name="actionName">show</param>
-				<param name="id">${post.id}</param>
-			</result>
-			<result name="input">/WEB-INF/content/admin/posts/edit.jsp</result>
-		</action>
-		<action name="delete" class="struts_blog.actions.admin.posts.DeleteAction">
-			<result type="redirectAction" name="success">
-				<param name="actionName">index</param>
-			</result>
-		</action>
-	</package>
+    <package name="admin_posts" extends="struts-default, exception_handling" namespace="/admin/posts">
+        <action name="index"
+                class="struts_blog.actions.admin.posts.IndexAction">
+            <result name="success">/WEB-INF/content/admin/posts/index.jsp</result>
+        </action>
+        <action name="show"
+                class="struts_blog.actions.admin.posts.ShowAction">
+            <result name="success">/WEB-INF/content/admin/posts/show.jsp</result>
+        </action>
+        <action name="chained_back"
+                class="struts_blog.actions.admin.posts.ChainedBackAction">
+            <result type="chain" name="success">
+                <param name="actionName">index</param>
+            </result>
+        </action>
+        <action name="new"
+                class="struts_blog.actions.admin.posts.NewAction">
+            <result name="success">/WEB-INF/content/admin/posts/new.jsp</result>
+        </action>
+        <action name="edit"
+                class="struts_blog.actions.admin.posts.EditAction">
+            <result name="success">/WEB-INF/content/admin/posts/edit.jsp</result>
+        </action>
+        <action name="create"
+                class="struts_blog.actions.admin.posts.CreateAction">
+            <result type="redirectAction" name="success">
+                <param name="actionName">show</param>
+                <param name="id">${post.id}</param>
+            </result>
+            <result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
+        </action>
+        <action name="chained_create"
+                class="struts_blog.actions.admin.posts.ChainedCreateAction">
+            <result type="chain" name="success">
+                <param name="actionName">show</param>
+                <param name="id">${post.id}</param>
+            </result>
+            <result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
+        </action>
+        <action name="no_redirect_create"
+                class="struts_blog.actions.admin.posts.NoRedirectCreateAction">
+            <result name="success">
+                /WEB-INF/content/admin/posts/show.jsp
+            </result>
+            <result name="input">/WEB-INF/content/admin/posts/new.jsp</result>
+        </action>
+        <action name="update"
+                class="struts_blog.actions.admin.posts.UpdateAction">
+            <result type="redirectAction" name="success">
+                <param name="actionName">show</param>
+                <param name="id">${post.id}</param>
+            </result>
+            <result name="input">/WEB-INF/content/admin/posts/edit.jsp</result>
+        </action>
+        <action name="delete" class="struts_blog.actions.admin.posts.DeleteAction">
+            <result type="redirectAction" name="success">
+                <param name="actionName">index</param>
+            </result>
+        </action>
+    </package>
 
 </struts>

@@ -43,7 +43,9 @@ public class PaginationLinks {
     }
 
     public int getMaxPages() {
-        if (count == 0) { return 1; }
+        if (count == 0) {
+            return 1;
+        }
 
         return ((count - 1) / perPage) + 1;
     }

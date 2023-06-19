@@ -3,14 +3,14 @@ package struts_blog.models;
 import java.util.Map;
 
 public class GuestForm {
+    static private final String GUEST_KEY = "guest";
     private String nickname = "";
     private String country = "";
     private String twitter = "";
-    static private final String GUEST_KEY = "guest";
 
     static public GuestForm retrieveFromSession(Map<String, Object> sessionMap) {
         if (sessionMap != null && sessionMap.get("guest") != null) {
-            return (GuestForm)sessionMap.get("guest");
+            return (GuestForm) sessionMap.get("guest");
         } else {
             return new GuestForm();
         }

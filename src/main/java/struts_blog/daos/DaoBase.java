@@ -33,6 +33,8 @@ import java.util.ArrayList;
  *    (see the implementations for examples)
  * */
 abstract class DaoBase<T extends Indexable> implements Refreshable {
+    String connectionUrl = "jdbc:mysql://localhost:3306/struts_blog?serverTimezone=UTC";
+
     abstract protected String getTable();
 
     abstract protected T getObjectFromResultSet(ResultSet resultSet) throws SQLException;
@@ -40,8 +42,6 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
     abstract protected PreparedStatement getPreparedStatementForCreate(Connection conn, T object) throws SQLException;
 
     abstract protected PreparedStatement getPreparedStatementForUpdate(Connection conn, T object) throws SQLException;
-
-    String connectionUrl = "jdbc:mysql://localhost:3306/struts_blog?serverTimezone=UTC";
 
     protected Connection getConnection() throws SQLException {
         return DriverManager.getConnection(connectionUrl, "root", "password");

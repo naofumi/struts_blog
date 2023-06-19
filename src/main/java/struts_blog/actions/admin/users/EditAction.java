@@ -7,45 +7,44 @@ import struts_blog.daos.UserDao;
 import struts_blog.models.User;
 
 public class EditAction extends AdminBaseAction implements Titleable {
-	private int id;
-	private User user;
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    UserDao userDao = new UserDao();
+    private int id;
+    private User user;
 
-	UserDao userDao = new UserDao();
+    public EditAction() {
+    }
 
-	public EditAction() {
-	}
+    public EditAction(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
-	public EditAction(UserDao userDao) {
-		this.userDao = userDao;
-	}
+    public String execute() throws UnauthenticatedException {
+        authenticate();
 
-	public String execute() throws UnauthenticatedException {
-		authenticate();
+        setUser(userDao.find(id));
 
-		setUser(userDao.find(id));
+        return SUCCESS;
+    }
 
-		return SUCCESS;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public String getTitle() {
-		return "Edit User";
-	}
+    @Override
+    public String getTitle() {
+        return "Edit User";
+    }
 }

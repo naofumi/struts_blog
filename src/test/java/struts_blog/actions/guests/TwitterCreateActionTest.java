@@ -48,7 +48,7 @@ public class TwitterCreateActionTest extends TestCase {
         new TestSetup().setUpDb();
     }
 
-    public void test_execute_returns_success_and_updates_session()  {
+    public void test_execute_returns_success_and_updates_session() {
         TwitterCreateAction action = new TwitterCreateAction();
 
         // HTTP parameters
@@ -68,7 +68,7 @@ public class TwitterCreateActionTest extends TestCase {
 
         assertEquals("success", result);
 
-        GuestForm guestFormInSession = (GuestForm)sessionMap.get("guest");
+        GuestForm guestFormInSession = (GuestForm) sessionMap.get("guest");
         assertEquals("New Nickname", guestFormInSession.getNickname());
         assertEquals("New Country", guestFormInSession.getCountry());
         assertEquals("New Twitter", guestFormInSession.getTwitter());

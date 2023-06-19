@@ -3,8 +3,6 @@ package struts_blog.actions.admin.users;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.junit.StrutsTestCase;
-import struts_blog.actions.admin.users.IndexAction;
-import struts_blog.actions.admin.users.ShowAction;
 import struts_blog.daos.UserDao;
 import struts_blog.models.User;
 import struts_blog.setup.TestSetup;
@@ -13,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
-* Here we are testing the capabilities of the `StrutsTestCase`.
-*
-* It looks similar to request testing in RSpec in that it is difficult to directly
-* access the session. Otherwise, it looks pretty nice to use.
-* */
+ * Here we are testing the capabilities of the `StrutsTestCase`.
+ *
+ * It looks similar to request testing in RSpec in that it is difficult to directly
+ * access the session. Otherwise, it looks pretty nice to use.
+ * */
 public class ShowActionWithStrutsTest extends StrutsTestCase {
     ActionProxy actionProxy;
     ShowAction action;

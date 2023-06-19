@@ -3,14 +3,11 @@ package struts_blog.actions.admin.posts;
 import com.opensymphony.xwork2.ActionSupport;
 import junit.framework.TestCase;
 import struts_blog.actions.UnauthenticatedException;
-import struts_blog.actions.admin.posts.CreateAction;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
 
-import javax.print.attribute.HashPrintJobAttributeSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class CreateActionTest extends TestCase {
     private CreateAction action;

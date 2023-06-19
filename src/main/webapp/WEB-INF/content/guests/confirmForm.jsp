@@ -44,8 +44,10 @@
             />
         </div>
         <a href="<s:url namespace="/guests" action="nicknameForm" />" class="btn btn-info mt-5">Go back to Nickname</a>
-        <a href="<s:url namespace="/guests" action="countryForm" />" class="btn btn-info mt-5 ms-1">Go back to Country</a>
-        <a href="<s:url namespace="/guests" action="twitterForm" />" class="btn btn-info mt-5 ms-1">Go back to Twitter</a>
+        <a href="<s:url namespace="/guests" action="countryForm" />" class="btn btn-info mt-5 ms-1">Go back to
+            Country</a>
+        <a href="<s:url namespace="/guests" action="twitterForm" />" class="btn btn-info mt-5 ms-1">Go back to
+            Twitter</a>
         <input type="submit" value="Create Guest" class="btn btn-danger mt-5 ms-5"/>
     </form>
 </div>

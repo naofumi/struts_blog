@@ -6,6 +6,7 @@ import struts_blog.actions.admin.AdminBaseAction;
 import struts_blog.daos.UserDao;
 import struts_blog.models.OneTimeTokenService;
 import struts_blog.models.User;
+
 /*
  * This user uses a oneTimeToken for authentication via emails, etc.
  * Instead of putting this logic inside the Domain Model (here) as I
@@ -31,11 +32,10 @@ import struts_blog.models.User;
  * */
 public class CreateAction extends AdminBaseAction implements Titleable {
     private static final long serialVersionUID = 1L;
-    private User user;
-//    private Mailer mailer;
-
     UserDao userDao = new UserDao();
+//    private Mailer mailer;
     OneTimeTokenService oneTimeTokenService = new OneTimeTokenService();
+    private User user;
 
     public CreateAction() {
     }

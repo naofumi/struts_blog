@@ -2,9 +2,7 @@ package struts_blog.actions.admin.posts;
 
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
-
 import org.apache.struts2.junit.StrutsTestCase;
-import struts_blog.actions.admin.posts.IndexAction;
 import struts_blog.models.Post;
 import struts_blog.setup.TestSetup;
 
@@ -13,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
-* Here we are testing the capabilities of the `StrutsTestCase`.
-*
-* It looks similar to request testing in RSpec in that it is difficult to directly
-* access the session. Otherwise, it looks pretty nice to use.
-* */
+ * Here we are testing the capabilities of the `StrutsTestCase`.
+ *
+ * It looks similar to request testing in RSpec in that it is difficult to directly
+ * access the session. Otherwise, it looks pretty nice to use.
+ * */
 public class IndexActionWithStrutsTest extends StrutsTestCase {
     ActionProxy actionProxy;
     IndexAction action;
@@ -72,21 +70,21 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
     }
 
     /*
-    * As far as I have been able to discover, `executeAction` does the best
-    * job of simulating an HTTP request as it goes through the Interceptor stack
-    * and returns values.
-    *
-    * Set up the session and parameter values and then call `executeAction()`.
-    * Instead of directly querying the action via getters, you can use `findValueAfterExecute()` to
-    * get the state of the action.
-    *
-    * You can query the response object for status and JSP template. You can also get at
-    * the response headers.
-    * */
+     * As far as I have been able to discover, `executeAction` does the best
+     * job of simulating an HTTP request as it goes through the Interceptor stack
+     * and returns values.
+     *
+     * Set up the session and parameter values and then call `executeAction()`.
+     * Instead of directly querying the action via getters, you can use `findValueAfterExecute()` to
+     * get the state of the action.
+     *
+     * You can query the response object for status and JSP template. You can also get at
+     * the response headers.
+     * */
     public void test_can_execute_test_executeAction() throws Exception {
         request.getSession().setAttribute("user_id", 1);
         String body = executeAction("/admin/posts/index.action");
-        ArrayList<Post> posts = (ArrayList<Post>)findValueAfterExecute("posts");//findValueAfterExecute("")
+        ArrayList<Post> posts = (ArrayList<Post>) findValueAfterExecute("posts");//findValueAfterExecute("")
 
         assertEquals("My first Blog Post", posts.get(0).getTitle());
         assertEquals(200, response.getStatus());

@@ -12,7 +12,7 @@
 <div class="container w-50">
     <h1 class="mt-5 mb-5">Login</h1>
     <s:if test="flash != null">
-        <div class="alert alert-warning"><s:property value="flash" /></div>
+        <div class="alert alert-warning"><s:property value="flash"/></div>
     </s:if>
     <form action="create" method="post">
         <div class="form-group mt-3">

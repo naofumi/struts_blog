@@ -12,7 +12,8 @@
 <div class="container">
     <h1 class="mt-5">List of guests</h1>
 
-    <div class="text-end mb-5"><a href="<s:url namespace="/guests" action="nicknameForm" />" class="btn btn-success">Please post on our guestbook!</a></div>
+    <div class="text-end mb-5"><a href="<s:url namespace="/guests" action="nicknameForm" />" class="btn btn-success">Please
+        post on our guestbook!</a></div>
     <table class="table">
         <thead>
         <th>Nickname</th>

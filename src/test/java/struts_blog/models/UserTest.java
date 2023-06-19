@@ -36,7 +36,7 @@ public class UserTest extends TestCase {
 
     public void test_setting_password_to_blank_will_update_password() {
         /* We do need to allow Users to be updated without sending the password itself
-        *  to the HTTP form, but this will be handled in the Action and not the Domain Model */
+         *  to the HTTP form, but this will be handled in the Action and not the Domain Model */
 
         // Setup
         User user = new User();

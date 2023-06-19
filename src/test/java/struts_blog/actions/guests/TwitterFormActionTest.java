@@ -34,7 +34,6 @@ import org.apache.struts2.junit.StrutsTestCase;
 import struts_blog.models.GuestForm;
 import struts_blog.setup.TestSetup;
 
-import javax.servlet.GenericFilter;
 import javax.servlet.ServletException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
