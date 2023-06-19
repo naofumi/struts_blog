@@ -3,6 +3,8 @@ package struts_blog.actions;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.action.SessionAware;
 import org.apache.struts2.dispatcher.SessionMap;
+import struts_blog.models.AuthenticationService;
+import struts_blog.models.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,9 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
     public final static String VISITS_COUNT_SESSION_KEY = "vcsk";
     public String flash;
     protected Map<String, Object> sessionMap = new HashMap<String, Object>();
+
+    User currentUser;
+    AuthenticationService authenticationService = new AuthenticationService();
 
     public void withSession(Map<String, Object> session) {
         this.sessionMap = session;
@@ -50,4 +55,25 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
         }
         sessionMap.remove("flash");
     }
+
+    public User getCurrentUser() {
+        // Memoization
+        if (currentUser != null) {
+            return currentUser;
+        }
+
+        return this.currentUser = authenticationService.userFromSession(sessionMap);
+    }
+
+    public boolean isLoggedIn() {
+        return getCurrentUser() != null;
+    }
+
+    protected void authenticate() throws UnauthenticatedException {
+        if (!isLoggedIn()) {
+            setFlash("You must be logged in!");
+            throw new UnauthenticatedException("You must log in to access the page");
+        }
+    }
+
 }
