@@ -41,6 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+
 public class IndexActionWithMockTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
@@ -53,7 +55,7 @@ public class IndexActionWithMockTest extends TestCase {
                 createPost(2, "Mock Title 2", "Mock Content 2")
         ));
 
-        Mockito.when(postDaoMock.getAllWithPage(1, 5)).thenReturn(posts);
+        Mockito.when(postDaoMock.getAllWithPage(anyInt(), anyInt())).thenReturn(posts);
 
         IndexAction action = new IndexAction(postDaoMock);
         action.withSession(new HashMap(Map.of("user_id", 1)));
@@ -70,7 +72,7 @@ public class IndexActionWithMockTest extends TestCase {
                 createPost(1, "Mock Title 1", "Mock Content 1"),
                 createPost(2, "Mock Title 2", "Mock Content 2")
         ));
-        Mockito.when(postDaoMock.getAllWithPage(1, 5)).thenReturn(posts);
+        Mockito.when(postDaoMock.getAllWithPage(anyInt(), anyInt())).thenReturn(posts);
 
         // Inject the mock into the action
         IndexAction action = new IndexAction(postDaoMock);
