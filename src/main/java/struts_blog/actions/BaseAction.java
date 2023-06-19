@@ -9,7 +9,7 @@ import struts_blog.models.User;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class BaseAction extends ActionSupport implements SessionAware {
+public abstract class BaseAction extends ActionSupport implements SessionAware, AuthenticationAware {
     public final static String VISITS_COUNT_SESSION_KEY = "vcsk";
     public String flash;
     protected Map<String, Object> sessionMap = new HashMap<String, Object>();
@@ -71,11 +71,11 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
         return this.currentUser = authenticationService.userFromSession(sessionMap);
     }
 
-    private boolean isLoggedIn() {
+    public boolean isLoggedIn() {
         return getCurrentUser() != null;
     }
 
-    protected void authenticate() throws UnauthenticatedException {
+    public void authenticate() throws UnauthenticatedException {
         if (!isLoggedIn()) {
             setFlash("You must be logged in!");
             throw new UnauthenticatedException("You must log in to access the page");
