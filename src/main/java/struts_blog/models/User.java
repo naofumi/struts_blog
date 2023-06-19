@@ -51,13 +51,14 @@ public class User implements Indexable {
         return password;
     }
 
-    // Automatically sets the passwordDigest too if password not blank.
+    /*
+    * From a UI perspective, we need to check whether the password field is blank or not
+    * and adjusting behaviour accordingly. If the password field is blank, then we will leave
+    * the password as is. This is an Action concern (Business logic) and not a Domain Model concern.
+    * */
     public void setPassword(String password) {
         this.password = password;
-
-        if (!password.isBlank()) {
-            this.passwordDigest = getHashedString(password);
-        }
+        this.passwordDigest = getHashedString(password);
     }
 
     public String getPasswordConfirm() {

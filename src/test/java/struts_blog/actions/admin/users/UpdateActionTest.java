@@ -32,6 +32,8 @@ public class UpdateActionTest extends TestCase {
 
         User user = userDao.findBy("email", "spongebob@example.com");
         user.setEmail("newEmail@example.com");
+        user.setPassword("new password");
+        user.setPasswordConfirm("new password");
 
         action.setUser(user);
 
@@ -40,5 +42,28 @@ public class UpdateActionTest extends TestCase {
         assertEquals("success", result);
         User reloadedUser = userDao.find(user.getId());
         assertEquals("newEmail@example.com", reloadedUser.getEmail());
+        assertTrue(reloadedUser.isMatchingPassword("new password"));
     }
+
+    public void test_user_updated_with_blank_password() throws UnauthenticatedException {
+        UpdateAction action = new UpdateAction();
+
+        action.withSession(new HashMap<>(Map.of("user_id", 1)));
+
+        User user = userDao.findBy("email", "spongebob@example.com");
+
+        assertTrue(user.isMatchingPassword("password"));
+
+        user.setEmail("newEmail@example.com");
+        user.setPassword("");
+        user.setPasswordConfirm("");
+
+        action.setUser(user);
+
+        String result = action.execute();
+
+        User reloadedUser = userDao.find(user.getId());
+        assertTrue(reloadedUser.isMatchingPassword("password"));
+    }
+
 }

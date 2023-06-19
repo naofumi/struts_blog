@@ -34,9 +34,9 @@ public class UserTest extends TestCase {
         assertNotSame("testPassword", reloadedUser.getPasswordDigest());
     }
 
-    public void test_setting_password_to_blank_will_not_update_password() {
-        /* This is necessary to allow Users to be updated without sending the password itself
-        *  to the HTTP form */
+    public void test_setting_password_to_blank_will_update_password() {
+        /* We do need to allow Users to be updated without sending the password itself
+        *  to the HTTP form, but this will be handled in the Action and not the Domain Model */
 
         // Setup
         User user = new User();
@@ -44,13 +44,8 @@ public class UserTest extends TestCase {
         user.setPassword("testPassword");
         assertTrue(user.isMatchingPassword("testPassword"));
 
-        // Set password to blank and confirm matching has not changed
+        // Set password to blank and confirm matching changed
         user.setPassword("");
-        assertTrue(user.isMatchingPassword("testPassword"));
-
-        // Set password to something other than blank and confirm matching has changed
-        user.setPassword("testPassword2");
         assertFalse(user.isMatchingPassword("testPassword"));
-        assertTrue(user.isMatchingPassword("testPassword2"));
     }
 }
