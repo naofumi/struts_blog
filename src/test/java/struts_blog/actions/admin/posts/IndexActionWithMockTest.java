@@ -77,7 +77,7 @@ public class IndexActionWithMockTest extends TestCase {
         // Inject the mock into the action
         IndexAction action = new IndexAction(postDaoMock);
         // Create a session with authentication
-        action.withSession(new HashMap(Map.of("user_id", 1)));
+        action.withSession(new HashMap<>(Map.of("user_id", 1)));
 
         // Execute the Action
         String result = action.execute();

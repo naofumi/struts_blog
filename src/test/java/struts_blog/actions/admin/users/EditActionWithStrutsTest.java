@@ -45,7 +45,7 @@ public class EditActionWithStrutsTest extends StrutsTestCase {
         EditAction action = (EditAction) actionProxy.getAction();
         action.setId(userToEdit.getId());
 
-        actionProxy.getInvocation().getInvocationContext().setSession(new HashMap(Map.of("user_id", 1)));
+        actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1)));
 
         String result = actionProxy.execute();
 

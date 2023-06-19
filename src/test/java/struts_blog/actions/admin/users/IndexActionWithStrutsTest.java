@@ -77,6 +77,6 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
 
     private void setSessionOnActionProxy(ActionProxy actionProxy, Map sessionMap) {
         //  https://stackoverflow.com/a/19653568
-        actionProxy.getInvocation().getInvocationContext().setSession(sessionMap);
+        actionProxy.getInvocation().getInvocationContext().withSession(sessionMap);
     }
 }

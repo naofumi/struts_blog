@@ -51,7 +51,7 @@ public class IndexActionTest extends TestCase implements AuthenticationMockable 
     }
 
     public void test_execute_returns_success() throws UnauthenticatedException {
-        action.withSession(new HashMap(Map.of("user_id", 1)));
+        action.withSession(new HashMap<>(Map.of("user_id", 1)));
         String result = action.execute();
         assertEquals(ActionSupport.SUCCESS, result);
     }
@@ -101,7 +101,7 @@ public class IndexActionTest extends TestCase implements AuthenticationMockable 
     }
 
     public void test_execute_sets_getPost() throws UnauthenticatedException {
-        action.withSession(new HashMap(Map.of("user_id", 1)));
+        action.withSession(new HashMap<>(Map.of("user_id", 1)));
         action.execute();
 
         List<Post> posts = action.getPosts();
