@@ -8,7 +8,7 @@ import java.util.Map;
 public class AuthenticationService {
     UserDao userDao = new UserDao();
 
-    public User userFromSession(Map<String, Object> sessionMap) {
+    public User getUserFromSession(Map<String, Object> sessionMap) {
         Integer id = (Integer) sessionMap.get("user_id");
         if (id == null) {
             return null;

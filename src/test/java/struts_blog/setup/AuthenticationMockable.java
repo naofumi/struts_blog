@@ -12,14 +12,14 @@ public interface AuthenticationMockable {
     default AuthenticationService mockedAuthenticationServiceForEmail(String email) {
         UserDao userDao = new UserDao();
         AuthenticationService authServiceMock = Mockito.mock(AuthenticationService.class);
-        Mockito.when(authServiceMock.userFromSession(any(Map.class)))
+        Mockito.when(authServiceMock.getUserFromSession(any(Map.class)))
                 .thenReturn(userDao.findBy("email", email));
         return authServiceMock;
     }
 
     default AuthenticationService mockedAuthenticationServiceUnauthenticated() {
         AuthenticationService authServiceMock = Mockito.mock(AuthenticationService.class);
-        Mockito.when(authServiceMock.userFromSession(any(Map.class)))
+        Mockito.when(authServiceMock.getUserFromSession(any(Map.class)))
                 .thenReturn(null);
         return authServiceMock;
     }
