@@ -31,7 +31,9 @@
                  cssErrorClass="border border-danger">
     </s:textfield>
 </div>
-<div class="form-group mt-3">
-    <s:hidden name="__checkbox_user.admin" value="false"/>
-    <s:checkbox key="user.admin"/>
-</div>
+<%-- The intention is not to allow the user to set their own `admin` value --%>
+<%-- See the wiki for a discussion https://github.com/naofumi/struts_blog/wiki/SendingMaliciousRequestsWithCurl --%>
+<%--<div class="form-group mt-3">--%>
+<%--    <s:hidden name="__checkbox_user.admin" value="false"/>--%>
+<%--    <s:checkbox key="user.admin"/>--%>
+<%--</div>--%>
