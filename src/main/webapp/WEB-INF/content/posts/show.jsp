@@ -15,7 +15,13 @@
 <div class="container">
     <h1 class="mt-5"><s:property value="post.title"/>: Show</h1>
 
-    <div>
+    <div class="mt-5">
+        <h3>In database</h3>
+        <s:textarea key="post.content" cssClass="form-control my-3" disabled="true" />
+        <s:textarea key="post.xssEscapedContent" cssClass="form-control my-3" disabled="true" />
+    </div>
+    <div class="mt-5">
+        <h3>When displayed</h3>
         <s:url var="sanitizerUrl">
             <s:param name="id" value="%{post.id}"/>
             <s:param name="xssProtection" value="%{'sanitizer'}"/>
