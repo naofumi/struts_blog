@@ -40,8 +40,10 @@ public abstract class BaseAction extends ActionSupport implements SessionAware, 
         prepareFlash();
     }
 
+    // Dependency injection
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
-
 
     public String getFlash() {
         return flash;
@@ -65,28 +67,17 @@ public abstract class BaseAction extends ActionSupport implements SessionAware, 
         sessionMap.remove("flash");
     }
 
-    // Dependency injection
-    public void setAuthenticationService(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
-    }
-
     public User getCurrentUser() {
         // Memoization
+        // Since authenticationService.getUserFromSession() requires access to the database,
+        // it can become costly if repeated many times. To prevent this, we do "memoization"
+        // which is to remember the currentUser for the duration of the current request.
+        //
+        // Memoization is a very powerful technique when optimising page load times.
         if (currentUser != null) {
             return currentUser;
         }
 
-        return this.currentUser = authenticationService.userFromSession(sessionMap);
-    }
-
-    public boolean isLoggedIn() {
-        return getCurrentUser() != null;
-    }
-
-    public void authenticate() throws UnauthenticatedException {
-        if (!isLoggedIn()) {
-            setFlash("You must be logged in!");
-            throw new UnauthenticatedException("You must log in to access the page");
-        }
+        return this.currentUser = authenticationService.getUserFromSession(sessionMap);
     }
 }
