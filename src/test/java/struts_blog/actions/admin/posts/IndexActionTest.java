@@ -81,25 +81,6 @@ public class IndexActionTest extends TestCase implements AuthenticationMockable 
         assertEquals("You must log in to access the page", exception.getMessage());
     }
 
-    public void test_execute_sets_visitCount_to_1_on_initial_visit() throws UnauthenticatedException {
-        action.withSession(new HashMap(Map.of("user_id", 1)));
-        action.execute();
-
-        assertEquals(1, action.getVisitsCount());
-    }
-
-    public void test_execute_increments_visitCount_on_subsequent_visits() throws UnauthenticatedException {
-        HashMap<String, Object> previousSession = new HashMap<>(Map.ofEntries(
-                entry("user_id", 1),
-                entry(BaseAction.VISITS_COUNT_SESSION_KEY, 3)
-        ));
-
-        action.withSession(previousSession);
-        action.execute();
-
-        assertEquals(4, action.getVisitsCount());
-    }
-
     public void test_execute_sets_getPost() throws UnauthenticatedException {
         action.withSession(new HashMap<>(Map.of("user_id", 1)));
         action.execute();

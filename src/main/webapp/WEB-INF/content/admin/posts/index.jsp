@@ -22,7 +22,6 @@
 
 <div class="container">
     <h1 class="mb-5">List of posts</h1>
-    <h2 class="mt-3">Visits: <s:property value="visitsCount"/></h2>
     <table class="table">
         <thead>
         <tr>

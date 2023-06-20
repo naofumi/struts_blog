@@ -29,8 +29,6 @@ public class IndexAction extends AdminBaseAction implements Titleable {
     public String execute() throws UnauthenticatedException {
         authenticate();
 
-        incrementVisitsCount();
-
         this.posts = postDao.getAllWithPage(page, 5);
 
         return SUCCESS;

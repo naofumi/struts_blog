@@ -29,7 +29,6 @@ import java.util.Map;
  *
  * */
 public abstract class BaseAction extends ActionSupport implements SessionAware, AuthenticationAware {
-    public final static String VISITS_COUNT_SESSION_KEY = "vcsk";
     public String flash;
     protected Map<String, Object> sessionMap = new HashMap<String, Object>();
 
@@ -41,18 +40,8 @@ public abstract class BaseAction extends ActionSupport implements SessionAware, 
         prepareFlash();
     }
 
-    public int getVisitsCount() {
-        Integer visitsCount = (Integer) sessionMap.get(VISITS_COUNT_SESSION_KEY);
-        if (visitsCount == null) return 0;
-
-        return visitsCount;
     }
 
-    protected void incrementVisitsCount() {
-        int visitsCount = getVisitsCount();
-
-        sessionMap.put(VISITS_COUNT_SESSION_KEY, visitsCount + 1);
-    }
 
     public String getFlash() {
         return flash;
