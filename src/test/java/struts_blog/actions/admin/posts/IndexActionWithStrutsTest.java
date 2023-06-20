@@ -84,7 +84,7 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
     public void test_can_execute_test_executeAction() throws Exception {
         request.getSession().setAttribute("user_id", 1);
         String body = executeAction("/admin/posts/index.action");
-        ArrayList<Post> posts = (ArrayList<Post>) findValueAfterExecute("posts");//findValueAfterExecute("")
+        ArrayList<Post> posts = (ArrayList<Post>) findValueAfterExecute("posts");// findValueAfterExecute("")
 
         assertEquals("My first Blog Post", posts.get(0).getTitle());
         assertEquals(200, response.getStatus());
