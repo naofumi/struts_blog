@@ -5,6 +5,7 @@ import org.apache.struts2.action.SessionAware;
 import org.apache.struts2.dispatcher.SessionMap;
 import struts_blog.models.AuthenticationService;
 import struts_blog.models.User;
+import struts_blog.services.FlashService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +35,11 @@ public abstract class BaseAction extends ActionSupport implements SessionAware, 
 
     User currentUser;
     AuthenticationService authenticationService = new AuthenticationService();
+    FlashService flashService = new FlashService();
 
     public void withSession(Map<String, Object> session) {
         this.sessionMap = session;
-        prepareFlash();
+        this.flash = flashService.prepareFlash(sessionMap);
     }
 
     // Dependency injection
@@ -49,22 +51,14 @@ public abstract class BaseAction extends ActionSupport implements SessionAware, 
         return flash;
     }
 
-    public void setFlash(String flash) {
-        sessionMap.put("flash", flash);
+    public void setFlash(String message) {
+        flashService.setFlash(message, sessionMap);
     }
 
     protected void invalidateSession() {
         if (sessionMap instanceof SessionMap) {
             ((SessionMap<String, Object>) sessionMap).invalidate();
         }
-    }
-
-    private void prepareFlash() {
-        String value = (String) sessionMap.get("flash");
-        if ((value != null) && (value.length() > 0)) {
-            this.flash = value;
-        }
-        sessionMap.remove("flash");
     }
 
     public User getCurrentUser() {
