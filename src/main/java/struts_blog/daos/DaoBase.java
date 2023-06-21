@@ -185,6 +185,21 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
         }
     }
 
+    interface PreparedStatementFunction {
+        PreparedStatement run(Connection conn) throws SQLException;
+    }
+
+    public boolean mutateWithPreparedStatementFunction(PreparedStatementFunction preparedStatementFunction) {
+        try (Connection conn = getConnection()) {
+            PreparedStatement ps = preparedStatementFunction.run(conn);
+
+            int changedRows = ps.executeUpdate();
+            return isNotZero(changedRows);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public T createAndReturnSaved(T object) {
         try (Connection conn = getConnection()) {
             PreparedStatement ps = getPreparedStatementForCreate(conn, object);

@@ -47,6 +47,17 @@ public class PostDao extends DaoBase<Post> {
         return post;
     }
 
+    public boolean createImplementedUsingLambda(Post post) {
+        return mutateWithPreparedStatementFunction((conn) -> {
+            String sqlString = "INSERT INTO posts (title, content, xss_escaped_content) VALUES (?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sqlString);
+            ps.setString(1, post.getTitle());
+            ps.setString(2, post.getContent());
+            ps.setString(3, post.getXssEscapedContent());
+            return ps;
+        });
+    }
+
     @Override
     protected void seedFreshData() {
         Post post = new Post();
