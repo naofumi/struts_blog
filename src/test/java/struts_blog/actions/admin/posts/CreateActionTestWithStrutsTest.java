@@ -34,9 +34,11 @@ public class CreateActionTestWithStrutsTest extends StrutsTestCase {
     public void test_execute_with_valid_parameters_returns_success() throws Exception {
         request.setParameter("post.title", "Test Title");
         request.setParameter("post.content", "Test Content");
+        request.setParameter("struts.token.name", "token");
+        request.setParameter("token", "mockTokenValue");
 
         this.actionProxy = getActionProxy("/admin/posts/create");
-        actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1)));
+        actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1, "struts.tokens.token", "mockTokenValue")));
 
         this.action = (CreateAction) actionProxy.getAction();
 

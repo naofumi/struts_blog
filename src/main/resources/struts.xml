@@ -176,6 +176,8 @@
         </action>
         <action name="create"
                 class="struts_blog.actions.admin.posts.CreateAction">
+            <interceptor-ref name="token" />
+            <interceptor-ref name="defaultStack" />
             <result type="redirectAction" name="success">
                 <param name="actionName">show</param>
                 <param name="id">${post.id}</param>
