@@ -3,7 +3,7 @@ package struts_blog.actions;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.action.SessionAware;
 import org.apache.struts2.dispatcher.SessionMap;
-import struts_blog.models.AuthenticationService;
+import struts_blog.services.AuthenticationService;
 import struts_blog.models.User;
 import struts_blog.services.FlashService;
 

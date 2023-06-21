@@ -1,12 +1,13 @@
-package struts_blog.models;
+package struts_blog.services;
 
 import org.apache.struts2.dispatcher.SessionMap;
 import struts_blog.daos.UserDao;
+import struts_blog.models.User;
 
 import java.util.Map;
 
 public class AuthenticationService {
-    UserDao userDao = new UserDao();
+    private UserDao userDao = new UserDao();
 
     public User getUserFromSession(Map<String, Object> sessionMap) {
         Integer id = (Integer) sessionMap.get("user_id");

@@ -2,7 +2,7 @@ package struts_blog.setup;
 
 import org.mockito.Mockito;
 import struts_blog.daos.UserDao;
-import struts_blog.models.AuthenticationService;
+import struts_blog.services.AuthenticationService;
 
 import java.util.Map;
 
