@@ -35,6 +35,7 @@ import org.mockito.Mockito;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.daos.PostDao;
 import struts_blog.models.Post;
+import struts_blog.setup.AuthenticationMockable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,22 +44,25 @@ import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 
-public class IndexActionWithMockTest extends TestCase {
+public class IndexActionWithMockTest extends TestCase implements AuthenticationMockable {
+    ArrayList<Post> posts;
+
     public void setUp() throws Exception {
         super.setUp();
-    }
-
-    public void test_execute_returns_success() throws UnauthenticatedException {
-        PostDao postDaoMock = Mockito.mock(PostDao.class);
-        ArrayList<Post> posts = new ArrayList<>(List.of(
+        this.posts = new ArrayList<>(List.of(
                 createPost(1, "Mock Title 1", "Mock Content 1"),
                 createPost(2, "Mock Title 2", "Mock Content 2")
         ));
+    }
 
+    public void test_execute_returns_success() throws UnauthenticatedException {
+        IndexAction action = new IndexAction();
+
+        PostDao postDaoMock = Mockito.mock(PostDao.class);
         Mockito.when(postDaoMock.getAllWithPage(anyInt(), anyInt())).thenReturn(posts);
+        action.setPostDao(postDaoMock);
 
-        IndexAction action = new IndexAction(postDaoMock);
-        action.withSession(new HashMap(Map.of("user_id", 1)));
+        action.setAuthenticationService(mockedAuthenticationServiceForEmail("test@example.com"));
 
         String result = action.execute();
 
@@ -66,22 +70,18 @@ public class IndexActionWithMockTest extends TestCase {
     }
 
     public void test_execute_returns_posts() throws UnauthenticatedException {
-        // Prepare the mock
-        PostDao postDaoMock = Mockito.mock(PostDao.class);
-        ArrayList<Post> posts = new ArrayList<>(List.of(
-                createPost(1, "Mock Title 1", "Mock Content 1"),
-                createPost(2, "Mock Title 2", "Mock Content 2")
-        ));
-        Mockito.when(postDaoMock.getAllWithPage(anyInt(), anyInt())).thenReturn(posts);
+        IndexAction action = new IndexAction();
 
-        // Inject the mock into the action
-        IndexAction action = new IndexAction(postDaoMock);
-        // Create a session with authentication
-        action.withSession(new HashMap<>(Map.of("user_id", 1)));
+        PostDao postDaoMock = Mockito.mock(PostDao.class);
+        Mockito.when(postDaoMock.getAllWithPage(anyInt(), anyInt())).thenReturn(posts);
+        action.setPostDao(postDaoMock);
+
+        action.setAuthenticationService(mockedAuthenticationServiceForEmail("test@example.com"));
 
         // Execute the Action
         String result = action.execute();
 
+        assertEquals(2, action.getPosts().size());
         assertEquals("Mock Title 1", action.getPosts().get(0).getTitle());
     }
 

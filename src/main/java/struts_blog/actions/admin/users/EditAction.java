@@ -12,10 +12,7 @@ public class EditAction extends AdminBaseAction implements Titleable {
     private int id;
     private User user;
 
-    public EditAction() {
-    }
-
-    public EditAction(UserDao userDao) {
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
