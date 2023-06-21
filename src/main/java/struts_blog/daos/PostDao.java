@@ -14,20 +14,22 @@ public class PostDao extends DaoBase<Post> {
 
     @Override
     protected PreparedStatement getPreparedStatementForCreate(Connection conn, Post post) throws SQLException {
-        String sqlString = "INSERT INTO posts (title, content) VALUES (?, ?)";
+        String sqlString = "INSERT INTO posts (title, content, xss_escaped_content) VALUES (?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sqlString);
         ps.setString(1, post.getTitle());
         ps.setString(2, post.getContent());
+        ps.setString(3, post.getXssEscapedContent());
         return ps;
     }
 
     @Override
     protected PreparedStatement getPreparedStatementForUpdate(Connection conn, Post post) throws SQLException {
-        String sqlString = "UPDATE posts SET title = ?, content = ? WHERE id = ?";
+        String sqlString = "UPDATE posts SET title = ?, content = ?, xss_escaped_content = ? WHERE id = ?";
         PreparedStatement ps = conn.prepareStatement(sqlString);
         ps.setString(1, post.getTitle());
         ps.setString(2, post.getContent());
-        ps.setLong(3, post.getId());
+        ps.setString(3, post.getXssEscapedContent());
+        ps.setLong(4, post.getId());
 
         return ps;
     }
@@ -36,10 +38,12 @@ public class PostDao extends DaoBase<Post> {
         int id = resultSet.getInt("id");
         String title = resultSet.getString("title");
         String content = resultSet.getString("content");
+        String xssEscapedContent = resultSet.getString("xss_escaped_content");
         Post post = new Post();
         post.setId(id);
         post.setTitle(title);
         post.setContent(content);
+        post.setXssEscapedContent(xssEscapedContent);
         return post;
     }
 

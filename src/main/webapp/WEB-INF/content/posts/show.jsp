@@ -37,27 +37,76 @@
         </s:url>
         <a href="${nonEscapedUrl}" class="btn btn-outline-primary">Non Escaped</a>
     </div>
-    <div class="mt-3 border border-secondary p-3 rounded">
+    <div class="mt-3">
         <s:if test="%{xssProtection == null || xssProtection == 'sanitizer'}">
-            <%-- This is sanitization using an HTML sanitizer. It is safe against XSS and can also display HTML.
-                         You can select what HTML tags will allow formatting. --%>
-            <code><pre>&dollar;{HTMLSanitizer.sanitize(post.content)}</pre></code>
-            ${HTMLSanitizer.sanitize(post.content)}
+            <div class="mt-3 border border-secondary p-3 rounded">
+                    <%-- This is sanitization using an HTML sanitizer. It is safe against XSS and can also display HTML.
+                                 You can select what HTML tags will allow formatting. --%>
+                <code>
+                    <pre>&dollar;{HTMLSanitizer.sanitize(post.content)}</pre>
+                </code>
+                    ${HTMLSanitizer.sanitize(post.content)}
+            </div>
+            <div class="mt-3 border border-secondary p-3 rounded">
+                    <%-- This is sanitization using an HTML sanitizer. It is safe against XSS and can also display HTML.
+                                 You can select what HTML tags will allow formatting. --%>
+                <code>
+                    <pre>&dollar;{HTMLSanitizer.sanitize(post.xssEscapedContent)}</pre>
+                </code>
+                    ${HTMLSanitizer.sanitize(post.xssEscapedContent)}
+            </div>
         </s:if>
         <s:elseif test="%{xssProtection == 'raw'}">
-            <%-- This does not do any sanitization and is vulnerable to XSS --%>
-            <code><pre>&dollar;{post.content}</pre></code>
-            ${post.content}
+            <div class="mt-3 border border-secondary p-3 rounded">
+                    <%-- This does not do any sanitization and is vulnerable to XSS --%>
+                <code>
+                    <pre>&dollar;{post.content}</pre>
+                </code>
+                    ${post.content}
+            </div>
+            <div class="mt-3 border border-secondary p-3 rounded">
+                    <%-- This does not do any sanitization and is vulnerable to XSS --%>
+                <code>
+                    <pre>&dollar;{post.xssEscapedContent}</pre>
+                </code>
+                    ${post.xssEscapedContent}
+            </div>
         </s:elseif>
         <s:elseif test="%{xssProtection == 'escaped'}">
-            <%--         This does html entity escaping. It is safe against HTML but all HTML is neutralized and HTML loses all formatting ability --%>
-            <code><pre>&lt;s:property value="post.content"/&gt;</pre></code>
-            <s:property value="post.content"/>
+            <div class="mt-3 border border-secondary p-3 rounded">
+
+                    <%--         This does html entity escaping. It is safe against HTML but all HTML is neutralized and HTML loses all formatting ability --%>
+                <code>
+                    <pre>&lt;s:property value="post.content"/&gt;</pre>
+                </code>
+                <s:property value="post.content"/>
+            </div>
+            <div class="mt-3 border border-secondary p-3 rounded">
+
+                    <%--         This does html entity escaping. It is safe against HTML but all HTML is neutralized and HTML loses all formatting ability --%>
+                <code>
+                    <pre>&lt;s:property value="post.xssEscapedContent"/&gt;</pre>
+                </code>
+                <s:property value="post.xssEscapedContent"/>
+            </div>
         </s:elseif>
         <s:elseif test="%{xssProtection == 'nonEscaped'}">
-            <%--         This does not do any sanitization and is vulnerable to XSS --%>
-            <code><pre>&lt;s:property value="post.content" escapeHtml="false"/&gt;</pre></code>
-            <s:property value="post.content" escapeHtml="false"/>
+            <div class="mt-3 border border-secondary p-3 rounded">
+
+                    <%--         This does not do any sanitization and is vulnerable to XSS --%>
+                <code>
+                    <pre>&lt;s:property value="post.content" escapeHtml="false"/&gt;</pre>
+                </code>
+                <s:property value="post.content" escapeHtml="false"/>
+            </div>
+            <div class="mt-3 border border-secondary p-3 rounded">
+
+                    <%--         This does not do any sanitization and is vulnerable to XSS --%>
+                <code>
+                    <pre>&lt;s:property value="post.xssEscapedContent" escapeHtml="false"/&gt;</pre>
+                </code>
+                <s:property value="post.xssEscapedContent" escapeHtml="false"/>
+            </div>
         </s:elseif>
     </div>
 </div>

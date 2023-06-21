@@ -32,6 +32,6 @@
     </s:textfield>
 </div>
 <div class="form-group mt-3">
-    <s:hidden name="__checkbox_user.admin" value="false" />
-    <s:checkbox key="user.admin" />
+    <s:hidden name="__checkbox_user.admin" value="false"/>
+    <s:checkbox key="user.admin"/>
 </div>

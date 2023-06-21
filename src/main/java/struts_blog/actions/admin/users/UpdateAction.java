@@ -58,9 +58,11 @@ public class UpdateAction extends AdminBaseAction implements Titleable {
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
+
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
+
     @Override
     public String getTitle() {
         return "Update User";

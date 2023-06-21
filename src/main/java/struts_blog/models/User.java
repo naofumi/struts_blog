@@ -10,16 +10,16 @@ public class User implements Indexable, Authenticable {
     private String oneTimeToken;
 
     /*
-    * This is provided to illustrate the issue with setting models through OGNL
-    * in the Action. Let`s assume that `isAdmin` should not be settable without
-    * special permissions which are not generally available. However, we can see
-    * that we cannot block an HTTP request with the parameters `user.admin` from
-    * coming in through OGNL to set the value.
-    *
-    * To prevent this from getting into the database, we have to transfer the values
-    * from the model that was modified from OGNL, to a separate model that we will
-    * deliberately set, and we will save the second one to the database.
-    * */
+     * This is provided to illustrate the issue with setting models through OGNL
+     * in the Action. Let`s assume that `isAdmin` should not be settable without
+     * special permissions which are not generally available. However, we can see
+     * that we cannot block an HTTP request with the parameters `user.admin` from
+     * coming in through OGNL to set the value.
+     *
+     * To prevent this from getting into the database, we have to transfer the values
+     * from the model that was modified from OGNL, to a separate model that we will
+     * deliberately set, and we will save the second one to the database.
+     * */
     private boolean isAdmin;
 
     public boolean isCorrectPassword(String password) {

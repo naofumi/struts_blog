@@ -10,24 +10,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
-* Features supported by the BaseAction class
-*
-* Authentication:
-* ===
-*
-* Using the `AuthenticationService` set in field `authenticationService`, this class
-* provides the `authenticate()`, `isLoggedIn()` and `currentUser()` methods to
-* check the current authentication status.
-*
-* Flash
-* ===
-*
-* Flash is a way to show a message on the next screen, but to discard it for subsequent ones.
-* It is often used when, for example, you want to display the results for the action that
-* was performed on the immediately previous action like "Your post was successfully updated"
-* or "Successfully logged in".
-*
-* */
+ * Features supported by the BaseAction class
+ *
+ * Authentication:
+ * ===
+ *
+ * Using the `AuthenticationService` set in field `authenticationService`, this class
+ * provides the `authenticate()`, `isLoggedIn()` and `currentUser()` methods to
+ * check the current authentication status.
+ *
+ * Flash
+ * ===
+ *
+ * Flash is a way to show a message on the next screen, but to discard it for subsequent ones.
+ * It is often used when, for example, you want to display the results for the action that
+ * was performed on the immediately previous action like "Your post was successfully updated"
+ * or "Successfully logged in".
+ *
+ * */
 public abstract class BaseAction extends ActionSupport implements SessionAware, AuthenticationAware {
     public final static String VISITS_COUNT_SESSION_KEY = "vcsk";
     public String flash;
