@@ -3,6 +3,15 @@ package struts_blog.services;
 import java.util.Map;
 
 /*
+ * Here I have extract the Flash code from BaseAction and created a
+ * Service. The benefits in terms of reducing code on BaseAction were
+ * minimal. However, I still decided to keep the Service because I
+ * can write detailed documentation on what the Flash is, how it is
+ * implemented, and how you can reuse it. I think that adding documentation
+ * alone is a valid reason for adding new classes, and so that's what I'm
+ * doing.
+ * 
+ * ---
  * The Flash is a feature that allows you to send a message to the
  * next screen that will be shown. It is a convenient way to show that
  * the user was logged out or the login was successful or that the
