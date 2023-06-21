@@ -18,9 +18,6 @@ import java.util.Map;
  * access the session. Otherwise, it looks pretty nice to use.
  * */
 public class IndexActionWithStrutsTest extends StrutsTestCase {
-    ActionProxy actionProxy;
-    IndexAction action;
-
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -33,7 +30,7 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
         new TestSetup().setUpDb();
     }
 
-    public void test_path_routes_here() {
+    public void test_routes() {
         ActionMapping mapping = getActionMapping("/admin/posts/index.action");
 
         assertEquals("/admin/posts", mapping.getNamespace());
@@ -41,25 +38,24 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
     }
 
     public void test_execute_returns_success() throws Exception {
-        this.actionProxy = getActionProxy("/admin/posts/index.action");
+        ActionProxy actionProxy = getActionProxy("/admin/posts/index.action");
         actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1)));
 
         String result = actionProxy.execute();
-        this.action = (IndexAction) actionProxy.getAction();
+        IndexAction action = (IndexAction) actionProxy.getAction();
 
         assertEquals(ActionSupport.SUCCESS, result);
         assertEquals(200, response.getStatus());
         assertEquals("/WEB-INF/content/admin/posts/index.jsp", response.getForwardedUrl());
-        // You can also get headers and cookies if you want to check these
     }
 
     public void test_execute_returns_posts() throws Exception {
-        this.actionProxy = getActionProxy("/admin/posts/index.action");
+        ActionProxy actionProxy = getActionProxy("/admin/posts/index.action");
         actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1)));
 
         actionProxy.execute();
 
-        this.action = (IndexAction) actionProxy.getAction();
+        IndexAction action = (IndexAction) actionProxy.getAction();
 
         assertEquals(1, action.getPosts().size());
         assertEquals("My first Blog Post", action.getPosts().get(0).getTitle());
