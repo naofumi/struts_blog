@@ -11,15 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- * Here we are testing the capabilities of the `StrutsTestCase`.
- *
- * It looks similar to request testing in RSpec in that it is difficult to directly
- * access the session. Otherwise, it looks pretty nice to use.
- * */
-public class IndexActionWithStrutsTest extends StrutsTestCase {
-    ActionProxy actionProxy;
-    IndexAction action;
+public class EditActionWithStrutsTest extends StrutsTestCase {
 
     @Override
     public void setUp() throws Exception {
@@ -33,36 +25,37 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
         new TestSetup().setUpDb();
     }
 
-    public void test_path_routes_here() {
-        ActionMapping mapping = getActionMapping("/admin/posts/index.action");
+    public void test_routes() {
+        ActionMapping mapping = getActionMapping("/admin/posts/edit.action");
 
         assertEquals("/admin/posts", mapping.getNamespace());
-        assertEquals("index", mapping.getName());
+        assertEquals("edit", mapping.getName());
     }
 
     public void test_execute_returns_success() throws Exception {
-        this.actionProxy = getActionProxy("/admin/posts/index.action");
+        ActionProxy actionProxy = getActionProxy("/admin/posts/edit.action");
         actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1)));
-
+        request.setParameter("id", "1");
         String result = actionProxy.execute();
-        this.action = (IndexAction) actionProxy.getAction();
+
+        EditAction action = (EditAction) actionProxy.getAction();
 
         assertEquals(ActionSupport.SUCCESS, result);
         assertEquals(200, response.getStatus());
-        assertEquals("/WEB-INF/content/admin/posts/index.jsp", response.getForwardedUrl());
+        assertEquals("/WEB-INF/content/admin/posts/edit.jsp", response.getForwardedUrl());
         // You can also get headers and cookies if you want to check these
     }
 
-    public void test_execute_returns_posts() throws Exception {
-        this.actionProxy = getActionProxy("/admin/posts/index.action");
+    public void test_execute_returns_post() throws Exception {
+        request.setParameter("id", "1");
+        ActionProxy actionProxy = getActionProxy("/admin/posts/edit.action");
         actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1)));
-
         actionProxy.execute();
 
-        this.action = (IndexAction) actionProxy.getAction();
+        EditAction action = (EditAction) actionProxy.getAction();
 
-        assertEquals(1, action.getPosts().size());
-        assertEquals("My first Blog Post", action.getPosts().get(0).getTitle());
+        assertEquals(1, action.getPost().getId());
+        assertEquals("My first Blog Post", action.getPost().getTitle());
     }
 
     /*
@@ -82,12 +75,13 @@ public class IndexActionWithStrutsTest extends StrutsTestCase {
      * */
     public void test_can_execute_test_executeAction() throws Exception {
         request.getSession().setAttribute("user_id", 1);
-        String body = executeAction("/admin/posts/index.action");
-        ArrayList<Post> posts = (ArrayList<Post>) findValueAfterExecute("posts");// findValueAfterExecute("")
+        request.setParameter("id", "1");
+        String body = executeAction("/admin/posts/edit.action");
+        Post post = (Post) findValueAfterExecute("post");// findValueAfterExecute("")
 
-        assertEquals("My first Blog Post", posts.get(0).getTitle());
+        assertEquals("My first Blog Post", post.getTitle());
         assertEquals(200, response.getStatus());
-        assertEquals("/WEB-INF/content/admin/posts/index.jsp", response.getForwardedUrl());
+        assertEquals("/WEB-INF/content/admin/posts/edit.jsp", response.getForwardedUrl());
         // I haven't yet set it up to return JSP content
         assertEquals("", body);
     }
