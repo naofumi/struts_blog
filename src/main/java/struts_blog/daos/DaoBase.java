@@ -150,54 +150,37 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
     }
 
     public boolean delete(int id) {
-        try (Connection conn = getConnection()) {
+        return mutateWithPreparedStatementFunction((conn) -> {
             String sqlString = "DELETE FROM " + getTable() + " WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sqlString);
             ps.setInt(1, id);
 
-            int changedRows = ps.executeUpdate();
-            return isNotZero(changedRows);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            return ps;
+        });
     }
 
     public boolean truncate() {
-        try (Connection conn = getConnection()) {
+        return mutateWithPreparedStatementFunction((conn) -> {
             String sqlString = "TRUNCATE TABLE " + getTable();
-            PreparedStatement ps = conn.prepareStatement(sqlString);
+            return conn.prepareStatement(sqlString);
+        });
+    }
 
-            int changedRows = ps.executeUpdate();
-            return isNotZero(changedRows);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public boolean drop() {
+        return mutateWithPreparedStatementFunction((conn) -> {
+            String sqlString = "DROP TABLE IF EXISTS " + getTable();
+            return conn.prepareStatement(sqlString);
+        });
     }
 
     public boolean create(T object) {
-        try (Connection conn = getConnection()) {
-            PreparedStatement ps = getPreparedStatementForCreate(conn, object);
-
-            int changedRows = ps.executeUpdate();
-            return isNotZero(changedRows);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return mutateWithPreparedStatementFunction((conn) -> {
+            return getPreparedStatementForCreate(conn, object);
+        });
     }
 
     interface PreparedStatementFunction {
         PreparedStatement run(Connection conn) throws SQLException;
-    }
-
-    public boolean mutateWithPreparedStatementFunction(PreparedStatementFunction preparedStatementFunction) {
-        try (Connection conn = getConnection()) {
-            PreparedStatement ps = preparedStatementFunction.run(conn);
-
-            int changedRows = ps.executeUpdate();
-            return isNotZero(changedRows);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public T createAndReturnSaved(T object) {
@@ -214,8 +197,14 @@ abstract class DaoBase<T extends Indexable> implements Refreshable {
     }
 
     public boolean update(T object) {
+        return mutateWithPreparedStatementFunction((conn) -> {
+            return getPreparedStatementForUpdate(conn, object);
+        });
+    }
+
+    public boolean mutateWithPreparedStatementFunction(PreparedStatementFunction preparedStatementFunction) {
         try (Connection conn = getConnection()) {
-            PreparedStatement ps = getPreparedStatementForUpdate(conn, object);
+            PreparedStatement ps = preparedStatementFunction.run(conn);
 
             int changedRows = ps.executeUpdate();
             return isNotZero(changedRows);

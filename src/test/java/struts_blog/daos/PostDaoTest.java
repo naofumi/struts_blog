@@ -36,6 +36,15 @@ public class PostDaoTest extends TestCase {
 
         Post reloadedPost = postDao.findBy("title", "New Title");
         assertEquals("New Content", reloadedPost.getContent());
-
     }
+
+    public void test_post_is_correctly_deleted() {
+        Post post = postDao.findBy("title", "My first Blog Post");
+        postDao.delete(post.getId());
+
+        Post reloadedPost = postDao.find(post.getId());
+        assertNull(reloadedPost);
+    }
+
+
 }
