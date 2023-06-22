@@ -11,14 +11,22 @@
 package struts_blog.actions.admin.posts;
 
 import com.opensymphony.xwork2.ActionProxy;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.mapper.ActionMapping;
 import org.apache.struts2.junit.StrutsTestCase;
+import struts_blog.setup.TestSetup;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.opensymphony.xwork2.Action.SUCCESS;
+
 public class DeleteActionTestWithStrutsTest extends StrutsTestCase {
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        new TestSetup().setUpDb();
+    }
+
     public void test_path_mapping() {
         ActionMapping mapping = getActionMapping("/admin/posts/delete.action");
 
@@ -28,13 +36,18 @@ public class DeleteActionTestWithStrutsTest extends StrutsTestCase {
 
     public void test_execute_with_valid_parameters_returns_success() throws Exception {
         request.setParameter("id", "1");
+        request.setParameter("struts.token.name", "token");
+        request.setParameter("token", "mockTokenValue");
 
         ActionProxy actionProxy = getActionProxy("/admin/posts/delete");
-        actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1)));
+        actionProxy.getInvocation().getInvocationContext()
+                .withSession(new HashMap<>(Map.of("user_id", 1, "struts" + ".tokens.token", "mockTokenValue")));
 
         String result = actionProxy.execute();
         DeleteAction action = (DeleteAction) actionProxy.getAction();
 
-        assertEquals(ActionSupport.SUCCESS, result);
+        assertEquals(SUCCESS, result);
+        assertEquals(302, response.getStatus());
+        assertEquals("/admin/posts/index.action", response.getHeader("Location"));
     }
 }

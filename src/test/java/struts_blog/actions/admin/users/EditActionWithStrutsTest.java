@@ -2,6 +2,7 @@ package struts_blog.actions.admin.users;
 
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.dispatcher.mapper.ActionMapping;
 import org.apache.struts2.junit.StrutsTestCase;
 import struts_blog.actions.UnauthenticatedException;
 import struts_blog.daos.UserDao;
@@ -40,15 +41,21 @@ public class EditActionWithStrutsTest extends StrutsTestCase {
     }
 
     public void test_path_routes_here() {
-        assertTrue(action instanceof EditAction);
+        ActionMapping mapping = getActionMapping("/admin/users/edit.action");
+
+        assertEquals("/admin/users", mapping.getNamespace());
+        assertEquals("edit", mapping.getName());
     }
 
     public void test_fails_if_unauthenticated() throws Exception {
-        action.setId(1);
+        request.setParameter("id", "1");
+        ActionProxy actionProxy = getActionProxy("/admin/users/edit.action");
 
         String result = actionProxy.execute();
+
         assertEquals("unauthenticated", result);
         assertEquals(302, response.getStatus());
+        assertEquals("/sessions/new.action", response.getHeader("Location"));
     }
 
     public void test_execute_returns_success_and_sets_getUser() throws Exception {

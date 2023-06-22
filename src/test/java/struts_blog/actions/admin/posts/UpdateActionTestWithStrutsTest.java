@@ -14,11 +14,17 @@ import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.mapper.ActionMapping;
 import org.apache.struts2.junit.StrutsTestCase;
+import struts_blog.setup.TestSetup;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateActionTestWithStrutsTest extends StrutsTestCase {
+    public void setUp() throws Exception {
+        super.setUp();
+        new TestSetup().setUpDb();
+    }
+
     public void test_path_mapping() {
         ActionMapping mapping = getActionMapping("/admin/posts/update.action");
 

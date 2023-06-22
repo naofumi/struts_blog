@@ -19,12 +19,6 @@ public class ShowActionWithStrutsTest extends StrutsTestCase {
         new TestSetup().setUpDb();
     }
 
-    @Override
-    public void tearDown() throws Exception {
-        super.tearDown();
-        new TestSetup().setUpDb();
-    }
-
     public void test_routes() {
         ActionMapping mapping = getActionMapping("/admin/posts/show.action");
 

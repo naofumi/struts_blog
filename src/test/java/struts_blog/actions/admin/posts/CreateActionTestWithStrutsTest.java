@@ -14,15 +14,20 @@ import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.mapper.ActionMapping;
 import org.apache.struts2.junit.StrutsTestCase;
-import org.apache.struts2.util.TokenHelper;
+import struts_blog.daos.PostDao;
+import struts_blog.models.Post;
+import struts_blog.setup.TestSetup;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CreateActionTestWithStrutsTest extends StrutsTestCase {
-    protected ActionProxy actionProxy;
-    protected CreateAction action;
+    private PostDao postDao = new PostDao();
+
+    public void setUp() throws Exception {
+        super.setUp();
+        new TestSetup().setUpDb();
+    }
 
     public void test_path_mapping() {
         ActionMapping mapping = getActionMapping("/admin/posts/create.action");
@@ -37,26 +42,30 @@ public class CreateActionTestWithStrutsTest extends StrutsTestCase {
         request.setParameter("struts.token.name", "token");
         request.setParameter("token", "mockTokenValue");
 
-        this.actionProxy = getActionProxy("/admin/posts/create");
+        ActionProxy actionProxy = getActionProxy("/admin/posts/create");
         actionProxy.getInvocation().getInvocationContext().withSession(new HashMap<>(Map.of("user_id", 1, "struts.tokens.token", "mockTokenValue")));
-
-        this.action = (CreateAction) actionProxy.getAction();
 
         String result = actionProxy.execute();
 
+        CreateAction action = (CreateAction) actionProxy.getAction();
+        Post reloadedPost = postDao.find(action.getPost().getId());
+
         assertEquals(ActionSupport.SUCCESS, result);
+        assertEquals(302, response.getStatus());
+        assertEquals("/admin/posts/show.action?id=" + reloadedPost.getId(), response.getHeader("Location"));
+        assertEquals("Test Title", reloadedPost.getTitle());
     }
 
     public void test_execute_with_invalid_parameters_returns_input() throws Exception {
         request.setParameter("post.title", "");
         request.setParameter("post.content", "Test Content");
 
-        this.actionProxy = getActionProxy("/admin/posts/create");
+        ActionProxy actionProxy = getActionProxy("/admin/posts/create");
         // We don't need authentication information because we do not reach the Action
+        // We apparently don't reach the token Interceptor either, but I'm not sure why not.
         String result = actionProxy.execute();
 
-        this.action = (CreateAction) actionProxy.getAction();
-
+        CreateAction action = (CreateAction) actionProxy.getAction();
         assertEquals(1, action.getFieldErrors().size());
         assertEquals("Title is required", action.getFieldErrors().get("post.title").get(0));
 
