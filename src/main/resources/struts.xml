@@ -208,6 +208,8 @@
             <result name="input">/WEB-INF/content/admin/posts/edit.jsp</result>
         </action>
         <action name="delete" class="struts_blog.actions.admin.posts.DeleteAction">
+            <interceptor-ref name="token" />
+            <interceptor-ref name="defaultStack" />
             <result type="redirectAction" name="success">
                 <param name="actionName">index</param>
             </result>
