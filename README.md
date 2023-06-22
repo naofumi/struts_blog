@@ -18,7 +18,9 @@ This application depends on a MySQL database. You need to configure it and set u
 
 1. Install MySQL for your local development environment.
 2. Configure the connection settings in `src/main/java/struts_blog/daos/DaoBase.java`.
-3. To set up the tables, consult the MySQL dump file in the `db` directory.
+3. To set up the tables
+   1. Confirm that you have a MySQL dump file in the `db` directory.
+   2. Run `mysql -u root -p struts_blog < db/[MySQL dump file name]` (enter password when prompted)
 
 ### Seeding the database
 
